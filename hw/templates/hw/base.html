@@ -1,0 +1,29 @@
+{% load static %} <!-- load in the static function -->
+
+<html>
+    <head>
+        <title>Hello World</title>
+
+        <!-- call the static function and pass in 'styles.css' as a param -->
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+
+    <body>
+        <nav>
+            <!-- generates a url based on the name 'home_page' (which we set in urls.py) -->
+            <li><a href="{% url 'home_page' %}">Home</a></li>
+
+            <li><a href="{% url 'about_page' %}">About</a></li>
+        </nav>
+
+        <!-- put page specific content here -->
+        {% block name %}{% endblock %}
+
+        <footer>
+            The current time is {{time}}. <br>
+
+            This page has been brought to you by the letters {{letter1}} and {{letter2}},
+            and by the number {{number}}.
+        </footer>
+    </body>
+</html>
