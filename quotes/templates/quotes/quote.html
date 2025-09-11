@@ -1,0 +1,18 @@
+{% extends 'quotes/base.html' %}
+    
+{% block body %}
+
+    <table class="quote-table">
+        <tr>
+            <td>
+                <p class="quote-text">{{quote}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img class="quote-img" src="{{image}}" alt="cyberpunk edgerunners image">
+            </td>
+        </tr>
+    </table>
+    
+{% endblock %}
