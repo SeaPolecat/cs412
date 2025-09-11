@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
+
+/* BASE */
+
+body {
+    background-color: black;
+    margin: 0;
+}
+
+div.yellow-bar {
+    position: fixed;
+    display: block;
+    width: 10%;
+    height: 100%;
+    top: 10px;
+    left: 10px;
+    background: yellow;
+}
+
+nav.menu {
+    position: fixed;
+    display: block;
+    width: fit-content;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    text-align: center;
+    border: 3px solid yellow;
+    background: rgb(0, 0, 0, 0.9);
+    z-index: 1;
+}
+
+li.menu {
+    position: relative;
+    display: inline;
+    top: 2px;
+    margin: 0 20px 0 20px;
+}
+
+a.menu {
+    text-decoration: none;
+    font: 30px 'oxanium';
+    color: white;
+}
+
+a.menu:hover {
+    color: cyan;
+}
+
+/* QUOTE */
+
+table.quote-table {
+    position: absolute;
+    display: block;
+    width: 60%;
+    transform: translate(-50%, -50%);
+    top: 55%;
+    left: 55%;
+    text-align: left;
+}
+
+p.quote-text {
+    color: white;
+    margin: 0 0 20px 0;
+    font: 30px 'oxanium';
+}
+
+img.quote-img {
+    width: 100%;
+    border: 5px inset yellow;
+}
