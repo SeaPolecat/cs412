@@ -1,11 +1,23 @@
+{% load static %}
+
 <html>
 <head>
-    <title>Quote of the Day</title>
+    <title>Cyberpunk Edgerunners Quotes</title>
 
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static 'styles_quotes.css' %}">
 </head>
 
 <body>
-    
+
+    <div class="yellow-bar"></div>
+
+    <nav class="menu">
+        <li class="menu"><a class="menu" href="{% url 'quote' %}">Quote</a></li>
+        <li class="menu"><a class="menu" href="{% url 'show_all' %}">Show All</a></li>
+        <li class="menu"><a class="menu" href="{% url 'about' %}">About</a></li>
+    </nav>
+
+    {% block body %}{% endblock %}
+
 </body>
 </html>
