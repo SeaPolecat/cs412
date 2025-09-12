@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "hw", # NEW
-    "quotes",
+    "hw", # Module 1: hello world example
+    "quotes", # Assignment 1: quotes app
 ]
 
 MIDDLEWARE = [

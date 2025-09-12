@@ -22,5 +22,5 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("hw/", include("hw.urls")), # project level url that refers anything with hw/ to the hw app's urls
-    path("quotes/", include("quotes.urls")),
+    path("quotes/", include("quotes.urls")), # Assignment 1: quotes app
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
