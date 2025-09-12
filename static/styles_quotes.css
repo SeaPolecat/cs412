@@ -1,13 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
 
-/* BASE */
-
 body {
     background-color: black;
     margin: 0;
 }
 
-div.yellow-bar {
+/* GENERAL PURPOSE STYLES */
+
+h1 {
+    margin: 50px 0 0 0;
+    font: 40px 'oxanium';
+    color: cyan;
+}
+
+p.small-text {
+    width: fit-content;
+    font: 20px 'oxanium';
+    color: white;
+}
+
+div.text-wrapper-div {
+    width: 80%;
+    transform: translate(-50%, 0);
+    margin: 8% 0 0 56%;
+}
+
+/* BASE */
+
+div.yellow-bar-div {
     position: fixed;
     display: block;
     width: 10%;
@@ -17,7 +37,7 @@ div.yellow-bar {
     background: yellow;
 }
 
-nav.menu {
+nav.menu-nav {
     position: fixed;
     display: block;
     width: fit-content;
@@ -30,21 +50,28 @@ nav.menu {
     z-index: 1;
 }
 
-li.menu {
+li.menu-list {
     position: relative;
     display: inline;
     top: 2px;
     margin: 0 20px 0 20px;
 }
 
-a.menu {
+a.menu-link {
     text-decoration: none;
     font: 30px 'oxanium';
     color: white;
 }
 
-a.menu:hover {
+a.menu-link:hover {
     color: cyan;
+}
+
+img.line-decoration-img {
+    position: fixed;
+    width: 80px;
+    top: 74%;
+    left: 5.5%;
 }
 
 /* QUOTE */
@@ -70,6 +97,8 @@ img.quote-img {
     border: 5px inset yellow;
 }
 
+/* SHOW_ALL */
+
 div.gallery-div {
     display: flex;
     flex-wrap: wrap;
@@ -84,23 +113,7 @@ img.gallery-img {
     border: 3px inset yellow;
 }
 
-div.text-wrapper-div {
-    width: 80%;
-    transform: translate(-50%, 0);
-    margin: 8% 0 0 56%;
-}
-
-h1 {
-    margin: 50px 0 0 0;
-    font: 40px 'oxanium';
-    color: cyan;
-}
-
-p.small-text {
-    width: fit-content;
-    font: 20px 'oxanium';
-    color: white;
-}
+/* ABOUT */
 
 a.edgerunners-link {
     text-decoration: underline;
@@ -109,11 +122,4 @@ a.edgerunners-link {
 
 a.edgerunners-link:hover {
     color: cyan;
-}
-
-img.line-decoration {
-    position: fixed;
-    width: 80px;
-    top: 74%;
-    left: 5.5%;
 }
