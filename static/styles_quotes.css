@@ -69,3 +69,33 @@ img.quote-img {
     width: 100%;
     border: 5px inset yellow;
 }
+
+/* SHOW_ALL */
+
+h1.gallery-heading {
+    width: fit-content;
+    margin: 8% 0 40px 15%;
+    font: 40px 'oxanium';
+    color: cyan;
+}
+
+p.gallery-quote-text {
+    width: fit-content;
+    margin: 0 0 20px 15%;
+    font: 20px 'oxanium';
+    color: white;
+}
+
+div.gallery-div {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    transform: translate(-50%, 0);
+    margin: 40px 0 0 56%;
+}
+
+img.gallery-img {
+    width: 360px;
+    margin: 15px;
+    border: 3px inset yellow;
+}

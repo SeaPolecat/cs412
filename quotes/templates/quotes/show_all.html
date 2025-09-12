@@ -1,0 +1,17 @@
+{% extends 'quotes/base.html' %}
+    
+{% block body %}
+
+    <h1 class="gallery-heading">All Quotes and Images</h1>
+
+    {% for quote in quote_list %}
+        <p class="gallery-quote-text">{{quote}}</p>
+    {% endfor %}
+
+    <div class="gallery-div">
+        {% for image in image_list %}
+            <img class="gallery-img" src="{{image}}" alt="">
+        {% endfor %}
+    </div>
+    
+{% endblock %}
