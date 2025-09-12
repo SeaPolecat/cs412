@@ -1,12 +1,13 @@
 /*
 File: quotes/static/quotes/styles.css
 Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/12/2025
-Description: A template that gives a brief overview of what the
-quotes app is about.
+Description: A CSS stylesheet for the quotes web app templates.
 */
 
+/* imported font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
 
+/* colour variables */
 :root {
     --yellow: #FCED11;
     --cyan: #20EEFF;

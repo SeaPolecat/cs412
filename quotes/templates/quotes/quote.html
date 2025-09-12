@@ -1,7 +1,16 @@
+<!-- 
+File: quotes/templates/quotes/quote.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/12/2025
+Description: A template that displays random quotes and images 
+from Cyberpunk Edgerunners.
+-->
+
 {% extends 'quotes/base.html' %}
     
 {% block body %}
 
+    <!-- a table with 2 rows and 1 col, containing a quote and image both 
+     selected at random from the lists in views.py -->
     <table class="quote-table">
         <tr>
             <td>

@@ -1,10 +1,20 @@
+<!-- 
+File: quotes/templates/quotes/show_all.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/12/2025
+Description: A template that displays all available quotes and 
+images from the quotes web app.
+-->
+
 {% extends 'quotes/base.html' %}
     
 {% block body %}
 
+    <!-- a div that contains headings for this page, and all quotes
+     within this app -->
     <div class="text-wrapper-div">
         <h1>All Quotes</h1>
 
+        <!-- a loop that displays every quote from quote_list in views.py -->
         {% for quote in quote_list %}
             <p class="small-text">{{quote}}</p>
         {% endfor %}
@@ -12,7 +22,10 @@
         <h1>All Images</h1>
     </div>
 
+    <!-- a div that contains every image within this app -->
     <div class="gallery-div">
+        
+        <!-- a loop that displays every image from image_list in views.py -->
         {% for image in image_list %}
             <img class="gallery-img" src="{{image}}" alt="cyberpunk edgerunners image">
         {% endfor %}

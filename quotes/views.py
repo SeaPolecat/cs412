@@ -1,9 +1,13 @@
-# file: quotes/views.py
+# File: quotes/views.py
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/12/2025
+# Description: Contains views for the quotes web app that render templates 
+# and provide them with context variables.
 
 from django.shortcuts import render
 
 import random
 
+# list containing quotes to be selected at random
 quote_list = [
     "All right, David. Let's go. To the top, then.",
     "I'm gonna take you there myself, fly you to the moon. That's a promise.",
@@ -16,6 +20,7 @@ quote_list = [
     "You’re the guy who jumps into the fire to rescue someone, anyone, even when you know you’re gonna get burned. Just that type.",
 ]
 
+# list containing images to be selected at random
 image_list = [
     "https://statcdn.fandango.com/MPX/image/NBCU_Fandango/205/262/thumb_4AE07441-C039-428E-94A7-840B0943466F.jpg",
     "https://www.digitaltrends.com/wp-content/uploads/2022/09/cyberpunk-edgerunners-01.jpg?resize=1200%2C720&p=1",
@@ -32,8 +37,10 @@ image_list = [
 def quote(request):
     """Display one random quote and one random image."""
 
-    template_name = 'quotes/quote.html'
+    template_name = 'quotes/quote.html' # the template to be rendered
 
+    # context dict containing a quote and an image chosen at random  
+    # from the lists above
     context = {
         'quote': random.choice(quote_list),
         'image': random.choice(image_list),
@@ -42,10 +49,11 @@ def quote(request):
 
     
 def show_all(request):
-    """Show all quotes and images."""
+    """Show all quotes and images from the quotes app."""
 
-    template_name = 'quotes/show_all.html'
+    template_name = 'quotes/show_all.html' # the template to be rendered
 
+    # context dict containing the quote and image lists above
     context = {
         'quote_list': quote_list,
         'image_list': image_list,
@@ -54,8 +62,11 @@ def show_all(request):
 
 
 def about(request):
-    """Display information about the famous person whose quotes are shown in this application."""
+    """Display information about the show whose quotes are 
+    shown in this application, as well as a note about the 
+    author of this page.
+    """
 
-    template_name = 'quotes/about.html'
+    template_name = 'quotes/about.html' # the template to be rendered
 
     return render(request, template_name)

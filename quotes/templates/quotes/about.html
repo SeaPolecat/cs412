@@ -1,10 +1,19 @@
+<!-- 
+File: quotes/templates/quotes/about.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/12/2025
+Description: A template that gives a brief overview of what the
+quotes web app is about.
+-->
+
 {% extends 'quotes/base.html' %}
     
 {% block body %}
 
+    <!-- a div that contains all text for this page -->
     <div class="text-wrapper-div">
         <h1>Welcome to Cyberpunk Edgerunners Quotes!</h1>
 
+        <!-- information about Cyberpunk Edgerunners, whose quotes are displayed in this app -->
         <p class="small-text">
             This page displays quotes and images from 
             <a class="edgerunners-link" href="https://www.cyberpunk.net/en/edgerunners" target="_blank">Cyberpunk Edgerunners</a>.

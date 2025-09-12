@@ -1,24 +1,36 @@
+<!-- 
+File: quotes/templates/quotes/base.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/12/2025
+Description: The base template of the quotes web app, which all other 
+templates inherit from.
+-->
+
 {% load static %}
 
 <html>
 <head>
     <title>Cyberpunk Edgerunners Quotes</title>
 
-    <link rel="stylesheet" href="{% static 'styles_quotes.css' %}">
+    <!-- linking the stylesheet -->
+    <link rel="stylesheet" href="{% static 'quotes/styles.css' %}">
 </head>
 
 <body>
 
-    <div class="yellow-bar-div"></div>
-
+    <!-- a menu containing links to the other pages -->
     <nav class="menu-nav">
         <li class="menu-list"><a class="menu-link" href="{% url 'quote' %}">Quote</a></li>
         <li class="menu-list"><a class="menu-link" href="{% url 'show_all' %}">Show All</a></li>
         <li class="menu-list"><a class="menu-link" href="{% url 'about' %}">About</a></li>
     </nav>
 
-    <img class="line-decoration-img" src="{% static 'line-decoration.png' %}" alt="black lines">
+    <!-- a vertical yellow bar on the left side of the page for decoration purposes -->
+    <div class="yellow-bar-div"></div>
 
+    <!-- black lines at the bottom of the yellow bar for decoration purposes -->
+    <img class="line-decoration-img" src="{% static 'quotes/line-decoration.png' %}" alt="black lines">
+
+    <!-- for children templates, this is where their HTML body code will go -->
     {% block body %}{% endblock %}
 
 </body>
