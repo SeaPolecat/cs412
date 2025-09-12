@@ -2,11 +2,15 @@
     
 {% block body %}
 
-    <h1 class="gallery-heading">All Quotes and Images</h1>
+    <div class="text-wrapper-div">
+        <h1>All Quotes</h1>
 
-    {% for quote in quote_list %}
-        <p class="gallery-quote-text">{{quote}}</p>
-    {% endfor %}
+        {% for quote in quote_list %}
+            <p class="small-text">{{quote}}</p>
+        {% endfor %}
+
+        <h1>All Images</h1>
+    </div>
 
     <div class="gallery-div">
         {% for image in image_list %}
