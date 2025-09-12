@@ -28,6 +28,7 @@ image_list = [
     "https://i.pinimg.com/1200x/39/cb/d0/39cbd09e6844b44a8c1a09996b68a2dd.jpg",
 ]
 
+
 def quote(request):
     """Display one random quote and one random image."""
 
@@ -51,5 +52,10 @@ def show_all(request):
     }
     return render(request, template_name, context)
 
+
 def about(request):
     """Display information about the famous person whose quotes are shown in this application."""
+
+    template_name = 'quotes/about.html'
+
+    return render(request, template_name)
