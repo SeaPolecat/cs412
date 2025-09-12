@@ -43,5 +43,13 @@ def quote(request):
 def show_all(request):
     """Show all quotes and images."""
 
+    template_name = 'quotes/show_all.html'
+
+    context = {
+        'quote_list': quote_list,
+        'image_list': image_list,
+    }
+    return render(request, template_name, context)
+
 def about(request):
     """Display information about the famous person whose quotes are shown in this application."""
