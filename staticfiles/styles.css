@@ -1,0 +1,140 @@
+/*
+File: quotes/static/quotes/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/12/2025
+Description: A CSS stylesheet for the quotes web app templates.
+*/
+
+/* imported font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
+
+/* colour variables */
+:root {
+    --yellow: #FCED11;
+    --cyan: #20EEFF;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+}
+
+/* GENERAL PURPOSE STYLES */
+
+h1 {
+    margin: 50px 0 0 0;
+    font: 40px 'oxanium';
+    color: var(--cyan);
+}
+
+p.small-text {
+    font: 20px 'oxanium';
+    color: white;
+}
+
+div.text-wrapper-div {
+    width: 80%;
+    transform: translate(-50%, 0);
+    margin: 8% 0 0 56%;
+}
+
+/* BASE */
+
+div.yellow-bar-div {
+    position: fixed;
+    width: 10%;
+    height: 100%;
+    top: 10px;
+    left: 10px;
+    background: var(--yellow);
+}
+
+nav.menu-nav {
+    position: fixed;
+    width: fit-content;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    text-align: center;
+    background: rgb(0, 0, 0, 0.9);
+    border: 3px solid var(--yellow);
+    z-index: 1;
+}
+
+li.menu-list {
+    position: relative;
+    display: inline;
+    top: 2px;
+    margin: 0 20px 0 20px;
+}
+
+a.menu-link {
+    text-decoration: none;
+    font: 30px 'oxanium';
+    color: white;
+}
+
+a.menu-link:hover {
+    color: var(--cyan);
+}
+
+img.line-decoration-img {
+    position: fixed;
+    width: 5.291vw;
+    top: 74%;
+    left: 5.5%;
+}
+
+/* QUOTE */
+
+table.quote-table {
+    position: absolute;
+    width: 60%;
+    transform: translate(-50%, -50%);
+    top: 55%;
+    left: 55%;
+    text-align: left;
+}
+
+p.quote-text {
+    margin: 0 0 20px 0;
+    font: 30px 'oxanium';
+    color: white;
+}
+
+img.quote-img {
+    width: 100%;
+    border: 5px inset var(--yellow);
+}
+
+/* SHOW_ALL */
+
+div.gallery-div {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    transform: translate(-50%, 0);
+    margin: 10px 0 0 56%;
+}
+
+img.gallery-img {
+    width: 360px;
+    margin: 15px;
+    border: 3px inset var(--yellow);
+}
+
+/* ABOUT */
+
+a.edgerunners-link {
+    text-decoration: underline;
+    color: var(--yellow);
+}
+
+a.edgerunners-link:hover {
+    color: var(--cyan);
+}
+
+p.author-text {
+    margin: 40px 0 0 0;
+    font: 15px 'oxanium';
+    color: white;
+}
