@@ -1,0 +1,17 @@
+<!-- formdata/templates/formdata/base.html -->
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Form Data Example</title>
+
+        <link rel="stylesheet" href="{% static 'formdata/styles.css' %}">
+    </head>
+
+    <body>
+
+        {% block content %}{% endblock %}
+
+    </body>
+</html>

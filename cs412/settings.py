@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "hw", # Module 1: hello world example
     "quotes", # Assignment 1: quotes app
+    "formdata", # Module 2: formdata example
 ]
 
 MIDDLEWARE = [
