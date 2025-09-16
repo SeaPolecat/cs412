@@ -9,6 +9,10 @@ from django.shortcuts import render
 def main(request):
     """Displays the main.html template."""
 
+    template_name = 'restaurant/main.html'
+
+    return render(request, template_name)
+
 
 def order(request):
     """Generates a daily special item and adds it to the context, then 
