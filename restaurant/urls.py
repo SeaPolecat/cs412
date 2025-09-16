@@ -9,8 +9,7 @@ from . import views
 
 # list containing different url endings that redirect to functions within views.py
 urlpatterns = [
-    path(r'', views.quote, name="main"),
-    path(r'quote', views.quote, name="quote"),
-    path(r'show_all', views.show_all, name="show_all"),
-    path(r'about', views.about, name="about"),
+    path(r'main', views.main, name="main"),
+    path(r'order', views.order, name="order"),
+    path(r'confirmation', views.confirmation, name="confirmation"),
 ]
