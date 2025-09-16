@@ -24,4 +24,5 @@ urlpatterns = [
     path("hw/", include("hw.urls")), # project level url that refers anything with hw/ to the hw app's urls
     path("quotes/", include("quotes.urls")), # Assignment 1: quotes app
     path("formdata/", include("formdata.urls")), # Module 2: formdata example
+    path("restaurant/", include("restaurant.urls")), # Assignment 2: restaurant app
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

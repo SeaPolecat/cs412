@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "hw", # Module 1: hello world example
     "quotes", # Assignment 1: quotes app
     "formdata", # Module 2: formdata example
+    "restaurant", # Assignment 2: restaurant app
 ]
 
 MIDDLEWARE = [
