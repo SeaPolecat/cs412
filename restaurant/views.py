@@ -5,5 +5,16 @@
 
 from django.shortcuts import render
 
-# Create your views here.
 
+def main(request):
+    """Displays the main.html template."""
+
+
+def order(request):
+    """Generates a daily special item and adds it to the context, then 
+    displays the order.html template.
+    """
+
+
+def confirmation(request):
+    """Processes the submission of an order, and displays a confirmation page."""
