@@ -77,6 +77,7 @@ def confirmation(request):
     if request.POST:
         # extract variables from the POST request into variables
         items = request.POST.getlist('items') # list of items ordered
+        topping = request.POST.getlist('topping') # topping selection for one of the items
         special = request.POST.get('special') # special item, if it was ordered
         instructions = request.POST.get('instructions') # special instructions entered by the user
         name = request.POST.get('name') # the user's name
@@ -100,6 +101,11 @@ def confirmation(request):
         # to total_price as well
         if special:
             total_price += special_prices[special]
+
+        # if a topping was selected for Whispering Almonds, add it to the 
+        # list of items
+        if topping:
+            items.append('Sapphire Salt on Whispering Almonds')
 
         # place variables in a context dictionary to be sent to the template
         context = {

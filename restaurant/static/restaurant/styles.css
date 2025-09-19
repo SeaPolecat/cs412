@@ -28,7 +28,7 @@ p {
 }
 
 img.restaurant-img {
-    width: 65%;
+    width: 60%;
     transform: translate(-50%, 0);
     margin: 20px 0 0 50vw;
     border: 1px solid white;
@@ -90,4 +90,10 @@ p.description-text {
     font-size: 18px;
     color: red;
     margin-left: 25px;
+}
+
+ul.main-list {
+    position: fixed;
+    top: 10vh;
+    left: 0.5vw;
 }
