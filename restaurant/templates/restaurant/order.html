@@ -1,0 +1,66 @@
+<!-- 
+File: restaurant/templates/restaurant/order.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/19/2025
+Description: A template that contains options for placing an 
+order at the restaurant.
+-->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+    <div class="text-wrapper-div">
+        <h1 class="welcome-heading">Place Your Order</h1>
+
+        <div class="order-div">
+
+            <!-- a form containing all the order options -->
+            <form action="{% url 'confirmation' %}" method="POST">
+                <!-- csrf token needed to make sure the user can submit the form -->
+                {% csrf_token %} 
+
+                <!-- section containing the regular restaurant item options -->
+
+                <h3 class="order-heading">What Would You Like?</h3>
+
+                <input type="checkbox" name="items" value="Prismatic Cream Puff"> $8 | Prismatic Cream Puff <br>
+                <input type="checkbox" name="items" value="Moonlight Nectar"> $12 | Moonlight Nectar <br>
+                <input type="checkbox" name="items" value="Frostfire Gelato"> $9 | Frostfire Gelato <br>
+                <input type="checkbox" name="items" value="Whispering Almonds"> $3 | Whispering Almonds <br>
+
+                <!-- section containing the restaurant's special item of the day -->
+
+                <h3 class="order-heading">Today's Special</h3>
+
+                <input type="checkbox" name="special" value="{{special_name}}"> 
+                ${{special_price}} | {{special_name}}<br>
+
+                <p class="description-text"><strong>{{special_description}}</strong></p>
+
+                <!-- section containing a textbox for the user to enter any special instructions -->
+
+                <h3 class="order-heading">Any Special Instructions?</h3>
+
+                <textarea name="instructions" cols="50" rows="5" 
+                placeholder="Enter special instructions here..."></textarea>
+
+                <!-- section asking for the user's contact information -->
+
+                <h3 class="order-heading">Your Information</h3>
+                
+                <p>Name:</p>
+                <input type="text" name="name" required>
+
+                <p>Phone:</p>
+                <input type="text" name="phone" required>
+
+                <p>Email:</p>
+                <input type="text" name="email" required>
+
+                <!-- button that, when clicked, submits the form and sends a POST request -->
+                <input class="order-button" type="submit" value="Order!">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

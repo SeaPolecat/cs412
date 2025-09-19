@@ -1,0 +1,35 @@
+<!-- 
+File: restaurant/templates/restaurant/base.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/19/2025
+Description: The base template of the restaurant web app, which all other 
+templates inherit from.
+-->
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Bubbly Brewery</title>
+
+        <!-- linking the stylesheet -->
+        <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
+    </head>
+
+    <body>
+
+        <!-- a menu containing links to every page -->
+        <nav class="menu-nav">
+            <li class="menu-list"><a class="menu-link" href="{% url 'main' %}">
+                <strong>Home</strong>
+            </a></li>
+
+            <li class="menu-list"><a class="menu-link" href="{% url 'order' %}">
+                <strong>Order</strong>
+            </a></li>
+        </nav>
+
+        <!-- where the content in other templates will go -->
+        {% block content %}{% endblock %}
+
+    </body>
+</html>

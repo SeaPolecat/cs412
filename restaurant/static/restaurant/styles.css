@@ -1,0 +1,93 @@
+/*
+File: restaurant/static/restaurant/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/19/2025
+Description: A CSS stylesheet for the restaurant web app templates.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body {
+    background-color: #2e1e04;
+    color: white;
+    font-family: 'nunito';
+}
+
+div.text-wrapper-div {
+    width: 80%;
+    margin: 5vh auto 0 auto;
+    /* border: 2px solid red; */
+    text-align: center;
+}
+
+h1.welcome-heading {
+    font-size: 45px;
+}
+
+p {
+    margin: 0;
+}
+
+img.restaurant-img {
+    width: 65%;
+    transform: translate(-50%, 0);
+    margin: 20px 0 0 50vw;
+    border: 1px solid white;
+}
+
+nav.menu-nav {
+    position: fixed;
+    width: 16vw;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: green;
+    border-radius: 0 0 20px 0;
+}
+
+li.menu-list {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    /* border: 10px solid #422b06; */
+    border-radius: 10px;
+    font-size: 30px;
+    margin: 20px 10px 20px 10px;
+}
+
+a.menu-link {
+    text-decoration: none;
+    color: white;
+}
+
+div.order-div {
+    text-align: left;
+    width: 50%;
+    height: fit-content;
+    background-color: tan;
+    border-radius: 20px;
+    font-size: 20px;
+    color: black;
+    margin: 50px auto 0 auto;
+    padding: 20px 50px 20px 50px;
+}
+
+h3.order-heading {
+    font-size: 20px;
+}
+
+input.order-button {
+    display: block;
+    background-color: green;
+    padding: 10px 15px 10px 15px;
+    margin-top: 30px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    border-radius: 30px;
+}
+
+p.description-text {
+    font-size: 18px;
+    color: red;
+    margin-left: 25px;
+}

@@ -1,0 +1,22 @@
+<!-- 
+File: restaurant/templates/restaurant/main.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/19/2025
+Description: A template that welcomes the user by showing 
+the name and an image of the restaurant.
+-->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+    <!-- div containing the restaurant's name and a tagline -->
+    <div class="text-wrapper-div">
+        <h1 class="welcome-heading">Welcome to Bubbly Brewery!</h1>
+
+        <h3>~ The coziest magical food and potion restaurant ~</h3>
+    </div>
+
+    <!-- image of the restaurant -->
+    <img class="restaurant-img" src="https://i.redd.it/ocolhgrse8071.jpg" alt="potion store image">
+
+{% endblock %}

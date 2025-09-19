@@ -1,0 +1,60 @@
+<!-- 
+File: restaurant/templates/restaurant/confirmation.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/19/2025
+Description: A template that contains a confirmation page for 
+after the user has placed an order at the restaurant
+-->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+    <div class="text-wrapper-div">
+        <h1 class="welcome-heading">Your Order is Confirmed!</h1>
+
+        <div class="order-div">
+            <!-- show the user when their order will be ready -->
+            <p>Your order will be ready at <strong>{{readytime}}</strong></p>
+
+            <!-- section containing a list of the items that the user ordered -->
+
+            <h3 class="order-heading">You Ordered:</h3>
+
+            <ul>
+                <!-- process the list of ordered items, and place an
+                 HTML list item for each item ordered -->
+                {% for item in items %}
+                    <li>{{item}}</li>
+                {% endfor %}
+
+                <!-- if the special item was ordered, add it to the list -->
+                {% if special %}
+                    <li>{{special}}</li>
+                {% endif %}
+            </ul>
+
+            <!-- if the user entered any special instructions, display
+             them here -->
+            {% if instructions %}
+                <h3 class="order-heading">Special Instructions</h3>
+
+                <p>{{instructions}}</p>
+            {% endif %}
+
+            <!-- show the user the total price of their order -->
+
+            <h3 class="order-heading">Your Total:</h3>
+
+            <p>${{total_price}}</p>
+
+            <!-- show the user the contact information they entered -->
+
+            <h3 class="order-heading">Customer Information:</h3>
+
+            <p>{{name}}</p>
+            <p>{{phone}}</p>
+            <p>{{email}}</p>
+        </div>
+    </div>
+
+{% endblock %}
