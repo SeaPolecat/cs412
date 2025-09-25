@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "formdata", # Module 2: formdata example
     "restaurant", # Assignment 2: restaurant app
     "blog", # Module 3: blog example
+    "mini_insta", # Assignment 3: mini insta app
 ]
 
 MIDDLEWARE = [
