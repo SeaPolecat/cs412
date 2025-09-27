@@ -13,7 +13,8 @@ Description: A template to display all profiles from the Mini Instagram app.
          to display all of them at once -->
         {% for profile in profiles %}
 
-            <!-- link redirecting to a particular profile's page -->
+            <!-- link redirecting to a particular profile's page, using
+             the profile's primary key -->
             <a href="{% url 'show_profile' profile.pk %}">
                 <img class="square-profile-img" src="{{profile.profile_image_url}}" alt="">
             </a>
