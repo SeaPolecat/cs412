@@ -1,0 +1,45 @@
+<!-- 
+File: mini_insta/templates/mini_insta/base.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+Description: The base template of the quotes web app, which all other 
+templates inherit from.
+-->
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Mini Instagram</title>
+
+        <!-- linking the stylesheet -->
+        <link rel="stylesheet" href="{% static 'mini_insta/styles.css' %}">
+    </head>
+
+    <body>
+
+        <!-- background image -->
+        <img class="background-img" src="https://i.pinimg.com/736x/c7/61/1b/c7611baa39e9c1fa2a0df49677690edf.jpg" alt="">
+
+        <!-- header bar containing key app information -->
+        <header>
+            <!-- home button that redirects to show_all_profiles page -->
+            <a href="{% url 'show_all_profiles' %}">
+                <img class="home-icon" src="{% static 'mini_insta/home.png' %}" alt="">
+            </a>
+
+            <h1 class="header-h1">MiniInsta</h1>
+
+            <!-- if viewing a profile, display that profile's username; 
+             else, display 'Showing all Profiles' -->
+            {% if profile %}
+                <h1 class="header-h1 right">@{{profile.username}}</h1>
+            {% else %}
+                <h1 class="header-h1 right">Showing all Profiles</h1>
+            {% endif %}
+        </header>
+
+        <!-- where content in child templates will go -->
+        {% block content %}{% endblock %}
+
+    </body>
+</html>

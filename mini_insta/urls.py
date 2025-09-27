@@ -1,8 +1,12 @@
-# mini_insta/urls.py
+# File: mini_insta/urls.py
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+# Description: Contains urls for the Mini Instagram app that redirect to
+# classes within views.py.
 
 from django.urls import path
 from .views import ProfileListView, ProfileDetailView
 
+# list containing different url endings that redirect to classes within views.py
 urlpatterns = [
     path('', ProfileListView.as_view(), name="show_all_profiles"),
     path('profile/<int:pk>', ProfileDetailView.as_view(), name="show_profile"),

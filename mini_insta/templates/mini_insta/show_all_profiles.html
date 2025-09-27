@@ -1,10 +1,19 @@
+<!-- 
+File: mini_insta/templates/mini_insta/show_all_profiles.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+Description: A template to display all profiles from the Mini Instagram app.
+-->
+
 {% extends 'mini_insta/base.html' %}
 
 {% block content %}
 
     <div class="grid-container-div">
+        <!-- a loop processing each profile in the list of profiles
+         to display all of them at once -->
         {% for profile in profiles %}
 
+            <!-- link redirecting to a particular profile's page -->
             <a href="{% url 'show_profile' profile.pk %}">
                 <img class="square-profile-img" src="{{profile.profile_image_url}}" alt="">
             </a>

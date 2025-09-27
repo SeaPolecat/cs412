@@ -1,4 +1,7 @@
-# mini_insta/views.py
+# File: mini_insta/views.py
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+# Description: Contains views for the Mini Instagram app. These render templates 
+# with entities from the database as context variables.
 
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView

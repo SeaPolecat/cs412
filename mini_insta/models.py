@@ -1,4 +1,6 @@
-# mini_insta/models.py
+# File: mini_insta/models.py
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+# Description: Describes what a Profile entity should look in the database.
 
 from django.db import models
 
@@ -14,4 +16,4 @@ class Profile(models.Model):
     def __str__(self):
         """Return a string representation of the Profile model instance."""
 
-        return f'{self.username} (joined on {self.join_date})'
+        return f'{self.username} ({self.display_name})'

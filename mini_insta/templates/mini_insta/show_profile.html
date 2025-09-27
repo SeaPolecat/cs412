@@ -1,15 +1,22 @@
-
+<!-- 
+File: mini_insta/templates/mini_insta/show_profile.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+Description: A template to display a single profile from the Mini Instagram app.
+-->
 
 {% extends 'mini_insta/base.html' %}
 
 {% block content %}
 
+    <!-- table containing the portion of the profile above the bio -->
     <table class="profile-wrapper-table">
         <tr>
+            <!-- left column to hold the profile picture -->
             <td>
                 <img class="circle-profile-img" src="{{profile.profile_image_url}}" alt="">
             </td>
 
+            <!-- right column to hold the profile name and post + follower stats -->
             <td class="stats-table-col">
                 <h1 class="profile-name">{{profile.display_name}}</h1>
 
@@ -35,6 +42,7 @@
         </tr>
     </table>
 
+    <!-- div containing the profile's bio and posts -->
     <div class="post-wrapper">
         <p class="small-text">
             {{profile.bio_text}}
