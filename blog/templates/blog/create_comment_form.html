@@ -1,0 +1,26 @@
+<!-- 
+blog/create_comment_form.html 
+display the HTML form to create a new Comment on an Article object.
+-->
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <!-- we can now use the article var after adding it to the context data
+     within the get_context_data method -->
+    <h1>Create a new Comment about {{article.title}}</h1>
+
+    <!-- display the HTML form -->
+    <form method="POST">
+        {% csrf_token %}
+
+        <table>
+            <!-- display the form as a table (can also do .as_p to display as paragraph)-->
+            {{form.as_table}}
+        </table>
+
+        <input type="submit" name="submit" value="submit">
+    </form>
+
+{% endblock %}
