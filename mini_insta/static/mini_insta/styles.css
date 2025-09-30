@@ -4,21 +4,58 @@ Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
 Description: A CSS stylesheet for the Mini Instagram app templates.
 */
 
+/* imported fonts */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 
+/* colour variables */
+:root {
+    --wisteria: rgba(203, 112, 255);
+    --wisteria-translucent: rgba(203, 112, 255, 0.6);
+}
+
+/* GENERAL STYLES */
+
 body {
-    background-color: black;
-    color: white;
     margin: 0;
+    background: black;
     font-family: 'merriweather';
+    color: white;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 20px;
+}
+
+/* BASE */
+
+img.background-img {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    filter: brightness(30%);
+    z-index: -1;
 }
 
 header {
+    position: fixed;
     display: flex;
+    align-items: center;
     width: 100vw;
     height: 110px;
+    top: 0;
     background: black;
-    align-items: center;
     border-bottom: 3px solid white;
 }
 
@@ -26,43 +63,47 @@ img.home-icon {
     display: inline-block;
     width: 50px;
     margin-left: 30px;
+    transition: 0.2s;
 }
 
-h1.header-h1 {
+img.home-icon:hover {
+    filter: brightness(69%);
+}
+
+h2.menu-heading {
     position: relative;
     top: 4px;
-    font-size: 40px;
     margin-left: 30px;
 }
 
-h1.header-h1.right {
-    left: 600px;
+h2.menu-heading.right {
+    margin-left: auto;
+    margin-right: 30px;
 }
 
-img.background-img {
-    position: fixed;
-    width: 100vw;
-    height: auto;
-    filter: brightness(30%);
-    z-index: -3;
-}
+/* SHOW ALL PROFILES */
 
 div.grid-container-div {
-    max-width: 95%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Three equal-width columns */
-    row-gap: 50px;
-    margin: 50px auto 0 auto;
+    width: 90%;
     justify-items: center;
-    /* border: 2px solid red; */
+    grid-template-columns: repeat(4, 1fr); /* 4 equal-width cols */
+    row-gap: 50px;
+    margin: 160px auto 50px auto;
 }
 
 img.square-profile-img {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     object-fit: cover;
     border: 3px solid white;
     border-radius: 20px;
+    transition: 0.2s;
+}
+
+img.square-profile-img:hover {
+    transform: scale(1.02);
+    border: 3px solid var(--wisteria);
 }
 
 /* SHOW PROFILE */
@@ -75,8 +116,13 @@ td {
     border: 2px solid red;
 } */
 
+table.profile-table {
+    width: 80%;
+    margin: 160px auto 0 auto;
+}
+
 img.circle-profile-img {
-    display: inline;
+    display: inline-block;
     width: 250px;
     height: 250px;
     object-fit: cover;
@@ -85,49 +131,28 @@ img.circle-profile-img {
 }
 
 h1.profile-name {
-    position: relative;
-    margin-left: 20px;
-    font-size: 50px;
+    margin-left: 40px;
 }
 
-table.profile-wrapper-table {
+table.stats-table {
+    border-spacing: 20px 0;
+    margin-left: 20px;
+}
+
+td.stats-table-col {
+    width: 200px;
+    padding: 20px;
+    background: var(--wisteria-translucent);
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+div.bio-div {
     width: 80%;
     margin: 50px auto 0 auto;
 }
 
-td.stats-table-col {
-    width: 75%;
-}
-
-td.stat-col {
-    background: rgba(229, 163, 255, 0.6);
-    width: 200px;
-    border-radius: 10px;
-    padding: 20px;
-    margin-left: 50px;
-    border: 1px solid white;
-}
-
-h3.stat-heading {
-    font-size: 30px;
-}
-
-p.small-text {
-    font-size: 20px;
-}
-
-div.post-wrapper {
-    width: 80vw;
-    height: fit-content;
-    /* border: 2px solid red; */
-    margin: 50px auto 0 auto;
-}
-
-p.bio-text {
-    font-size: 20px;
-}
-
-h2.posts-heading {
-    font-size: 35px;
-    margin-top: 50px;
+div.posts-div {
+    width: 80%;
+    margin: 0 auto 0 auto;
 }

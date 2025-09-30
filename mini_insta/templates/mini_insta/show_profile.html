@@ -1,4 +1,4 @@
-<!-- 
+<!--
 File: mini_insta/templates/mini_insta/show_profile.html
 Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
 Description: A template to display a single profile from the Mini Instagram app.
@@ -9,32 +9,33 @@ Description: A template to display a single profile from the Mini Instagram app.
 {% block content %}
 
     <!-- table containing the portion of the profile above the bio -->
-    <table class="profile-wrapper-table">
+    <table class="profile-table">
         <tr>
             <!-- left column to hold the profile picture -->
             <td>
-                <img class="circle-profile-img" src="{{profile.profile_image_url}}" alt="">
+                <img class="circle-profile-img" src="{{profile.profile_image_url}}"
+                alt="profile picture">
             </td>
 
             <!-- right column to hold the profile name and post + follower stats -->
-            <td class="stats-table-col">
+            <td>
                 <h1 class="profile-name">{{profile.display_name}}</h1>
 
-                <table style="border-spacing: 20px 0;">
+                <table class="stats-table">
                     <tr>
-                        <td class="stat-col">
-                            <h3 class="stat-heading">Posts</h3>
-                            <p class="small-text">TBD</p>
+                        <td class="stats-table-col">
+                            <h3>Posts</h3>
+                            <p>TBD</p>
                         </td>
 
-                        <td class="stat-col">
-                            <h3 class="stat-heading">Followers</h3>
-                            <p class="small-text">TBD</p>
+                        <td class="stats-table-col">
+                            <h3>Followers</h3>
+                            <p>TBD</p>
                         </td>
 
-                        <td class="stat-col">
-                            <h3 class="stat-heading">Following</h3>
-                            <p class="small-text">TBD</p>
+                        <td class="stats-table-col">
+                            <h3>Following</h3>
+                            <p>TBD</p>
                         </td>
                     </tr>
                 </table>
@@ -42,15 +43,14 @@ Description: A template to display a single profile from the Mini Instagram app.
         </tr>
     </table>
 
-    <!-- div containing the profile's bio and posts -->
-    <div class="post-wrapper">
-        <p class="small-text">
-            {{profile.bio_text}}
-        </p>
+    <!-- div containing the profile's bio -->
+    <div class="bio-div">
+        <p>{{profile.bio_text}}</p>
+    </div>
 
-        <h2 class="posts-heading">
-            Posts
-        </h2>
+    <!-- div containing the profile's posts -->
+    <div class="posts-div">
+        <h2>Posts</h2>
     </div>
     
 {% endblock %}
