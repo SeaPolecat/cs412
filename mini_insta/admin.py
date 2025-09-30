@@ -3,7 +3,9 @@
 # Description: Contains code to register models to the Django admin site
 
 from django.contrib import admin
-from .models import Profile
+from .models import Profile, Post, Photo
 
-# register the Profile model to the Django admin site
+# register models to the Django admin site
 admin.site.register(Profile)
+admin.site.register(Post)
+admin.site.register(Photo)
