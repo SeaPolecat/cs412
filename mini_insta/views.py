@@ -4,8 +4,9 @@
 # with entities from the database as context variables.
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Profile, Post
+from .forms import CreatePostForm
 
 
 class ProfileListView(ListView):
@@ -32,3 +33,23 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'mini_insta/show_post.html'
     context_object_name = 'post'
+
+
+class CreatePostView(CreateView):
+    """A view to handle creation of a new Post on a Mini Instagram Profile."""
+
+    form_class = CreatePostForm
+    template_name = 'mini_insta/create_post_form.html'
+
+    def get_context_data(self):
+        """Return the dictionary of context variables for use in the template."""
+
+        context = super().get_context_data()
+
+        pk = self.kwargs['pk']
+
+        profile = Profile.objects.get(pk=pk)
+
+        context['profile'] = profile
+
+        return context
