@@ -5,7 +5,7 @@
 
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Profile
+from .models import Profile, Post
 
 
 class ProfileListView(ListView):
@@ -24,3 +24,11 @@ class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'mini_insta/show_profile.html'
     context_object_name = 'profile'
+
+
+class PostDetailView(DetailView):
+    """Define a view class to show a single post in detail."""
+
+    model = Post
+    template_name = 'mini_insta/show_post.html'
+    context_object_name = 'post'
