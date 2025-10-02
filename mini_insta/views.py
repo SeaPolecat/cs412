@@ -5,7 +5,7 @@
 
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Profile, Post
+from .models import Profile, Post, Photo
 from .forms import CreatePostForm
 
 
@@ -53,3 +53,24 @@ class CreatePostView(CreateView):
         context['profile'] = profile
 
         return context
+    
+    def form_valid(self, form):
+        """Handles the form submission and saves the new object 
+        to the Django database.
+        """
+
+        print(form.cleaned_data)
+
+        post = form.instance
+
+        profile_pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=profile_pk)
+        post.profile = profile
+
+        response = super().form_valid(form)
+
+        photo = self.request.POST['photo']
+
+        Photo.objects.create(post=post, image_url=photo)
+
+        return response
