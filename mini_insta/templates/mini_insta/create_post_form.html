@@ -1,0 +1,26 @@
+<!--
+File: mini_insta/templates/mini_insta/create_post_form.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+Description: 
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+    <h1>make a post!</h1>
+
+    <form action="{% url 'create_post' profile.pk %}" method="POST">
+        {% csrf_token %}
+
+        <table>
+            {{form.as_table}}
+        </table>
+
+        <input type="url" name="photo" value="photo">
+
+        <input type="submit" name="submit" value="submit">
+        <input type="button" name="cancle" value="cancel">
+    </form>
+    
+{% endblock %}
