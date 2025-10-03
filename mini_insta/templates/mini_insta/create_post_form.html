@@ -1,26 +1,42 @@
 <!--
 File: mini_insta/templates/mini_insta/create_post_form.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
-Description: 
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+Description: A template to create a new post for a profile.
 -->
 
 {% extends 'mini_insta/base.html' %}
 
 {% block content %}
 
-    <h1>make a post!</h1>
+    <h2 class="create-post-heading">Create a Post</h2>
 
-    <form action="{% url 'create_post' profile.pk %}" method="POST">
+    <!-- form containing inputs for creating a new post -->
+    <form class="create-post-form" action="{% url 'create_post' profile.pk %}" method="POST">
         {% csrf_token %}
 
-        <table>
-            {{form.as_table}}
+        <table class="create-post-table">
+            <!-- input for the post's caption -->
+            <tr><td>
+                <h3 class="input-label">Caption</h3>
+                {{form.caption}}
+            </td></tr>
+
+            <!-- input for the post's image (URL of a single image for now) -->
+            <tr><td>
+                <h3 class="input-label">Photo</h3>
+                <input class="photo-input" type="url" name="photo_image_url" required>
+            </td></tr>
+
+            <!-- create and cancel buttons -->
+            <tr><td>
+                <input class="button-input" type="submit" value="Create">
+
+                <!-- return to the post owner's profile upon clicking cancel button -->
+                <a href="{% url 'show_profile' profile.pk %}">
+                    <input class="button-input" type="button" value="Cancel">
+                </a>
+            </td></tr>
         </table>
-
-        <input type="url" name="photo" value="photo">
-
-        <input type="submit" name="submit" value="submit">
-        <input type="button" name="cancle" value="cancel">
     </form>
     
 {% endblock %}

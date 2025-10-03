@@ -1,22 +1,25 @@
 <!--
 File: mini_insta/templates/mini_insta/show_post.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
-Description: 
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+Description: A template to display a profile's post in detail, 
+including its caption and all associated photos.
 -->
 
 {% extends 'mini_insta/base.html' %}
 
 {% block content %}
 
-    <h1>showing a post!</h1>
+    <!-- div containing the post's caption -->
+    <div class="caption-div">
+        <p>{{post.caption}}</p>
+    </div>
 
-    <div class="picture-grid-div">
+    <!-- div containing every photo in the post -->
+    <div class="photo-grid-div">
+        <!-- loop to process each photo in the post to
+         display them all at once -->
         {% for photo in post.get_all_photos %}
-            <div class="picture-div">
-                <img class="picture" src="{{photo.image_url}}" alt="">
-
-                <p>{{photo.timestamp}}</p>
-            </div>
+            <img class="photo" src="{{photo.image_url}}" alt="">
         {% endfor %}
     </div>
     

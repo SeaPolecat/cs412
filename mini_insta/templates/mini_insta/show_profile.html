@@ -1,7 +1,7 @@
 <!--
 File: mini_insta/templates/mini_insta/show_profile.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
-Description: A template to display a single profile from the Mini Instagram app.
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+Description: A template to display a single profile and its posts.
 -->
 
 {% extends 'mini_insta/base.html' %}
@@ -24,18 +24,18 @@ Description: A template to display a single profile from the Mini Instagram app.
                 <table class="stats-table">
                     <tr>
                         <td class="stats-table-col">
-                            <h3>Posts</h3>
-                            <p>TBD</p>
+                            <h3 class="stat-heading">Posts</h3>
+                            <h3 class="stat-heading">{{profile.get_all_posts.count}}<h3>
                         </td>
 
                         <td class="stats-table-col">
-                            <h3>Followers</h3>
-                            <p>TBD</p>
+                            <h3 class="stat-heading">Followers</h3>
+                            <h3 class="stat-heading">0</h3>
                         </td>
 
                         <td class="stats-table-col">
-                            <h3>Following</h3>
-                            <p>TBD</p>
+                            <h3 class="stat-heading">Following</h3>
+                            <h3 class="stat-heading">0</h3>
                         </td>
                     </tr>
                 </table>
@@ -43,14 +43,30 @@ Description: A template to display a single profile from the Mini Instagram app.
         </tr>
     </table>
 
-    <!-- div containing the profile's bio -->
+    <!-- div containing the profile's join date and bio -->
     <div class="bio-div">
-        <p>{{profile.bio_text}}</p>
+        <p><strong>Joined on {{profile.join_date}}</strong></p>
+
+        <p>{{profile.bio_text | linebreaksbr}}</p>
+
+        <h2>Posts</h2>
     </div>
 
     <!-- div containing the profile's posts -->
-    <div class="posts-div">
-        <h2>Posts</h2>
+    <div class="posts-grid-div">
+        <!-- loop to process each post in the profile to
+         display all of them at once -->
+        {% for post in profile.get_all_posts %}
+            <div>
+                <!-- link to view a post in detail using its primary key -->
+                <a href="{% url 'show_post' post.pk %}">
+                    <img class="post" src="{{post.get_all_photos.0.image_url}}"
+                    alt="first photo of post">
+                </a>
+                
+                <p class="post-date">{{post.timestamp.date}}</p>
+            </div>
+        {% endfor %}
     </div>
     
 {% endblock %}

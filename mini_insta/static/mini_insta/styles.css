@@ -7,10 +7,12 @@ Description: A CSS stylesheet for the Mini Instagram app templates.
 /* imported fonts */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 
-/* colour variables */
+/* font + colour variables */
 :root {
+    --merriweather: 'merriweather';
     --wisteria: rgba(203, 112, 255);
     --wisteria-translucent: rgba(203, 112, 255, 0.6);
+    --black-translucent: rgba(0, 0, 0, 0.5);
 }
 
 /* GENERAL STYLES */
@@ -18,7 +20,7 @@ Description: A CSS stylesheet for the Mini Instagram app templates.
 body {
     margin: 0;
     background: black;
-    font-family: 'merriweather';
+    font-family: var(--merriweather);
     color: white;
 }
 
@@ -42,7 +44,7 @@ p {
 
 img.background-img {
     position: fixed;
-    width: 100vw;
+    width: 100%;
     top: 0;
     filter: brightness(30%);
     z-index: -1;
@@ -52,79 +54,79 @@ header {
     position: fixed;
     display: flex;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     height: 110px;
     top: 0;
     background: black;
     border-bottom: 3px solid white;
 }
 
-img.home-icon {
-    display: inline-block;
-    width: 50px;
-    margin-left: 30px;
-    transition: 0.2s;
-}
-
-img.home-icon:hover {
-    filter: brightness(69%);
+img.slayer-logo {
+    width: 80px;
+    margin-left: 20px;
 }
 
 h2.menu-heading {
     position: relative;
     top: 4px;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
-h2.menu-heading.right {
+table.icon-table {
     margin-left: auto;
-    margin-right: 30px;
+    margin-right: 10px;
+    border-spacing: 25px 0;
+}
+
+img.icon {
+    width: 50px;
+    transition: 0.2s;
+}
+
+img.icon:hover {
+    filter: brightness(69%);
+}
+
+div.content-wrapper-div {
+    width: 90%;
+    margin: 160px auto 50px auto;
 }
 
 /* SHOW ALL PROFILES */
 
-div.grid-container-div {
+div.profile-grid-div {
     display: grid;
-    width: 90%;
+    width: 100%;
     justify-items: center;
     grid-template-columns: repeat(4, 1fr); /* 4 equal-width cols */
-    row-gap: 50px;
-    margin: 160px auto 50px auto;
 }
 
-img.square-profile-img {
+img.square-pfp {
     width: 280px;
     height: 280px;
     object-fit: cover;
     border: 3px solid white;
-    border-radius: 20px;
+    border-radius: 10px;
     transition: 0.2s;
 }
 
-img.square-profile-img:hover {
+img.square-pfp:hover {
     transform: scale(1.02);
     border: 3px solid var(--wisteria);
 }
 
 /* SHOW PROFILE */
 
-/* table {
-    border: 2px solid red;
-}
-
-td {
-    border: 2px solid red;
-} */
+/* table { border: 2px solid red; }
+td { border: 2px solid red; } */
 
 table.profile-table {
-    width: 80%;
-    margin: 160px auto 0 auto;
+    margin: 0 auto 0 auto;
 }
 
 img.circle-profile-img {
-    display: inline-block;
-    width: 250px;
-    height: 250px;
+    width: 240px;
+    height: 240px;
     object-fit: cover;
     border: 3px solid white;
     border-radius: 50%;
@@ -147,12 +149,101 @@ td.stats-table-col {
     border-radius: 10px;
 }
 
-div.bio-div {
-    width: 80%;
-    margin: 50px auto 0 auto;
+h3.stat-heading {
+    margin: 0;
 }
 
-div.posts-div {
-    width: 80%;
+div.bio-div {
+    width: 100%;
+    margin: 50px 0 0 130px;
+}
+
+div.posts-grid-div {
+    display: grid;
+    width: 85%;
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 40px;
     margin: 0 auto 0 auto;
+}
+
+img.post {
+    width: 330px;
+    height: 330px;
+    object-fit: cover;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+img.post:hover {
+    transform: scale(1.02);
+    border: 3px solid var(--wisteria);
+}
+
+p.post-date {
+    text-align: left;
+}
+
+/* SHOW POST */
+
+div.caption-div {
+    width: 95%;
+    text-align: center;
+    margin: 0 auto 50px auto;
+    padding: 10px;
+    background-color: var(--black-translucent);
+}
+
+div.photo-grid-div {
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 50px;
+}
+
+img.photo {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+/* CREATE POST FORM */
+
+h2.create-post-heading {
+    width: fit-content;
+    transform: translate(-50%, 0);
+    margin: 0 0 0 50%;
+}
+
+table.create-post-table {
+    width: fit-content;
+    margin: 0 auto 0 auto;
+    border-spacing: 50px;
+}
+
+h3.input-label {
+    margin: 0 0 12px 0;
+}
+
+input.photo-input {
+    width: 100%;
+}
+
+input.button-input {
+    margin: 0 5px 0 5px;
+    padding: 5px 10px 5px 10px;
+    background: var(--wisteria-translucent);
+    font: 20px var(--merriweather);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+input.button-input:hover {
+    background-color: darkgray;
 }
