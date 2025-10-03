@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Profile, Post, Photo
 from .forms import CreatePostForm
+from django.urls import reverse
 
 
 class ProfileListView(ListView):
@@ -41,6 +42,12 @@ class CreatePostView(CreateView):
     form_class = CreatePostForm
     template_name = 'mini_insta/create_post_form.html'
 
+    def get_success_url(self):
+        """"""
+        pk = self.kwargs['pk']
+
+        return reverse('show_profile', kwargs={'pk': pk})
+
     def get_context_data(self):
         """Return the dictionary of context variables for use in the template."""
 
@@ -65,12 +72,13 @@ class CreatePostView(CreateView):
 
         profile_pk = self.kwargs['pk']
         profile = Profile.objects.get(pk=profile_pk)
+
         post.profile = profile
+        post.save()
 
-        response = super().form_valid(form)
+        photo_image_url = self.request.POST['photo_image_url']
 
-        photo = self.request.POST['photo']
+        photo = Photo(post=post, image_url=photo_image_url)
+        photo.save()
 
-        Photo.objects.create(post=post, image_url=photo)
-
-        return response
+        return super().form_valid(form)
