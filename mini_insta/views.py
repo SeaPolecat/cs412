@@ -1,7 +1,7 @@
 # File: mini_insta/views.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
-# Description: Contains views for the Mini Instagram app. These render templates 
-# with entities from the database as context variables.
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+# Description: Contains views for the Mini Insta app. These render templates,
+# pass in context variables, and handle form submissions.
 
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
@@ -43,20 +43,23 @@ class CreatePostView(CreateView):
     template_name = 'mini_insta/create_post_form.html'
 
     def get_success_url(self):
-        """"""
-        pk = self.kwargs['pk']
+        """Provide a URL to redirect to after creating a new Post."""
 
+        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
+
+        # redirect to the profile page with primary key pk
         return reverse('show_profile', kwargs={'pk': pk})
 
     def get_context_data(self):
         """Return the dictionary of context variables for use in the template."""
 
-        context = super().get_context_data()
+        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
 
-        pk = self.kwargs['pk']
-
+        # get the Profile instance using pk
         profile = Profile.objects.get(pk=pk)
 
+        # get the context dict from the superclass, and add the Profile to it
+        context = super().get_context_data()
         context['profile'] = profile
 
         return context
@@ -66,19 +69,26 @@ class CreatePostView(CreateView):
         to the Django database.
         """
 
+        # print the data the user entered (for debugging purposes)
         print(form.cleaned_data)
 
-        post = form.instance
+        post = form.instance # the Post instance being created
+        profile_pk = self.kwargs['pk'] # PK of the Profile associated with this Post
 
-        profile_pk = self.kwargs['pk']
+        # get the Profile instance using pk
         profile = Profile.objects.get(pk=profile_pk)
 
+        # attach the Profile's PK as a foreign key to the Post
         post.profile = profile
         post.save()
 
+        # get the photo URL that the user entered through an explicit form
         photo_image_url = self.request.POST['photo_image_url']
 
+        # create a new Photo instance with the Post's PK as a foreign key, and
+        # the given photo URL
         photo = Photo(post=post, image_url=photo_image_url)
         photo.save()
 
+        # let the superclass' form_valid() handle the rest
         return super().form_valid(form)

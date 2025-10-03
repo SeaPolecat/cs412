@@ -5,6 +5,7 @@ Description: A template to display a single profile and its posts.
 -->
 
 {% extends 'mini_insta/base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -60,8 +61,17 @@ Description: A template to display a single profile and its posts.
             <div>
                 <!-- link to view a post in detail using its primary key -->
                 <a href="{% url 'show_post' post.pk %}">
-                    <img class="post" src="{{post.get_all_photos.0.image_url}}"
-                    alt="first photo of post">
+
+                    <!-- if the post has photos, display the first photo -->
+                    {% if post.get_all_photos.0.image_url %}
+                        <img class="post" src="{{post.get_all_photos.0.image_url}}"
+                        alt="first photo of post">
+
+                    <!-- otherwise, display an alternate image saying 'no image' -->
+                    {% else %}
+                        <img class="post" src="{% static 'mini_insta/no-photo.png' %}"
+                        alt="no photo">
+                    {% endif %}
                 </a>
                 
                 <p class="post-date">{{post.timestamp.date}}</p>

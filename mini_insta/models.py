@@ -1,12 +1,13 @@
 # File: mini_insta/models.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
-# Description: Describes what a Profile entity should look in the database.
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+# Description: Defines what attributes the Mini Insta models 
+# in the database should have.
 
 from django.db import models
 
 
 class Profile(models.Model):
-    """Encapsulate the data of a Mini Insta profile."""
+    """Encapsulate the data of a Mini Insta Profile."""
 
     username = models.TextField(blank=True)
     display_name = models.TextField(blank=True)
@@ -22,14 +23,14 @@ class Profile(models.Model):
     def get_all_posts(self):
         """Return a QuerySet of all Posts on this Profile."""
 
-        # posts are ordered by newest first
+        # Posts are ordered by newest first
         posts = Post.objects.filter(profile=self).order_by('-timestamp')
 
         return posts
     
 
 class Post(models.Model):
-    """Encapsulate the data of a post on a Mini Insta profile."""
+    """Encapsulate the data of a Post on a Mini Insta Profile."""
 
     # the foreign key to indicate the relationship to the Profile of the creator of this post
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -44,6 +45,7 @@ class Post(models.Model):
     def get_all_photos(self):
         """Return a QuerySet of all Photos on this Post."""
     
+        # Photos are ordered by newest first
         photos = Photo.objects.filter(post=self).order_by('-timestamp')
 
         return photos

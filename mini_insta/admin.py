@@ -1,6 +1,6 @@
 # File: mini_insta/admin.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
-# Description: Contains code to register models to the Django admin site
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+# Description: Registers Mini Insta models to the Django admin site
 
 from django.contrib import admin
 from .models import Profile, Post, Photo
