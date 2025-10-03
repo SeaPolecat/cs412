@@ -6,6 +6,7 @@ including its caption and all associated photos.
 -->
 
 {% extends 'mini_insta/base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -19,7 +20,14 @@ including its caption and all associated photos.
         <!-- loop to process each photo in the post to
          display them all at once -->
         {% for photo in post.get_all_photos %}
-            <img class="photo" src="{{photo.image_url}}" alt="">
+            <!-- if a photo exists, display it -->
+            {% if photo.image_url %}
+                <img class="photo" src="{{photo.image_url}}">
+
+            <!-- otherwise, display an alternate image saying 'no photo' -->
+            {% else %}
+                <img class="photo" src="{% static 'mini_insta/no-photo.png' %}">
+            {% endif %}
         {% endfor %}
     </div>
     

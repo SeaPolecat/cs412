@@ -67,7 +67,7 @@ Description: A template to display a single profile and its posts.
                         <img class="post" src="{{post.get_all_photos.0.image_url}}"
                         alt="first photo of post">
 
-                    <!-- otherwise, display an alternate image saying 'no image' -->
+                    <!-- otherwise, display an alternate image saying 'no photo' -->
                     {% else %}
                         <img class="post" src="{% static 'mini_insta/no-photo.png' %}"
                         alt="no photo">
