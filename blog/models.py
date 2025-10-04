@@ -12,11 +12,12 @@ class Article(models.Model):
     # need to run makemigrations and migrate every time these model vars are changed!!
 
     # define the data attributes of the Article object
-    title = models.TextField(blank=True)
+    title = models.TextField(blank=True) # blank=True means it's possible to leave it blank
     author = models.TextField(blank=True)
     text = models.TextField(blank=True)
     published = models.DateTimeField(auto_now=True) # automatically sets published to the current time
-    image_url = models.URLField(blank=True) # holds any kind of url
+    # image_url = models.URLField(blank=True) # holds any kind of url # url as a string
+    image_file = models.ImageField(blank=True) # an actual image file
 
 
     def __str__(self):

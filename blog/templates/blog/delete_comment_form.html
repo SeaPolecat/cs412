@@ -1,0 +1,25 @@
+<!-- blog/delete_comment_form.html -->
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<h3>Are you sure you want to delete this comment?</h3>
+
+<p>
+    {{comment}}
+</p>
+
+<!-- form to submit the delete request -->
+<form method="POST"> <!-- don't need action, because default action is to go back to the page that called this form -->
+    {% csrf_token %}
+
+    <input type="submit" value="Delete">
+</form>
+
+<!-- form to cancel -->
+<form action="{% url 'article' comment.article.pk %}" method="GET">
+    <input type="submit" value="Cancel">
+</form>
+
+{% endblock %}

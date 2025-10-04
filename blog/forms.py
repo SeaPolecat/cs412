@@ -12,7 +12,18 @@ class CreateArticleForm(forms.ModelForm):
         """Associate this form with the Article model."""
 
         model = Article
-        fields = ['author', 'title', 'text', 'image_url'] # the db can set the publish date automatically
+        # fields = ['author', 'title', 'text', 'image_url'] # the db can set the publish date automatically
+        fields = ['author', 'title', 'text', 'image_file']
+
+
+class UpdateArticleForm(forms.ModelForm):
+    """A form to handle an update to an Article"""
+
+    class Meta():
+        """Associate this form with the Article Model."""
+
+        model = Article
+        fields = ['title', 'text'] # list of fields we're allowed to update
 
 
 class CreateCommentForm(forms.ModelForm):

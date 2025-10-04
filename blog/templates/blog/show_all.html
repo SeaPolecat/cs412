@@ -26,7 +26,12 @@
                 <!-- create a link to show this one article only -->
                 <!-- attribute pk modifies the url to include the image's primary key number -->
                 <a href="{% url 'article' article.pk %}">
-                    <img src="{{article.image_url}}" alt="">
+                    
+                    {% if article.image_file %}
+                        <img src="{{article.image_file.url}}" alt="">
+                    {% else %}
+                        <h3>No image</h3>
+                    {% endif %}
                 </a>
             </article>
 

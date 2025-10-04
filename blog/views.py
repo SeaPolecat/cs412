@@ -1,9 +1,9 @@
 # blog/views.py
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
-from .models import Article
-from .forms import CreateArticleForm, CreateCommentForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Article, Comment
+from .forms import CreateArticleForm, CreateCommentForm, UpdateArticleForm
 from django.urls import reverse
 
 import random
@@ -61,6 +61,15 @@ class CreateArticleView(CreateView):
 
     form_class = CreateArticleForm
     template_name = 'blog/create_article_form.html'
+
+    def form_valid(self, form):
+        """Override the default method to add some debug information."""
+
+        # print out the form data:
+        print(f'CreateArticleView.form_valid(): {form.cleaned_data}')
+
+        # delegate work to the superclass to do the rest:
+        return super().form_valid(form)
 
 
 class CreateCommentView(CreateView):
@@ -126,3 +135,37 @@ class CreateCommentView(CreateView):
 
         # delegate the work to the superlcass method form_valid:
         return super().form_valid(form)
+    
+
+class UpdateArticleView(UpdateView):
+    """View class to handle update of an article based on its PK."""
+
+    model = Article
+    form_class = UpdateArticleForm
+    template_name = 'blog/update_article_form.html'
+    # Django automatically generates the 'article' context variable name
+    # (based on the model name), even if we don't add one
+
+
+class DeleteCommentView(DeleteView):
+    """View class to delete a comment on an Article."""
+
+    model = Comment
+    template_name = 'blog/delete_comment_form.html'
+    # Django automatically generates the 'comment' context variable name
+    # (based on the model name), even if we don't add one
+
+    def get_success_url(self):
+        """Return the URL to redirect to after a successful delete."""
+
+        # find the PK for this Comment:
+        pk = self.kwargs['pk']
+
+        # find the Comment object:
+        comment = Comment.objects.get(pk=pk)
+
+        # find the PK of the Article to which this comment is associated:
+        article = comment.article
+
+        # return the URL to redirect to:
+        return reverse('article', kwargs={'pk': article.pk})

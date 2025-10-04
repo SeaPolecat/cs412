@@ -1,0 +1,32 @@
+<!-- 
+blog/update_article_form.html 
+display the HTML form to update an Article object.
+-->
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <h1>Update this Article</h1>
+
+    <!-- display the HTML form -->
+    <!-- need the enctype="multipart/form-data" to send media (binary data) with this form submission -->
+    <form action="{% url 'update_article' article.pk %}" method="POST" 
+        enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <table>
+            <!-- display the form as a table (can also do .as_p to display as paragraph)-->
+            {{form.as_table}}
+        </table>
+
+        <input type="submit" name="submit" value="Update">
+    </form>
+
+    <!-- Add a separate form for a cancel button -->
+    <form action="{% url 'article' article.pk %}" method="GET">
+        <input type="submit" value="Cancel">
+    </form>
+
+{% endblock %}

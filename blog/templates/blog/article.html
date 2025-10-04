@@ -14,7 +14,14 @@ display a single article on this web page
 
     <main class="grid-container">
         <article>
-            <img src="{{article.image_url}}" alt="">
+            <!-- <img src="{{article.image_url}}" alt=""> -->
+
+            {% if article.image_file %}
+                <!-- using an image file instead of just a url -->
+                <img src="{{article.image_file.url}}" alt="">
+            {% else %}
+                <h3>No image</h3>
+            {% endif %}
 
             <div>
                 <h2>{{article.title}}</h2>
@@ -24,6 +31,10 @@ display a single article on this web page
                 <p>
                     {{article.text}}
                 </p>
+
+                <h3>
+                    <a href="{% url 'update_article' article.pk %}">Update Article</a>
+                </h3>
             </div>
         </article>
 
@@ -41,6 +52,9 @@ display a single article on this web page
                     <strong>by {{comment.author}} at {{comment.published}}</strong>
 
                     <p>{{comment.text}}</p>
+
+                    <!-- link to delete this comment -->
+                    <a href="{% url 'delete_comment' comment.pk %}">Delete</a>
                 </div>
             {% endfor %}
         </div>
