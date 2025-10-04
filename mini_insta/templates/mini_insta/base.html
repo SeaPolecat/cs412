@@ -12,7 +12,7 @@ templates inherit from.
         <title>Mini Instagram</title>
 
         <!-- linking the stylesheet -->
-        <link rel="stylesheet" href="{% static 'mini_insta/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'mini_insta/css/styles.css' %}">
     </head>
 
     <body>
@@ -24,7 +24,7 @@ templates inherit from.
         <!-- header bar containing key app information -->
         <header>
             <!-- decorative logo -->
-            <img class="slayer-logo" src="{% static 'mini_insta/demon-slayer-icon.png' %}" 
+            <img class="slayer-logo" src="{% static 'mini_insta/img/demon-slayer-icon.png' %}" 
             alt="demon slayer logo">
 
             <!-- if viewing all profiles, display 'MiniInsta Profiles' -->
@@ -48,7 +48,7 @@ templates inherit from.
                     {% if profile %}
                         <td>
                             <a href="{% url 'create_post' profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/add-icon.png' %}"
+                                <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}"
                                 alt="add post">
                             </a>
                         </td>
@@ -59,7 +59,7 @@ templates inherit from.
                     {% if post %}
                         <td>
                             <a href="{% url 'show_profile' post.profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/back-icon.png' %}"
+                                <img class="icon" src="{% static 'mini_insta/img/back-icon.png' %}"
                                 alt="back to profile">
                             </a>
                         </td>
@@ -68,7 +68,7 @@ templates inherit from.
                     <!-- button to return to the home page (view all profiles) -->
                     <td>
                         <a href="{% url 'show_all_profiles' %}">
-                            <img class="icon" src="{% static 'mini_insta/home-icon.png' %}"
+                            <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}"
                             alt="back to home">
                         </a>
                     </td>
