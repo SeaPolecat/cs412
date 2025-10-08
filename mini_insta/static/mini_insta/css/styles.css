@@ -154,8 +154,9 @@ h3.stat-heading {
 }
 
 div.bio-div {
-    width: 100%;
-    margin: 50px 0 0 130px;
+    width: fit-content;
+    margin-top: 50px;
+    padding-left: 130px;
 }
 
 div.posts-grid-div {
