@@ -10,7 +10,7 @@ display the HTML form to create a new Article object.
     <h1>Create a new Article</h1>
 
     <!-- display the HTML form -->
-    <form action="{% url 'create_article' article.pk %}" method="POST" 
+    <form action="{% url 'create_article' %}" method="POST" 
         enctype="multipart/form-data"> <!-- when submitting media (images, etc.), we need the enctype attribute -->
 
         {% csrf_token %}
