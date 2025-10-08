@@ -83,12 +83,18 @@ class CreatePostView(CreateView):
         post.save()
 
         # get the photo URL that the user entered through an explicit form
-        photo_image_url = self.request.POST['photo_image_url']
+        # photo_image_url = self.request.POST['photo_image_url']
+
+        photo_files = self.request.FILES.getlist('photo_files')
 
         # create a new Photo instance with the Post's PK as a foreign key, and
         # the given photo URL
-        photo = Photo(post=post, image_url=photo_image_url)
-        photo.save()
+        # photo = Photo(post=post, image_url=photo_image_url)
+        # photo.save()
+
+        for file in photo_files:
+            photo = Photo(post=post, image_file=file)
+            photo.save()
 
         # let the superclass' form_valid() handle the rest
         return super().form_valid(form)
