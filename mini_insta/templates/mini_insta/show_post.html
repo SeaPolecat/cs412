@@ -21,8 +21,8 @@ including its caption and all associated photos.
          display them all at once -->
         {% for photo in post.get_all_photos %}
             <!-- if a photo exists, display it -->
-            {% if photo.image_url %}
-                <img class="photo" src="{{photo.image_url}}">
+            {% if photo.get_image_url %}
+                <img class="photo" src="{{photo.get_image_url}}">
 
             <!-- otherwise, display an alternate image saying 'no photo' -->
             {% else %}

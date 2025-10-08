@@ -63,8 +63,8 @@ Description: A template to display a single profile and its posts.
                 <a href="{% url 'show_post' post.pk %}">
 
                     <!-- if the post has photos, display the first photo -->
-                    {% if post.get_all_photos.0.image_url %}
-                        <img class="post" src="{{post.get_all_photos.0.image_url}}"
+                    {% if post.get_all_photos.0.get_image_url %}
+                        <img class="post" src="{{post.get_all_photos.0.get_image_url}}"
                         alt="first photo of post">
 
                     <!-- otherwise, display an alternate image saying 'no photo' -->
