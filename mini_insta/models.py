@@ -56,9 +56,23 @@ class Photo(models.Model):
     # the foreign key to indicate the relationship to the Post to which this Photo is associated
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image_url = models.URLField(blank=True) # a valid URL to an image stored on the public world-wide web
+    image_file = models.ImageField(blank=True) # an image stored as a media file
     timestamp = models.DateTimeField(auto_now=True) # the time at which this Photo was created/saved
 
     def __str__(self):
         """Return a string representation of this Photo model instance."""
 
         return f'{self.post.profile} | {self.post.caption} | Photo {self.pk}'
+    
+    def get_image_url(self):
+        """Returns either the URL stored in the image_url attribute 
+        (if it exists), or else the URL to the image_file attribute.
+        If no photo exists, return None.
+        """
+
+        if self.image_url:
+            return self.image_url
+        elif self.image_file:
+            return self.image_file.url
+        else:
+            return None
