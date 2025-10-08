@@ -11,7 +11,8 @@ Description: A template to create a new post for a profile.
     <h2 class="create-post-heading">Create a Post</h2>
 
     <!-- form containing inputs for creating a new post -->
-    <form class="create-post-form" action="{% url 'create_post' profile.pk %}" method="POST">
+    <form class="create-post-form" action="{% url 'create_post' profile.pk %}" method="POST"
+    enctype="multipart/form-data">
         {% csrf_token %}
 
         <table class="create-post-table">
@@ -22,10 +23,15 @@ Description: A template to create a new post for a profile.
             </td></tr>
 
             <!-- input for the post's image (URL of a single image for now) -->
-            <tr><td>
+            <!-- <tr><td>
                 <h3 class="input-label">Photo</h3>
                 <input class="photo-input" type="url" name="photo_image_url">
-            </td></tr>
+            </td></tr> -->
+
+            <td><tr>
+                <h3 class="input-label">Photo</h3>
+                <input type="file" name="photo_files" multiple>
+            </tr></td>
 
             <!-- submit and cancel buttons -->
             <tr><td>
