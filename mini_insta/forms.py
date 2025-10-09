@@ -8,10 +8,20 @@ from .models import *
 
 
 class CreatePostForm(forms.ModelForm):
-    """A form to add a Post to a Mini Insta profile."""
+    """A form to add a Post to a Mini Insta Profile."""
 
     class Meta:
         """Associate this form with the Post model."""
 
         model = Post
         fields = ['caption'] # the data we want the user to enter
+
+
+class UpdateProfileForm(forms.ModelForm):
+    """A form to update a Mini Insta Profile."""
+
+    class Meta:
+        """Associate this form with the Profile model."""
+
+        model = Profile
+        fields = ['display_name', 'profile_image_url', 'bio_text']
