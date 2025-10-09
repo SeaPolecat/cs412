@@ -44,6 +44,10 @@ Description: A template to display a single profile and its posts.
         </tr>
     </table>
 
+    <a href="{% url 'update_profile' profile.pk %}">
+        <h1>Update Profile</h1>
+    </a>
+
     <!-- div containing the profile's join date and bio -->
     <div class="bio-div">
         <p><strong>Joined on {{profile.join_date}}</strong></p>
