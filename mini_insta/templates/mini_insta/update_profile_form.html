@@ -1,0 +1,46 @@
+<!--
+File: mini_insta/templates/mini_insta/update_profile_form.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+Description:
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+    <h2 class="create-post-heading">Update Profile</h2>
+
+    <!-- form containing inputs for creating a new post -->
+    <form class="create-post-form" action="{% url 'update_profile' profile.pk %}" method="POST">
+        {% csrf_token %}
+
+        <table class="create-post-table">
+            <!-- input for the post's caption -->
+            <tr><td>
+                <h3 class="input-label">Display Name</h3>
+                {{form.display_name}}
+            </td></tr>
+
+            <tr><td>
+                <h3 class="input-label">Profile Picture</h3>
+                {{form.profile_image_url}}
+            </td></tr>
+
+            <tr><td>
+                <h3 class="input-label">Bio</h3>
+                {{form.bio_text}}
+            </td></tr>
+
+            <!-- submit and cancel buttons -->
+            <tr><td>
+                <input class="button-input" type="submit" value="Create">
+
+                <!-- return to the post owner's profile upon clicking cancel button -->
+                <a href="{% url 'show_profile' profile.pk %}">
+                    <input class="button-input" type="button" value="Cancel">
+                </a>
+            </td></tr>
+        </table>
+    </form>
+    
+{% endblock %}
