@@ -4,6 +4,7 @@
 # in the database should have.
 
 from django.db import models
+from django.urls import reverse
 
 
 class Profile(models.Model):
@@ -19,6 +20,11 @@ class Profile(models.Model):
         """Return a string representation of this Profile model instance."""
 
         return f'{self.username} ({self.display_name})'
+    
+    def get_absolute_url(self):
+        """Return a URL to display this Profile by default."""
+
+        return reverse('show_profile', kwargs={'pk': self.pk})
     
     def get_all_posts(self):
         """Return a QuerySet of all Posts on this Profile."""
