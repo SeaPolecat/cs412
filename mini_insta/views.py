@@ -4,9 +4,9 @@
 # pass in context variables, and handle form submissions.
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm
+from .forms import CreatePostForm, UpdateProfileForm
 from django.urls import reverse
 
 
@@ -98,3 +98,11 @@ class CreatePostView(CreateView):
 
         # let the superclass' form_valid() handle the rest
         return super().form_valid(form)
+    
+
+class UpdateProfileView(UpdateView):
+    """View class to handle update of a Mini Instagram Profile."""
+
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_insta/update_profile_form.html'
