@@ -151,7 +151,7 @@ class DeletePostView(DeleteView):
         post = Post.objects.get(pk=pk)
         profile = post.profile
 
-        # redirect to the Profile page with primary key pk
+        # redirect to the Profile page whose Post was deleted
         return reverse('show_profile', kwargs={'pk': profile.pk})
 
     def get_context_data(self, **kwargs):
@@ -163,7 +163,7 @@ class DeletePostView(DeleteView):
         # use the Post in the context to find its associated Profile
         profile = context['post'].profile
 
-        # add the Profile to the context dict
+        # add the Profile to the context
         context['profile'] = profile
 
         return context
@@ -185,7 +185,7 @@ class DeletePhotoView(DeleteView):
         photo = Photo.objects.get(pk=pk)
         post = photo.post
 
-        # redirect to the Post page with primary key pk
+        # redirect to the Post page whose Photo was deleted
         return reverse('show_post', kwargs={'pk': post.pk})
 
     def get_context_data(self, **kwargs):
@@ -199,7 +199,7 @@ class DeletePhotoView(DeleteView):
         post = context['photo'].post
         profile = post.profile
 
-        # add the Post and Profile to the context dict
+        # add the Post and Profile to the context
         context['post'] = post
         context['profile'] = profile
 
