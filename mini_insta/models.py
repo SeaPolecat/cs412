@@ -14,7 +14,7 @@ class Profile(models.Model):
     display_name = models.TextField(blank=True)
     profile_image_url = models.URLField(blank=True)
     bio_text = models.TextField(blank=True)
-    join_date = models.DateField(auto_now=True)
+    join_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """Return a string representation of this Profile model instance."""
@@ -41,7 +41,7 @@ class Post(models.Model):
     # the foreign key to indicate the relationship to the Profile of the creator of this post
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     caption = models.TextField(blank=True) # the optional text associated with this post
-    timestamp = models.DateTimeField(auto_now=True) # the time at which this post was created/saved
+    timestamp = models.DateTimeField(auto_now_add=True) # the time at which this post was created/saved
 
     def __str__(self):
         """Return a string representation of this Post model instance."""
@@ -68,7 +68,7 @@ class Photo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image_url = models.URLField(blank=True) # a valid URL to an image stored on the public world-wide web
     image_file = models.ImageField(blank=True) # an image stored as a media file
-    timestamp = models.DateTimeField(auto_now=True) # the time at which this Photo was created/saved
+    timestamp = models.DateTimeField(auto_now_add=True) # the time at which this Photo was created/saved
 
     def __str__(self):
         """Return a string representation of this Photo model instance."""
