@@ -5,10 +5,6 @@ Description: A template to create a new post for a profile.
 
 {% extends 'mini_insta/base.html' %}
 
-<!-- widget_tweaks is a Django add-on that lets you style
- form fields within scriptlet code -->
-{% load widget_tweaks %}
-
 {% block content %}
 
     <h1 class="form-heading">Create New Post</h1>
@@ -30,7 +26,7 @@ Description: A template to create a new post for a profile.
             <!-- input for the post's caption -->
             <div class="form-div">
                 <h3 class="input-heading">Caption</h3>
-                {% render_field form.caption class="text-field" %}
+                {{form.caption}}
             </div>
 
             <!-- confirmation and cancel buttons -->

@@ -5,10 +5,6 @@ Description: A template to update a profile's contents.
 
 {% extends 'mini_insta/base.html' %}
 
-<!-- widget_tweaks is a Django add-on that lets you style
- form fields within scriptlet code -->
-{% load widget_tweaks %}
-
 {% block content %}
 
     <h1 class="form-heading">Edit Profile</h1>
@@ -22,19 +18,19 @@ Description: A template to update a profile's contents.
             <!-- input for changing display name -->
             <div class="form-div">
                 <h3 class="input-heading">Display Name</h3>
-                {% render_field form.display_name class="text-field" %}
+                {{form.display_name}}
             </div>
 
             <!-- input for changing profile picture -->
             <div class="form-div">
                 <h3 class="input-heading">Profile Picture</h3>
-                {% render_field form.profile_image_url class="url-field" %}
+                {{form.profile_image_url}}
             </div>
 
             <!-- input for changing bio text -->
             <div class="form-div">
                 <h3 class="input-heading">Bio Text</h3>
-                {% render_field form.bio_text class="text-field" %}
+                {{form.bio_text}}
             </div>
 
             <!-- confirmation and cancel buttons -->
