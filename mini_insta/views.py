@@ -1,5 +1,5 @@
 # File: mini_insta/views.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
 # Description: Contains views for the Mini Insta app. These render templates,
 # pass in context variables, and handle form submissions.
 
@@ -46,7 +46,7 @@ class CreatePostView(CreateView):
 
         pk = self.kwargs['pk'] # PK of the Profile associated with this Post
 
-        # redirect to the profile page with primary key pk
+        # redirect to the Profile page with primary key pk
         return reverse('show_profile', kwargs={'pk': pk})
 
     def get_context_data(self):
@@ -84,13 +84,15 @@ class CreatePostView(CreateView):
         # get the photo URL that the user entered through an explicit form
         # photo_image_url = self.request.POST['photo_image_url']
 
-        photo_files = self.request.FILES.getlist('photo_files')
-
         # create a new Photo instance with the Post's PK as a foreign key, and
         # the given photo URL
         # photo = Photo(post=post, image_url=photo_image_url)
         # photo.save()
 
+        # get a list of photo files the user uploaded
+        photo_files = self.request.FILES.getlist('photo_files')
+
+        # create a new Photo object for each file and save it to the db
         for file in photo_files:
             photo = Photo(post=post, image_file=file)
             photo.save()
@@ -119,9 +121,12 @@ class UpdatePostView(UpdateView):
         to the Django database.
         """
 
-        post = form.instance # the Post instance being created
+        post = form.instance # the Post instance being updated
+
+        # get a list of photo files the user uploaded
         photo_files = self.request.FILES.getlist('photo_files')
 
+        # create a new Photo object for each file and save it to the db
         for file in photo_files:
             photo = Photo(post=post, image_file=file)
             photo.save()
@@ -137,50 +142,64 @@ class DeletePostView(DeleteView):
     template_name = 'mini_insta/delete_post_form.html'
 
     def get_success_url(self):
-        """"""
+        """Provide a URL to redirect to after deleting a Post."""
 
-        pk = self.kwargs['pk']
+        pk = self.kwargs['pk'] # PK of the Post being deleted
 
+        # use pk to find the Post being deleted and its
+        # associated Profile
         post = Post.objects.get(pk=pk)
         profile = post.profile
 
+        # redirect to the Profile page with primary key pk
         return reverse('show_profile', kwargs={'pk': profile.pk})
 
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
 
+        # get the context dict from the superclass
         context = super().get_context_data()
 
+        # use the Post in the context to find its associated Profile
         profile = context['post'].profile
+
+        # add the Profile to the context dict
         context['profile'] = profile
 
         return context
     
 
 class DeletePhotoView(DeleteView):
-    """"""
+    """View class to delete a Photo on a Mini Instagram Profile's Post."""
 
     model = Photo
     template_name = 'mini_insta/delete_photo_form.html'
 
     def get_success_url(self):
-        """"""
+        """Provide a URL to redirect to after deleting a Photo."""
 
-        pk = self.kwargs['pk']
+        pk = self.kwargs['pk'] # PK of the Photo being deleted
 
+        # use pk to find the Photo being deleted and its
+        # associated Post
         photo = Photo.objects.get(pk=pk)
         post = photo.post
 
+        # redirect to the Post page with primary key pk
         return reverse('show_post', kwargs={'pk': post.pk})
 
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
 
+        # get the context dict from the superclass
         context = super().get_context_data()
 
+        # use the Photo in the context to find its associated 
+        # Post and Profile
         post = context['photo'].post
         profile = post.profile
 
+        # add the Post and Profile to the context dict
         context['post'] = post
         context['profile'] = profile
 

@@ -1,5 +1,5 @@
 # File: mini_insta/models.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
 # Description: Defines what attributes the Mini Insta models 
 # in the database should have.
 
@@ -60,6 +60,7 @@ class Post(models.Model):
         photos = Photo.objects.filter(post=self).order_by('-timestamp')
 
         return photos
+
 
 class Photo(models.Model):
     """Encapsulate the data of an image on a Mini Insta post."""

@@ -1,5 +1,5 @@
 # File: mini_insta/forms.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
 # Description: Defines the forms that we use for create/update/delete 
 # operations in the Mini Insta app.
 
@@ -24,11 +24,11 @@ class CreatePostForm(forms.ModelForm):
         """Associate this form with the Post model."""
 
         model = Post
-        fields = ['caption'] # the data we want the user to enter
+        fields = ['caption']
 
 
 class UpdatePostForm(forms.ModelForm):
-    """"""
+    """A form to update a Post on a Mini Insta Profile."""
 
     class Meta:
         """Associate this form with the Post model."""
