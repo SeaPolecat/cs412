@@ -18,49 +18,44 @@ templates inherit from.
     <body>
         
         <!-- background image -->
-        <img class="background-img" src="https://i.pinimg.com/736x/c7/61/1b/c7611baa39e9c1fa2a0df49677690edf.jpg" 
-        alt="wisteria background image">
+        <img class="background-img" src="https://i.pinimg.com/736x/c7/61/1b/c7611baa39e9c1fa2a0df49677690edf.jpg">
 
         <!-- header bar containing key app information -->
         <header>
             <!-- decorative logo -->
-            <img class="slayer-logo" src="{% static 'mini_insta/img/slayer-logo.png' %}" 
-            alt="demon slayer logo">
+            <img class="slayer-logo" src="{% static 'mini_insta/img/slayer-logo.png' %}">
 
             <!-- if viewing all profiles, display 'MiniInsta Profiles' -->
             {% if profiles %}
                 <h2 class="menu-heading">MiniInsta Profiles</h2>
 
             <!-- if viewing a single profile, display that profile's username -->
+            {% elif post %}
+                <h2 class="menu-heading">{{post.profile.display_name}}'s Post</h2>
+
+            <!-- if viewing a post, display the post's owner -->
             {% elif profile %}
                 <h2 class="menu-heading">@{{profile.username}}</h2>
-
-            <!-- if viewing a post, display the post's owner and the date it was posted -->
-            {% elif post %}
-                <h2 class="menu-heading">{{post.profile.display_name}}'s Post ({{post.timestamp.date}})</h2>
             {% endif %}
 
             <!-- table of navigation icons -->
             <table class="icon-table">
                 <tr>
-                    <!-- if viewing a profile, include a button to create a new post
-                     for that profile -->
-                    {% if profile %}
+                    <!-- if viewing a profile but not a post, include a button to create a 
+                     new post for that profile -->
+                    {% if profile and not post %}
                         <td>
                             <a href="{% url 'create_post' profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}"
-                                alt="add post">
+                                <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}">
                             </a>
                         </td>
                     {% endif%}
 
-                    <!-- if viewing a post, include a button to return to the
-                     post owner's page -->
+                    <!-- if viewing a post, include a button to return to the post owner's page -->
                     {% if post %}
                         <td>
                             <a href="{% url 'show_profile' post.profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/img/back-icon.png' %}"
-                                alt="back to profile">
+                                <img class="icon" src="{% static 'mini_insta/img/back-icon.png' %}">
                             </a>
                         </td>
                     {% endif %}
@@ -68,8 +63,7 @@ templates inherit from.
                     <!-- button to return to the home page (view all profiles) -->
                     <td>
                         <a href="{% url 'show_all_profiles' %}">
-                            <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}"
-                            alt="back to home">
+                            <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}">
                         </a>
                     </td>
                 </tr>
@@ -77,7 +71,7 @@ templates inherit from.
         </header>
 
         <!-- div containing the content in child templates -->
-        <div class="content-wrapper-div">
+        <div class="content-wrapper">
             {% block content %}{% endblock %}
         </div>
 

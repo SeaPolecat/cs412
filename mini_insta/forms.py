@@ -7,6 +7,16 @@ from django import forms
 from .models import *
 
 
+class UpdateProfileForm(forms.ModelForm):
+    """A form to update a Mini Insta Profile."""
+
+    class Meta:
+        """Associate this form with the Profile model."""
+
+        model = Profile
+        fields = ['display_name', 'profile_image_url', 'bio_text']
+
+
 class CreatePostForm(forms.ModelForm):
     """A form to add a Post to a Mini Insta Profile."""
 
@@ -17,11 +27,11 @@ class CreatePostForm(forms.ModelForm):
         fields = ['caption'] # the data we want the user to enter
 
 
-class UpdateProfileForm(forms.ModelForm):
-    """A form to update a Mini Insta Profile."""
+class UpdatePostForm(forms.ModelForm):
+    """"""
 
     class Meta:
-        """Associate this form with the Profile model."""
+        """Associate this form with the Post model."""
 
-        model = Profile
-        fields = ['display_name', 'profile_image_url', 'bio_text']
+        model = Post
+        fields = ['caption']

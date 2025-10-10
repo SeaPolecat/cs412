@@ -1,7 +1,7 @@
 <!--
-File: mini_insta/templates/mini_insta/create_post_form.html
+File: mini_insta/templates/mini_insta/update_profile_form.html
 Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
-Description: A template to create a new post for a profile.
+Description:
 -->
 
 {% extends 'mini_insta/base.html' %}
@@ -12,23 +12,23 @@ Description: A template to create a new post for a profile.
 
 {% block content %}
 
-    <h1 class="form-heading">Create New Post</h1>
+    <h1 class="form-heading">Edit Post</h1>
 
     <div class="form-wrapper">
 
-        <!-- form containing inputs for creating a new post -->
-        <form action="{% url 'create_post' profile.pk %}" method="POST"
+        <!-- form containing inputs for updating a post -->
+        <form class="create-post-form" action="{% url 'update_post' post.pk %}" method="POST"
         enctype="multipart/form-data">
             {% csrf_token %}
 
-            <!-- explicit input to upload photo files -->
+            <!-- explicit input for adding more photos to the post -->
             <div class="form-div">
-                <label class="photo-input-label" for="photo-input">Upload Photos</label>
+                <label class="photo-input-label" for="photo-input">Add More Photos</label>
 
                 <input id="photo-input" class="photo-input" type="file" name="photo_files" multiple>
             </div>
 
-            <!-- input for the post's caption -->
+            <!-- input for updating the post's caption -->
             <div class="form-div">
                 <h3 class="input-heading">Caption</h3>
                 {% render_field form.caption class="text-field" %}
@@ -36,10 +36,10 @@ Description: A template to create a new post for a profile.
 
             <!-- confirmation and cancel buttons -->
             <div class="form-div">
-                <input class="button-input" type="submit" value="Create">
+                <input class="button-input" type="submit" value="Confirm">
 
-                <!-- return to profile page upon clicking cancel -->
-                <a href="{% url 'show_profile' profile.pk %}">
+                <!-- return to the post page upon clicking cancel button -->
+                <a href="{% url 'show_post' post.pk %}">
                     <input class="button-input" type="button" value="Cancel">
                 </a>
             </div>

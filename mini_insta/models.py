@@ -48,6 +48,11 @@ class Post(models.Model):
 
         return f'{self.profile} | {self.caption}'
     
+    def get_absolute_url(self):
+        """Return a URL to display this Post by default."""
+
+        return reverse('show_post', kwargs={'pk': self.pk})
+    
     def get_all_photos(self):
         """Return a QuerySet of all Photos on this Post."""
     

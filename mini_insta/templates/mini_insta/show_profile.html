@@ -14,39 +14,38 @@ Description: A template to display a single profile and its posts.
         <tr>
             <!-- left column to hold the profile picture -->
             <td>
-                <img class="circle-profile-img" src="{{profile.profile_image_url}}"
-                alt="profile picture">
+                <img class="circle-profile-img" src="{{profile.profile_image_url}}">
             </td>
 
-            <!-- right column to hold the profile name and post + follower stats -->
+            <!-- right column to hold the profile name and stats -->
             <td>
                 <h1 class="profile-name">{{profile.display_name}}</h1>
 
-                <table class="stats-table">
-                    <tr>
-                        <td class="stats-table-col">
-                            <h3 class="stat-heading">Posts</h3>
-                            <h3 class="stat-heading">{{profile.get_all_posts.count}}<h3>
-                        </td>
+                <!-- button to update the profile -->
+                <a class="update-profile-link" href="{% url 'update_profile' profile.pk %}">
+                    <input class="button-input" type="button" value="Edit Profile">
+                </a>
 
-                        <td class="stats-table-col">
-                            <h3 class="stat-heading">Followers</h3>
-                            <h3 class="stat-heading">0</h3>
-                        </td>
+                <br>
 
-                        <td class="stats-table-col">
-                            <h3 class="stat-heading">Following</h3>
-                            <h3 class="stat-heading">0</h3>
-                        </td>
-                    </tr>
-                </table>
+                <!-- number of posts, followers, and following stats -->
+                <div class="stat-div">
+                    <h3 class="stat-heading">Posts</h3>
+                    <h3 class="stat-heading">{{profile.get_all_posts.count}}<h3>
+                </div>
+
+                <div class="stat-div">
+                    <h3 class="stat-heading">Followers</h3>
+                    <h3 class="stat-heading">0</h3>
+                </div>
+
+                <div class="stat-div">
+                    <h3 class="stat-heading">Following</h3>
+                    <h3 class="stat-heading">0</h3>
+                </div>
             </td>
         </tr>
     </table>
-
-    <a href="{% url 'update_profile' profile.pk %}">
-        <h1>Update Profile</h1>
-    </a>
 
     <!-- div containing the profile's join date and bio -->
     <div class="bio-div">
@@ -58,27 +57,25 @@ Description: A template to display a single profile and its posts.
     </div>
 
     <!-- div containing the profile's posts -->
-    <div class="posts-grid-div">
+    <div class="posts-grid">
         <!-- loop to process each post in the profile to
          display all of them at once -->
         {% for post in profile.get_all_posts %}
             <div>
-                <!-- link to view a post in detail using its primary key -->
+                <!-- link to view a post in detail using its PK -->
                 <a href="{% url 'show_post' post.pk %}">
 
                     <!-- if the post has photos, display the first photo -->
                     {% if post.get_all_photos.0.get_image_url %}
-                        <img class="post" src="{{post.get_all_photos.0.get_image_url}}"
-                        alt="first photo of post">
+                        <img class="post" src="{{post.get_all_photos.0.get_image_url}}">
 
                     <!-- otherwise, display an alternate image saying 'no photo' -->
                     {% else %}
-                        <img class="post" src="{% static 'mini_insta/img/no-photo.png' %}"
-                        alt="no photo">
+                        <img class="post" src="{% static 'mini_insta/img/no-photo.png' %}">
                     {% endif %}
                 </a>
                 
-                <p class="post-date">{{post.timestamp.date}}</p>
+                <p>{{post.timestamp.date}}</p>
             </div>
         {% endfor %}
     </div>

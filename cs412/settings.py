@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "widget_tweaks", # for styling scriplet templates
     "hw", # Module 1: hello world example
     "quotes", # Assignment 1: quotes app
     "formdata", # Module 2: formdata example

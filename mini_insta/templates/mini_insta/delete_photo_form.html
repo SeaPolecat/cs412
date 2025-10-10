@@ -1,0 +1,41 @@
+<!--
+File: mini_insta/templates/mini_insta/update_profile_form.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/3/2025
+Description:
+-->
+
+{% extends 'mini_insta/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h2 class="form-heading">Are you sure you want to delete this photo?</h2>
+
+    <!-- form to submit a POST request to delete the photo -->
+    <form class="create-post-form" action="{% url 'delete_photo' photo.pk %}" method="POST">
+        {% csrf_token %}
+
+        <!-- confirmation and cancel buttons -->
+        <div class="form-div">
+            <input class="button-input" type="submit" value="YES, Delete">
+
+            <!-- return to the post page upon clicking cancel button -->
+            <a href="{% url 'show_post' post.pk %}">
+                <input class="button-input" type="button" value="NO, Go Back">
+            </a>
+        </div>
+    </form>
+
+    <!-- div containing the photo to be deleted -->
+    <div>
+        <!-- if a photo exists, display it -->
+        {% if photo.get_image_url %}
+            <img class="photo" src="{{photo.get_image_url}}">
+
+        <!-- otherwise, display an alternate image saying 'no photo' -->
+        {% else %}
+            <img class="photo" src="{% static 'mini_insta/img/no-photo.png' %}">
+        {% endif %}
+    </div>
+    
+{% endblock %}

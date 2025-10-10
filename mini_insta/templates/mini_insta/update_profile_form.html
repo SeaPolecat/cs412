@@ -6,41 +6,49 @@ Description:
 
 {% extends 'mini_insta/base.html' %}
 
+<!-- widget_tweaks is a Django add-on that lets you style
+ form fields within scriptlet code -->
+{% load widget_tweaks %}
+
 {% block content %}
 
-    <h2 class="create-post-heading">Update Profile</h2>
+    <h1 class="form-heading">Edit Profile</h1>
 
-    <!-- form containing inputs for creating a new post -->
-    <form class="create-post-form" action="{% url 'update_profile' profile.pk %}" method="POST">
-        {% csrf_token %}
+    <div class="form-wrapper">
 
-        <table class="create-post-table">
-            <!-- input for the post's caption -->
-            <tr><td>
-                <h3 class="input-label">Display Name</h3>
-                {{form.display_name}}
-            </td></tr>
+        <!-- form containing inputs for updating a profile -->
+        <form class="create-post-form" action="{% url 'update_profile' profile.pk %}" method="POST">
+            {% csrf_token %}
 
-            <tr><td>
-                <h3 class="input-label">Profile Picture</h3>
-                {{form.profile_image_url}}
-            </td></tr>
+            <!-- input for changing display name -->
+            <div class="form-div">
+                <h3 class="input-heading">Display Name</h3>
+                {% render_field form.display_name class="text-field" %}
+            </div>
 
-            <tr><td>
-                <h3 class="input-label">Bio</h3>
-                {{form.bio_text}}
-            </td></tr>
+            <!-- input for changing profile picture -->
+            <div class="form-div">
+                <h3 class="input-heading">Profile Picture</h3>
+                {% render_field form.profile_image_url class="url-field" %}
+            </div>
 
-            <!-- submit and cancel buttons -->
-            <tr><td>
-                <input class="button-input" type="submit" value="Create">
+            <!-- input for changing bio text -->
+            <div class="form-div">
+                <h3 class="input-heading">Bio Text</h3>
+                {% render_field form.bio_text class="text-field" %}
+            </div>
 
-                <!-- return to the post owner's profile upon clicking cancel button -->
+            <!-- confirmation and cancel buttons -->
+            <div class="form-div">
+                <input class="button-input" type="submit" value="Confirm">
+
+                <!-- return to profile page upon clicking cancel -->
                 <a href="{% url 'show_profile' profile.pk %}">
                     <input class="button-input" type="button" value="Cancel">
                 </a>
-            </td></tr>
-        </table>
-    </form>
+            </div>
+        </form>
+
+    </div>
     
 {% endblock %}

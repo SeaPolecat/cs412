@@ -9,16 +9,15 @@ Description: A template to display all profiles from the Mini Instagram app.
 {% block content %}
 
     <!-- div containing every Mini Insta profile -->
-    <div class="profile-grid-div">
+    <div class="profile-grid">
+
         <!-- a loop processing each profile in the list of profiles
          to display all of them at once -->
         {% for profile in profiles %}
             <div>
-                <!-- link redirecting to a particular profile's page, using
-                the profile's primary key -->
+                <!-- link to a profile's page, using the profile's PK -->
                 <a href="{% url 'show_profile' profile.pk %}">
-                    <img class="square-pfp" src="{{profile.profile_image_url}}" 
-                    alt="profile picture">
+                    <img class="square-pfp" src="{{profile.profile_image_url}}">
                 </a>
 
                 <p>{{profile.display_name}}</p>

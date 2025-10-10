@@ -3,10 +3,9 @@
 # Description: Contains views for the Mini Insta app. These render templates,
 # pass in context variables, and handle form submissions.
 
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm, UpdateProfileForm
+from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
 from django.urls import reverse
 
 
@@ -106,3 +105,83 @@ class UpdateProfileView(UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_insta/update_profile_form.html'
+
+
+class UpdatePostView(UpdateView):
+    """View class to update a Post on a Mini Instagram Profile."""
+
+    model = Post
+    form_class = UpdatePostForm
+    template_name = 'mini_insta/update_post_form.html'
+
+    def form_valid(self, form):
+        """Handles the form submission and saves new Photos 
+        to the Django database.
+        """
+
+        post = form.instance # the Post instance being created
+        photo_files = self.request.FILES.getlist('photo_files')
+
+        for file in photo_files:
+            photo = Photo(post=post, image_file=file)
+            photo.save()
+
+        # let the superclass' form_valid() handle the rest
+        return super().form_valid(form)
+
+
+class DeletePostView(DeleteView):
+    """View class to delete a Post on a Mini Instagram Profile."""
+
+    model = Post
+    template_name = 'mini_insta/delete_post_form.html'
+
+    def get_success_url(self):
+        """"""
+
+        pk = self.kwargs['pk']
+
+        post = Post.objects.get(pk=pk)
+        profile = post.profile
+
+        return reverse('show_profile', kwargs={'pk': profile.pk})
+
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        context = super().get_context_data()
+
+        profile = context['post'].profile
+        context['profile'] = profile
+
+        return context
+    
+
+class DeletePhotoView(DeleteView):
+    """"""
+
+    model = Photo
+    template_name = 'mini_insta/delete_photo_form.html'
+
+    def get_success_url(self):
+        """"""
+
+        pk = self.kwargs['pk']
+
+        photo = Photo.objects.get(pk=pk)
+        post = photo.post
+
+        return reverse('show_post', kwargs={'pk': post.pk})
+
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        context = super().get_context_data()
+
+        post = context['photo'].post
+        profile = post.profile
+
+        context['post'] = post
+        context['profile'] = profile
+
+        return context

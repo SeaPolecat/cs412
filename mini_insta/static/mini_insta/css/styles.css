@@ -69,7 +69,7 @@ img.slayer-logo {
 h2.menu-heading {
     position: relative;
     top: 4px;
-    margin-left: 20px;
+    left: 20px;
 }
 
 table.icon-table {
@@ -87,14 +87,14 @@ img.icon:hover {
     filter: brightness(69%);
 }
 
-div.content-wrapper-div {
+div.content-wrapper {
     width: 90%;
     margin: 160px auto 50px auto;
 }
 
 /* SHOW ALL PROFILES */
 
-div.profile-grid-div {
+div.profile-grid {
     display: grid;
     width: 100%;
     justify-items: center;
@@ -117,32 +117,34 @@ img.square-pfp:hover {
 
 /* SHOW PROFILE */
 
-/* table { border: 2px solid red; }
-td { border: 2px solid red; } */
-
 table.profile-table {
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
 }
 
 img.circle-profile-img {
-    width: 240px;
-    height: 240px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
+    margin-right: 50px;
     border: 3px solid white;
     border-radius: 50%;
 }
 
 h1.profile-name {
-    margin-left: 40px;
-}
-
-table.stats-table {
-    border-spacing: 20px 0;
+    display: inline-block;
     margin-left: 20px;
 }
 
-td.stats-table-col {
-    width: 200px;
+a.update-profile-link {
+    float: right;
+    margin-top: 50px;
+}
+
+div.stat-div {
+    display: inline-block;
+    width: 190px;
+    height: 70px;
+    margin-left: 20px;
     padding: 20px;
     background: var(--wisteria-translucent);
     border: 1px solid white;
@@ -155,17 +157,16 @@ h3.stat-heading {
 
 div.bio-div {
     width: fit-content;
-    margin-top: 50px;
-    padding-left: 130px;
+    margin: 50px 0 0 130px;
 }
 
-div.posts-grid-div {
+div.posts-grid {
     display: grid;
     width: 85%;
     justify-items: center;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 40px;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
 }
 
 img.post {
@@ -182,10 +183,6 @@ img.post:hover {
     border: 3px solid var(--wisteria);
 }
 
-p.post-date {
-    text-align: left;
-}
-
 /* SHOW POST */
 
 div.caption-div {
@@ -196,7 +193,7 @@ div.caption-div {
     background-color: var(--black-translucent);
 }
 
-div.photo-grid-div {
+div.photo-grid {
     display: grid;
     width: 100%;
     justify-items: center;
@@ -205,46 +202,104 @@ div.photo-grid-div {
 }
 
 img.photo {
+    display: block;
     width: 400px;
     height: 400px;
     object-fit: cover;
+    margin: 0 auto;
     border: 2px solid white;
     border-radius: 10px;
 }
 
-/* CREATE POST FORM */
-
-h2.create-post-heading {
-    width: fit-content;
-    transform: translate(-50%, 0);
-    margin: 0 0 0 50%;
+a.delete-photo-link {
+    display: inline;
+    text-decoration: none;
+    color: gray;
+    transition: 0.2s;
 }
 
-table.create-post-table {
-    width: fit-content;
-    margin: 0 auto 0 auto;
-    border-spacing: 50px;
+a.delete-photo-link:hover {
+    color: red;
 }
 
-h3.input-label {
-    margin: 0 0 12px 0;
+div.post-actions-div {
+    width: fit-content;
+    margin: 50px auto 0 auto;
+}
+
+/* FORMS */
+
+h1.form-heading {
+    width: fit-content;
+    margin: 0 auto 30px auto;
+}
+
+h2.form-heading {
+    width: fit-content;
+    margin: 0 auto 30px auto;
+}
+
+div.form-wrapper {
+    width: 50vw;
+    margin: 0 auto;
+    padding: 1px 0;
+    background-color: var(--black-translucent);
+    border-radius: 30px;
+}
+
+div.form-div {
+    width: 500px;
+    text-align: center;
+    margin: 50px auto;
+}
+
+label.photo-input-label {
+    padding: 10px 15px;
+    background: var(--wisteria-translucent);
+    font: 30px var(--merriweather);
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+label.photo-input-label:hover {
+    background-color: darkgray;
 }
 
 input.photo-input {
-    width: 100%;
+    display: none;
+}
+
+h3.input-heading {
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 input.button-input {
-    margin: 0 5px 0 5px;
-    padding: 5px 10px 5px 10px;
+    margin: 0 8px;
+    padding: 10px 15px;
     background: var(--wisteria-translucent);
     font: 20px var(--merriweather);
     color: white;
     border: 1px solid white;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: 0.2s;
 }
 
 input.button-input:hover {
     background-color: darkgray;
+}
+
+.text-field {
+    width: 100%;
+    height: 100px;
+    font: 20px var(--merriweather);
+    color: black;
+}
+
+.url-field {
+    width: 100%;
+    font: 20px var(--merriweather);
+    color: black;
 }
