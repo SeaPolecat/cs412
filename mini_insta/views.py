@@ -204,3 +204,19 @@ class DeletePhotoView(DeleteView):
         context['profile'] = profile
 
         return context
+    
+
+class ShowFollowersDetailView(DetailView):
+    """View class to show a Mini Insta profile's followers."""
+
+    model = Profile
+    template_name = 'mini_insta/show_followers.html'
+    context_object_name = 'profile'
+
+
+class ShowFollowingDetailView(DetailView):
+    """View class to show a Mini Insta profile's following."""
+
+    model = Profile
+    template_name = 'mini_insta/show_following.html'
+    context_object_name = 'profile'
