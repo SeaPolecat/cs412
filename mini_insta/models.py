@@ -88,3 +88,24 @@ class Photo(models.Model):
             return self.image_file.url
         else:
             return None
+        
+
+class Follow(models.Model):
+    """Encapsulates the idea of an edge connecting two nodes within the 
+    social network (e.g., when one Profile follows another Profile).
+    """
+
+    # which profile is being followed;
+    # if a profile gets deleted, all its follows will be 'cleaned up' (as per models.CASCADE)
+    profile = models.ForeignKey(Profile, related_name="profile", on_delete=models.CASCADE)
+
+    # which profile is doing the following
+    follower_profile = models.ForeignKey(Profile, related_name="follower_profile", on_delete=models.CASCADE)
+
+    # the time at which the follower began following the other profile
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return a string representation of this Follow model instance."""
+
+        return f'{self.follower_profile.display_name} follows {self.profile.display_name}'

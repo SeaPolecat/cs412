@@ -3,9 +3,10 @@
 # Description: Registers Mini Insta models to the Django admin site
 
 from django.contrib import admin
-from .models import Profile, Post, Photo
+from .models import *
 
 # register models to the Django admin site
 admin.site.register(Profile)
 admin.site.register(Post)
 admin.site.register(Photo)
+admin.site.register(Follow)
