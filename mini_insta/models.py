@@ -34,6 +34,38 @@ class Profile(models.Model):
 
         return posts
     
+    def get_followers(self):
+        """Return a list of Profiles who follow this Profile."""
+        
+        follower_profile_list = []
+        followers = Follow.objects.filter(profile=self)
+
+        for f in followers:
+            follower_profile_list.append(f.follower_profile)
+
+        return follower_profile_list
+    
+    def get_num_followers(self):
+        """Return how many Profiles follow this Profile."""
+
+        return len(self.get_followers())
+    
+    def get_following(self):
+        """Return a list of Profiles followed by this Profile."""
+
+        following_profile_list = []
+        following = Follow.objects.filter(follower_profile=self)
+
+        for f in following:
+            following_profile_list.append(f.profile)
+
+        return following_profile_list
+    
+    def get_num_following(self):
+        """Return how many Profiles this Profile follows."""
+
+        return len(self.get_following())
+    
 
 class Post(models.Model):
     """Encapsulate the data of a Post on a Mini Insta Profile."""
