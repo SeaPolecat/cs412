@@ -38,7 +38,7 @@ class Profile(models.Model):
         """Return a list of Profiles who follow this Profile."""
         
         follower_profile_list = []
-        followers = Follow.objects.filter(profile=self)
+        followers = Follow.objects.filter(profile=self).order_by('-timestamp')
 
         for f in followers:
             follower_profile_list.append(f.follower_profile)
@@ -54,7 +54,7 @@ class Profile(models.Model):
         """Return a list of Profiles followed by this Profile."""
 
         following_profile_list = []
-        following = Follow.objects.filter(follower_profile=self)
+        following = Follow.objects.filter(follower_profile=self).order_by('-timestamp')
 
         for f in following:
             following_profile_list.append(f.profile)
@@ -96,7 +96,12 @@ class Post(models.Model):
     def get_all_comments(self):
         """Return a QuerySet of all Comments on this Post."""
 
-        return Comment.objects.filter(post=self)
+        return Comment.objects.filter(post=self).order_by('-timestamp')
+    
+    def get_likes(self):
+        """Return a QuerySet of all Likes on this Post."""
+        
+        return Like.objects.filter(post=self).order_by('-timestamp')
 
 
 class Photo(models.Model):
@@ -162,3 +167,16 @@ class Comment(models.Model):
         """Return a string representation of this Comment model instance."""
 
         return f'{self.profile.display_name}: "{self.text}" | {self.post.caption}'
+    
+
+class Like(models.Model):
+    """Encapsulates the idea of one Profile liking a Post"""
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE) # the Post to which this Like is related
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE) # the Profile that's doing the liking
+    timestamp = models.DateTimeField(auto_now_add=True) # the time at which this Like was created
+
+    def __str__(self):
+        """Return a string representation of this Like model instance."""
+
+        return f'{self.profile.display_name} liked "{self.post.caption}"'
