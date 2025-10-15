@@ -92,6 +92,11 @@ class Post(models.Model):
         photos = Photo.objects.filter(post=self).order_by('-timestamp')
 
         return photos
+    
+    def get_all_comments(self):
+        """Return a QuerySet of all Comments on this Post."""
+
+        return Comment.objects.filter(post=self)
 
 
 class Photo(models.Model):
@@ -141,3 +146,19 @@ class Follow(models.Model):
         """Return a string representation of this Follow model instance."""
 
         return f'{self.follower_profile.display_name} follows {self.profile.display_name}'
+    
+
+class Comment(models.Model):
+    """Encapsulates the idea of one Profile providing a 
+    response or commentary on a Post.
+    """
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE) # the Post to which this Comment is related
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE) # the Profile that's doing the commenting
+    text = models.TextField(blank=True) # the substance of the Comment
+    timestamp = models.DateTimeField(auto_now_add=True) # the time at which this Comment was created
+
+    def __str__(self):
+        """Return a string representation of this Comment model instance."""
+
+        return f'{self.profile.display_name}: "{self.text}" | {self.post.caption}'
