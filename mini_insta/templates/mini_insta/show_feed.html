@@ -16,9 +16,13 @@ Description: A template to display a Profile's feed.
 
             <!-- div that displays the profile that created the post  -->
             <div class="feed-profile-div">
-                <img class="pfp circle small clickable mr-20" src="{{post.profile.profile_image_url}}">
+                <a href="{% url 'show_profile' post.profile.pk %}">
+                    <img class="pfp circle small clickable mr-20" src="{{post.profile.profile_image_url}}">
+                </a>
 
-                <h1 class="small no-margin">@{{post.profile.username}}</h1>
+                <a href="{% url 'show_profile' post.profile.pk %}">
+                    <h1 class="small no-margin clickable">@{{post.profile.username}}</h1>
+                </a>
             </div>
 
             <!-- div that displays the post's first photo and its caption -->

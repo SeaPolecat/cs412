@@ -33,6 +33,10 @@ a {
     text-decoration: none;
 }
 
+h1 {
+    color: white;
+}
+
 h1.large {
     font-size: 50px;
 }
@@ -64,6 +68,14 @@ h1.align-left {
 h1.centered {
     width: fit-content;
     margin: 0 auto;
+}
+
+h1.clickable {
+    transition: 0.2s;
+}
+
+h1.clickable:hover {
+    color: var(--wisteria);
 }
 
 p {
