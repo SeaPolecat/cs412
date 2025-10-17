@@ -1,0 +1,119 @@
+/*
+File: mini_insta/static/mini_insta/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
+Description: A CSS stylesheet for Mini Instagram elementes related to the Profile model.
+*/
+
+div.profiles-grid {
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal-width cols */
+}
+
+div.profiles-grid.mt-50 {
+    margin-top: 50px;
+}
+
+div.profiles-grid.mt-mb-50 {
+    margin: 50px 0;
+}
+
+table.profile-table {
+    margin: 0 auto;
+}
+
+a.update-profile-link {
+    float: right;
+    margin-top: 50px;
+}
+
+div.stat-div {
+    display: inline-block;
+    width: 190px;
+    height: 70px;
+    margin-left: 20px;
+    padding: 20px;
+    color: white;
+    background: var(--wisteria-translucent);
+    border: 1px solid white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+a div.stat-div:hover {
+    background: darkgray;
+}
+
+div.bio-div {
+    width: fit-content;
+    margin: 50px 0 0 130px;
+}
+
+/* PFP IMAGE */
+
+img.pfp {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border: 3px solid white;
+}
+
+img.pfp.square {
+    border-radius: 10px;
+}
+
+img.pfp.circle {
+    border-radius: 50%;
+}
+
+img.pfp.x-large {
+    width: 280px;
+    height: 280px;
+}
+
+img.pfp.large {
+    width: 250px;
+    height: 250px;
+}
+
+img.pfp.medium {
+    width: 80px;
+    height: 80px;
+    border: 2px solid white;
+}
+
+img.pfp.small {
+    width: 55px;
+    height: 55px;
+    border: 2px solid white;
+}
+
+img.pfp.mr-50 {
+    margin-right: 50px;
+}
+
+img.pfp.mr-30 {
+    margin-right: 30px;
+}
+
+img.pfp.mr-20 {
+    margin-right: 20px;
+}
+
+img.pfp.mb-20 {
+    margin-bottom: 20px;
+}
+
+img.pfp.mt-5 {
+    margin-top: 5px;
+}
+
+img.pfp.clickable {
+    transition: 0.2s;
+}
+
+img.pfp.clickable:hover {
+    transform: scale(1.02);
+    border-color: var(--wisteria);
+}

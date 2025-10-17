@@ -1,11 +1,18 @@
 /*
 File: mini_insta/static/mini_insta/styles.css
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
 Description: A CSS stylesheet for the Mini Instagram app templates.
 */
 
-/* imported fonts */
+/* import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+
+/* import other stylesheets */
+@import url("base.css");
+@import url("profile.css");
+@import url("post.css");
+@import url("forms.css");
+@import url("feed.css");
 
 /* font + colour variables */
 :root {
@@ -15,8 +22,6 @@ Description: A CSS stylesheet for the Mini Instagram app templates.
     --black-translucent: rgba(0, 0, 0, 0.5);
 }
 
-/* GENERAL STYLES */
-
 body {
     margin: 0;
     background: black;
@@ -24,284 +29,76 @@ body {
     color: white;
 }
 
+a {
+    text-decoration: none;
+}
+
 h1 {
+    color: white;
+}
+
+h1.large {
     font-size: 50px;
 }
 
-h2 {
+h1.medium {
     font-size: 40px;
 }
 
-h3 {
+h1.small {
     font-size: 30px;
+}
+
+h1.inline {
+    display: inline-block;
+}
+
+h1.no-margin {
+    margin: 0;
+}
+
+h1.ml-20 {
+    margin-left: 20px;
+}
+
+h1.align-left {
+    text-align: left;
+}
+
+h1.centered {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+h1.clickable {
+    transition: 0.2s;
+}
+
+h1.clickable:hover {
+    color: var(--wisteria);
 }
 
 p {
     font-size: 20px;
+    color: white;
 }
 
-/* BASE */
-
-img.background-img {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    filter: brightness(30%);
-    z-index: -1;
-}
-
-header {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 110px;
-    top: 0;
-    background: black;
-    border-bottom: 3px solid white;
-}
-
-img.slayer-logo {
-    width: 80px;
-    margin-left: 20px;
-}
-
-h2.menu-heading {
-    position: relative;
-    top: 4px;
-    left: 20px;
-}
-
-table.icon-table {
-    margin-left: auto;
-    margin-right: 10px;
-    border-spacing: 25px 0;
-}
-
-img.icon {
-    width: 50px;
-    transition: 0.2s;
-}
-
-img.icon:hover {
-    filter: brightness(69%);
-}
-
-div.content-wrapper {
-    width: 90%;
-    margin: 160px auto 50px auto;
-}
-
-/* SHOW ALL PROFILES */
-
-div.profile-grid {
-    display: grid;
-    width: 100%;
-    justify-items: center;
-    grid-template-columns: repeat(4, 1fr); /* 4 equal-width cols */
-}
-
-img.square-pfp {
-    width: 280px;
-    height: 280px;
-    object-fit: cover;
-    border: 3px solid white;
-    border-radius: 10px;
-    transition: 0.2s;
-}
-
-img.square-pfp:hover {
-    transform: scale(1.02);
-    border: 3px solid var(--wisteria);
-}
-
-/* SHOW PROFILE */
-
-table.profile-table {
-    margin: 0 auto;
-}
-
-img.circle-profile-img {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    margin-right: 50px;
-    border: 3px solid white;
-    border-radius: 50%;
-}
-
-h1.profile-name {
-    display: inline-block;
-    margin-left: 20px;
-}
-
-a.update-profile-link {
-    float: right;
-    margin-top: 50px;
-}
-
-div.stat-div {
-    display: inline-block;
-    width: 190px;
-    height: 70px;
-    margin-left: 20px;
-    padding: 20px;
-    background: var(--wisteria-translucent);
-    border: 1px solid white;
-    border-radius: 10px;
-}
-
-h3.stat-heading {
+p.no-margin {
     margin: 0;
 }
 
-div.bio-div {
-    width: fit-content;
-    margin: 50px 0 0 130px;
+p.mt-mb-8 {
+    margin: 8px 0;
 }
 
-div.posts-grid {
-    display: grid;
-    width: 85%;
-    justify-items: center;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 40px;
-    margin: 0 auto;
+p.inline {
+    display: inline-block;
 }
 
-img.post {
-    width: 330px;
-    height: 330px;
-    object-fit: cover;
-    border: 2px solid white;
-    border-radius: 10px;
+p.clickable {
     transition: 0.2s;
 }
 
-img.post:hover {
-    transform: scale(1.02);
-    border: 3px solid var(--wisteria);
-}
-
-/* SHOW POST */
-
-div.caption-div {
-    width: 95%;
-    text-align: center;
-    margin: 0 auto 50px auto;
-    padding: 10px;
-    background-color: var(--black-translucent);
-}
-
-div.photo-grid {
-    display: grid;
-    width: 100%;
-    justify-items: center;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 50px;
-}
-
-img.photo {
-    display: block;
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-    margin: 0 auto;
-    border: 2px solid white;
-    border-radius: 10px;
-}
-
-a.delete-photo-link {
-    display: inline;
-    text-decoration: none;
-    color: gray;
-    transition: 0.2s;
-}
-
-a.delete-photo-link:hover {
-    color: red;
-}
-
-div.post-actions-div {
-    width: fit-content;
-    margin: 50px auto 0 auto;
-}
-
-/* FORMS */
-
-h1.form-heading {
-    width: fit-content;
-    margin: 0 auto 30px auto;
-}
-
-h2.form-heading {
-    width: fit-content;
-    margin: 0 auto 30px auto;
-}
-
-div.form-wrapper {
-    width: 50vw;
-    margin: 0 auto;
-    padding: 1px 0;
-    background-color: var(--black-translucent);
-    border-radius: 30px;
-}
-
-div.form-div {
-    width: 500px;
-    text-align: center;
-    margin: 50px auto;
-}
-
-label.photo-input-label {
-    padding: 10px 15px;
-    background: var(--wisteria-translucent);
-    font: 30px var(--merriweather);
-    color: white;
-    border: 1px solid white;
-    border-radius: 10px;
-    transition: 0.2s;
-}
-
-label.photo-input-label:hover {
-    background-color: darkgray;
-}
-
-input.photo-input {
-    display: none;
-}
-
-h3.input-heading {
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-input.button-input {
-    margin: 0 8px;
-    padding: 10px 15px;
-    background: var(--wisteria-translucent);
-    font: 20px var(--merriweather);
-    color: white;
-    border: 1px solid white;
-    border-radius: 10px;
-    transition: 0.2s;
-}
-
-input.button-input:hover {
-    background-color: darkgray;
-}
-
-/* for Django textarea form fields */
-textarea {
-    width: 100%;
-    height: 100px;
-    font: 20px var(--merriweather);
-    color: black;
-}
-
-/* for Django url form fields */
-input[type="url"] {
-    width: 100%;
-    font: 20px var(--merriweather);
-    color: black;
+p.clickable:hover {
+    color: var(--wisteria);
 }
