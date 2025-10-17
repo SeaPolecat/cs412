@@ -1,5 +1,5 @@
 <!--File: mini_insta/templates/mini_insta/update_profile_form.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 Description: A template to update a profile's contents.
 -->
 
@@ -7,7 +7,7 @@ Description: A template to update a profile's contents.
 
 {% block content %}
 
-    <h1 class="form-heading">Edit Profile</h1>
+    <h1 class="large centered">Edit Profile</h1>
 
     <div class="form-wrapper">
 
@@ -17,19 +17,19 @@ Description: A template to update a profile's contents.
 
             <!-- input for changing display name -->
             <div class="form-div">
-                <h3 class="input-heading">Display Name</h3>
+                <h1 class="small align-left">Display Name</h1>
                 {{form.display_name}}
             </div>
 
             <!-- input for changing profile picture -->
             <div class="form-div">
-                <h3 class="input-heading">Profile Picture</h3>
+                <h1 class="small align-left">Profile Picture</h1>
                 {{form.profile_image_url}}
             </div>
 
             <!-- input for changing bio text -->
             <div class="form-div">
-                <h3 class="input-heading">Bio Text</h3>
+                <h1 class="small align-left">Bio Text</h1>
                 {{form.bio_text}}
             </div>
 

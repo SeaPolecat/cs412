@@ -1,7 +1,26 @@
+/*
+File: mini_insta/static/mini_insta/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
+Description: A CSS stylesheet for the Mini Instagram feed.html template.
+*/
+
 div.feed-div {
     width: 80%;
     margin: 50px auto;
-    padding: 30px;
+    padding: 10px 40px;
     background: var(--black-translucent);
     border-radius: 30px;
+    border: 1px solid white;
+}
+
+div.feed-profile-div {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 20px 0;
+}
+
+div.feed-post-div {
+    display: flex;
 }

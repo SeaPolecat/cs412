@@ -1,3 +1,9 @@
+/*
+File: mini_insta/static/mini_insta/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
+Description: A CSS stylesheet for Mini Instagram elementes related to forms.
+*/
+
 /* for Django textarea form fields */
 textarea {
     width: 100%;

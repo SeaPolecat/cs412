@@ -1,5 +1,5 @@
 <!--File: mini_insta/templates/mini_insta/base.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 Description: The base template of the quotes web app, which all other 
 templates inherit from.
 -->
@@ -26,45 +26,75 @@ templates inherit from.
 
             <!-- if viewing all profiles, display 'MiniInsta Profiles' -->
             {% if profiles %}
-                <h2 class="menu-heading">MiniInsta Profiles</h2>
+                <h1 class="medium">MiniInsta Profiles</h1>
 
             <!-- if viewing a single profile, display that profile's username -->
-            {% elif post %}
-                <h2 class="menu-heading">{{post.profile.display_name}}'s Post</h2>
-
-            <!-- if viewing a post, display the post's owner -->
             {% elif profile %}
-                <h2 class="menu-heading">@{{profile.username}}</h2>
+                <h1 class="medium">@{{profile.username}}</h1>
+
+            <!-- if viewing a post, display the username of the profile associated with it -->
+            {% elif post %}
+                <h1 class="medium">@{{post.profile.username}}</h1>
             {% endif %}
 
             <!-- table of navigation icons -->
             <table class="icon-table">
                 <tr>
-                    <!-- if viewing a profile but not a post, include a button to create a 
-                     new post for that profile -->
-                    {% if profile and not post %}
+                    <!-- if displaying the post feed, include a button to return to the profile page -->
+                    {% if post_feed %}
                         <td>
-                            <a href="{% url 'create_post' profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}">
-                            </a>
-                        </td>
-                    {% endif%}
-
-                    <!-- if viewing a post, include a button to return to the post owner's page -->
-                    {% if post %}
-                        <td>
-                            <a href="{% url 'show_profile' post.profile.pk %}">
+                            <a href="{% url 'show_profile' profile.pk %}">
                                 <img class="icon" src="{% static 'mini_insta/img/back-icon.png' %}">
                             </a>
                         </td>
                     {% endif %}
 
-                    <!-- button to return to the home page (view all profiles) -->
-                    <td>
-                        <a href="{% url 'show_all_profiles' %}">
-                            <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}">
-                        </a>
-                    </td>
+                    <!-- if displaying a profile, include 4 buttons: search, add post, feed, and profile -->
+                    {% if profile %}
+                        <td>
+                            <a href="{% url 'search' profile.pk %}">
+                                <img class="icon" src="{% static 'mini_insta/img/search-icon.png' %}">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'create_post' profile.pk %}">
+                                <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'show_feed' profile.pk %}">
+                                <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'show_profile' profile.pk %}">
+                                <img class="pfp circle small clickable" src="{{profile.profile_image_url}}">
+                            </a>
+                        </td>
+
+                    <!-- if displaying a post, include 4 buttons: search, add post, feed, and profile -->
+                    {% elif post %}
+                        <td>
+                            <a href="{% url 'search' post.profile.pk %}">
+                                <img class="icon" src="{% static 'mini_insta/img/search-icon.png' %}">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'create_post' post.profile.pk %}">
+                                <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'show_feed' post.profile.pk %}">
+                                <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'show_profile' post.profile.pk %}">
+                                <img class="pfp circle small clickable" src="{{post.profile.profile_image_url}}">
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             </table>
         </header>

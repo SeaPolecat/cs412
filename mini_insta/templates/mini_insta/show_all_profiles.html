@@ -1,5 +1,5 @@
 <!--File: mini_insta/templates/mini_insta/show_all_profiles.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 Description: A template to display all profiles from the Mini Instagram app.
 -->
 
@@ -8,7 +8,7 @@ Description: A template to display all profiles from the Mini Instagram app.
 {% block content %}
 
     <!-- div containing every Mini Insta profile -->
-    <div class="profile-grid">
+    <div class="profiles-grid">
 
         <!-- a loop processing each profile in the list of profiles
          to display all of them at once -->
@@ -16,7 +16,7 @@ Description: A template to display all profiles from the Mini Instagram app.
             <div>
                 <!-- link to a profile's page, using the profile's PK -->
                 <a href="{% url 'show_profile' profile.pk %}">
-                    <img class="square-pfp" src="{{profile.profile_image_url}}">
+                    <img class="pfp square x-large clickable" src="{{profile.profile_image_url}}">
                 </a>
 
                 <p>{{profile.display_name}}</p>

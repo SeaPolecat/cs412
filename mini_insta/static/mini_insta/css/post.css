@@ -1,3 +1,9 @@
+/*
+File: mini_insta/static/mini_insta/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
+Description: A CSS stylesheet for Mini Instagram elementes related to the Post model.
+*/
+
 div.caption-div {
     width: 95%;
     text-align: center;
@@ -19,7 +25,7 @@ a.delete-photo-link:hover {
 
 div.post-actions-div {
     width: fit-content;
-    margin: 50px auto 30px auto;
+    margin: 50px auto 10px auto;
 }
 
 div.posts-grid {
@@ -42,14 +48,13 @@ div.photos-grid {
 img.photo {
     display: block;
     object-fit: cover;
-    margin: 0 auto;
     border: 2px solid white;
     border-radius: 10px;
 }
 
 img.photo.large {
-    width: 500px;
-    height: 500px;
+    width: 450px;
+    height: 450px;
 }
 
 img.photo.medium {
@@ -60,6 +65,10 @@ img.photo.medium {
 img.photo.small {
     width: 330px;
     height: 330px;
+}
+
+img.photo.mr-20 {
+    margin-right: 20px;
 }
 
 img.photo.clickable {
@@ -75,12 +84,16 @@ div.comments-wrapper {
     margin-left: 30px;
 }
 
+div.comments-wrapper.feed {
+    margin: 30px 0;
+}
+
 div.comment-div {
     display: flex;
-    align-items: center;
+    align-items: top;
     width: fit-content;
-    margin: 30px 0;
-    padding: 5px 20px;
+    margin: 20px 0;
+    padding: 5px 15px;
     background: var(--black-translucent);
     border-radius: 10px;
 }

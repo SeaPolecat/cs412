@@ -1,5 +1,5 @@
 # File: mini_insta/views.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 # Description: Contains views for the Mini Insta app. These render templates,
 # pass in context variables, and handle form submissions.
 
@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Profile, Post, Photo
 from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
 from django.urls import reverse
+from django.shortcuts import render
 
 
 class ProfileListView(ListView):
@@ -220,3 +221,116 @@ class ShowFollowingDetailView(DetailView):
     model = Profile
     template_name = 'mini_insta/show_following.html'
     context_object_name = 'profile'
+
+
+class PostFeedListView(ListView):
+    """View class to display a list of Posts in the feed."""
+
+    model = Post
+    template_name = 'mini_insta/show_feed.html'
+    context_object_name = 'post_feed'
+
+    def get_queryset(self):
+        """Returns a queryset that gets passed in as a context variable
+        and becomes associated with context_object_name.
+        """
+
+        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
+
+        # get the Profile instance using pk
+        profile = Profile.objects.get(pk=pk)
+
+        # get the Profile's post feed
+        post_feed = profile.get_post_feed()
+
+        return post_feed
+
+    def get_context_data(self):
+        """Return the dictionary of context variables for use in the template."""
+
+        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
+
+        # get the Profile instance using pk
+        profile = Profile.objects.get(pk=pk)
+
+        # get the context dict from the superclass, and add the Profile to it
+        context = super().get_context_data()
+        context['profile'] = profile
+
+        return context
+    
+
+class SearchView(ListView):
+    """View class to display a template for the user to enter search
+    queries, and another template containing the search results.
+    """
+
+    model = Profile
+    template_name = 'mini_insta/search_results.html'
+    context_object_name = 'matching_profiles'
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handles HTTP requests from the user that get mapped to
+        this view through a URL.
+        """
+
+        # if the GET request contains no data, render the search.html template
+        # to prompt the user to enter a search query
+        if not request.GET:
+            template_name = 'mini_insta/search.html' # name of the template to render
+
+            # get the Profile that's doing the searching
+            pk = self.kwargs['pk']
+            profile = Profile.objects.get(pk=pk)
+
+            # add the Profile to the context dict
+            context = {
+                'profile': profile
+            }
+            return render(request, template_name, context)
+
+        # otherwise, let the superclass' dispatch method handle the rest
+        else:
+            return super().dispatch(request, *args, **kwargs)
+        
+    def get_queryset(self):
+        """Returns a queryset that gets passed in as a context variable
+        and becomes associated with context_object_name.
+        """
+
+        # get the search query attached to the GET request
+        query = self.request.GET.get('query')
+
+        # # get a list of Profiles that match the search query,
+        # i.e. the query is found in its username, display name, or bio text
+        matching_profiles = (
+            Profile.objects.filter(username__contains=query) | # union operator that combines querysets
+            Profile.objects.filter(display_name__contains=query) |
+            Profile.objects.filter(bio_text__contains=query)
+        )
+        return matching_profiles
+
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        # get the Profile that's doing the searching
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+
+        # get the search query attached to the GET request
+        query = self.request.GET.get('query')
+
+        # get a list of Posts that match the search query,
+        # i.e. the query is found in its caption
+        matching_posts = Post.objects.filter(caption__contains=query)
+
+        # get the context dict from the superclass, and add all the
+        # relevant data to it
+        # (I didn't add matching_profiles because it's already associated with 
+        # the context_object_name as a result of overriding get_queryset)
+        context = super().get_context_data()
+        context['profile'] = profile
+        context['query'] = query
+        context['matching_posts'] = matching_posts
+
+        return context

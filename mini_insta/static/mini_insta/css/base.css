@@ -1,3 +1,9 @@
+/*
+File: mini_insta/static/mini_insta/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
+Description: A CSS stylesheet for the Mini Instagram base.html template.
+*/
+
 img.background-img {
     position: fixed;
     width: 100%;
@@ -19,7 +25,7 @@ header {
 
 img.slayer-logo {
     width: 80px;
-    margin-left: 20px;
+    margin: 0 20px;
 }
 
 table.icon-table {

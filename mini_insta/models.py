@@ -1,5 +1,5 @@
 # File: mini_insta/models.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 # Description: Defines what attributes the Mini Insta models 
 # in the database should have.
 
@@ -36,14 +36,18 @@ class Profile(models.Model):
     
     def get_followers(self):
         """Return a list of Profiles who follow this Profile."""
-        
-        follower_profile_list = []
-        followers = Follow.objects.filter(profile=self).order_by('-timestamp')
 
-        for f in followers:
-            follower_profile_list.append(f.follower_profile)
+        # get a queryset of Follows containing follower Profiles
+        queryset = Follow.objects.filter(profile=self).order_by('-timestamp')
 
-        return follower_profile_list
+        # extract the follower Profiles' PK's into a separate queryset
+        followers_pk_list = queryset.values_list('follower_profile')
+
+        # use followers_pk_list and the Profile object manager to get
+        # a list of follower Profiles
+        followers = list(Profile.objects.filter(pk__in=followers_pk_list))
+
+        return followers
     
     def get_num_followers(self):
         """Return how many Profiles follow this Profile."""
@@ -53,19 +57,46 @@ class Profile(models.Model):
     def get_following(self):
         """Return a list of Profiles followed by this Profile."""
 
-        following_profile_list = []
-        following = Follow.objects.filter(follower_profile=self).order_by('-timestamp')
+        # get a queryset of Follows containing following Profiles
+        queryset = Follow.objects.filter(follower_profile=self).order_by('-timestamp')
 
-        for f in following:
-            following_profile_list.append(f.profile)
+        # extract the following Profiles' PK's into a separate queryset
+        following_pk_list = queryset.values_list('profile')
 
-        return following_profile_list
+        # use following_pk_list and the Profile object manager to get
+        # a list of following Profiles
+        following = Profile.objects.filter(pk__in=following_pk_list)
+
+        return following
     
     def get_num_following(self):
         """Return how many Profiles this Profile follows."""
 
         return len(self.get_following())
     
+    def get_post_feed(self):
+        """Return a list (or QuerySet) of Posts, specifically for the Profiles 
+        being followed by the Profile on which the method was called.
+        """
+
+        post_feed = [] # the post feed, a list of Posts to be returned
+        following = self.get_following() # a list of Profiles that this Profile follows
+
+        # a list of Profiles that this Profile does NOT follow
+        not_following = Profile.objects.exclude(pk__in=following)
+
+        # first, process the following list to include every Post from every Profile 
+        # that this profile follows
+        for f in following:
+            post_feed += Post.objects.filter(profile=f).order_by('-timestamp')
+
+        # second, process the not_following list to include every Post from every Profile 
+        # that this profile does NOT follow
+        for nf in not_following:
+            post_feed += Post.objects.filter(profile=nf).order_by('-timestamp')
+
+        return post_feed
+
 
 class Post(models.Model):
     """Encapsulate the data of a Post on a Mini Insta Profile."""

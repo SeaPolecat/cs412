@@ -1,0 +1,36 @@
+<!--File: mini_insta/templates/mini_insta/search.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
+Description: A template containing a form to search for other profiles and posts.
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+    <h1 class="large centered">Search</h1>
+
+    <div class="form-wrapper">
+
+        <!-- form containing inputs for searching -->
+        <form action="{% url 'search' profile.pk %}" method="GET">
+            {% csrf_token %}
+
+            <!-- input to type a search query -->
+            <div class="form-div">
+                <textarea name="query" placeholder="Search for people or posts here"></textarea>
+            </div>
+
+            <!-- confirmation and cancel buttons -->
+            <div class="form-div">
+                <input class="button-input" type="submit" value="Search">
+
+                <!-- return to profile page upon clicking cancel -->
+                <a href="{% url 'show_profile' profile.pk %}">
+                    <input class="button-input" type="button" value="Cancel">
+                </a>
+            </div>
+        </form>
+
+    </div>
+    
+{% endblock %}

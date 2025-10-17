@@ -1,5 +1,5 @@
 <!--File: mini_insta/templates/mini_insta/delete_photo_form.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 Description: A template to delete a photo from a post.
 -->
 
@@ -8,7 +8,7 @@ Description: A template to delete a photo from a post.
 
 {% block content %}
 
-    <h2 class="form-heading">Are you sure you want to delete this photo?</h2>
+    <h1 class="medium centered">Are you sure you want to delete this photo?</h1>
 
     <!-- form to submit a POST request to delete the photo -->
     <form class="create-post-form" action="{% url 'delete_photo' photo.pk %}" method="POST">

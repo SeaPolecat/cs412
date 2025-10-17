@@ -1,5 +1,5 @@
 <!--File: mini_insta/templates/mini_insta/show_profile.html
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 Description: A template to display a single profile and its posts.
 -->
 
@@ -13,12 +13,12 @@ Description: A template to display a single profile and its posts.
         <tr>
             <!-- left column to hold the profile picture -->
             <td>
-                <img class="circle-profile-img" src="{{profile.profile_image_url}}">
+                <img class="pfp circle large mr-50" src="{{profile.profile_image_url}}">
             </td>
 
             <!-- right column to hold the profile name and stats -->
             <td>
-                <h1 class="profile-name">{{profile.display_name}}</h1>
+                <h1 class="large inline ml-20">{{profile.display_name}}</h1>
 
                 <!-- button to update the profile -->
                 <a class="update-profile-link" href="{% url 'update_profile' profile.pk %}">
@@ -29,19 +29,23 @@ Description: A template to display a single profile and its posts.
 
                 <!-- number of posts, followers, and following stats -->
                 <div class="stat-div">
-                    <h3 class="stat-heading">Posts</h3>
-                    <h3 class="stat-heading">{{profile.get_all_posts.count}}<h3>
+                    <h1 class="small no-margin">Posts</h1>
+                    <h1 class="small no-margin">{{profile.get_all_posts.count}}<h1>
                 </div>
 
-                <div class="stat-div">
-                    <h3 class="stat-heading">Followers</h3>
-                    <h3 class="stat-heading">0</h3>
-                </div>
+                <a href="{% url 'show_followers' profile.pk %}">
+                    <div class="stat-div">
+                        <h1 class="small no-margin">Followers</h1>
+                        <h1 class="small no-margin">{{profile.get_num_followers}}</h1>
+                    </div>
+                </a>
 
-                <div class="stat-div">
-                    <h3 class="stat-heading">Following</h3>
-                    <h3 class="stat-heading">0</h3>
-                </div>
+                <a href="{% url 'show_following' profile.pk %}">
+                    <div class="stat-div">
+                        <h1 class="small no-margin">Following</h1>
+                        <h1 class="small no-margin">{{profile.get_num_following}}</h1>
+                    </div>
+                </a>
             </td>
         </tr>
     </table>
@@ -52,8 +56,12 @@ Description: A template to display a single profile and its posts.
 
         <p>{{profile.bio_text | linebreaksbr}}</p>
 
-        <h2>Posts</h2>
+        <h1 class="medium">Posts</h1>
     </div>
+
+    {% if not profile.get_all_posts %}
+        <p>No posts</p>
+    {% endif %}
 
     <!-- div containing the profile's posts -->
     <div class="posts-grid">
@@ -66,11 +74,11 @@ Description: A template to display a single profile and its posts.
 
                     <!-- if the post has photos, display the first photo -->
                     {% if post.get_all_photos.0.get_image_url %}
-                        <img class="post" src="{{post.get_all_photos.0.get_image_url}}">
+                        <img class="photo small clickable" src="{{post.get_all_photos.0.get_image_url}}">
 
                     <!-- otherwise, display an alternate image saying 'no photo' -->
                     {% else %}
-                        <img class="post" src="{% static 'mini_insta/img/no-photo.png' %}">
+                        <img class="photo small clickable" src="{% static 'mini_insta/img/no-photo.png' %}">
                     {% endif %}
                 </a>
                 

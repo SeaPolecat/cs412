@@ -1,3 +1,24 @@
+/*
+File: mini_insta/static/mini_insta/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
+Description: A CSS stylesheet for Mini Instagram elementes related to the Profile model.
+*/
+
+div.profiles-grid {
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal-width cols */
+}
+
+div.profiles-grid.mt-50 {
+    margin-top: 50px;
+}
+
+div.profiles-grid.mt-mb-50 {
+    margin: 50px 0;
+}
+
 table.profile-table {
     margin: 0 auto;
 }
@@ -29,12 +50,7 @@ div.bio-div {
     margin: 50px 0 0 130px;
 }
 
-div.profile-grid {
-    display: grid;
-    width: 100%;
-    justify-items: center;
-    grid-template-columns: repeat(4, 1fr); /* 4 equal-width cols */
-}
+/* PFP IMAGE */
 
 img.pfp {
     width: 250px;
@@ -81,8 +97,16 @@ img.pfp.mr-30 {
     margin-right: 30px;
 }
 
+img.pfp.mr-20 {
+    margin-right: 20px;
+}
+
 img.pfp.mb-20 {
     margin-bottom: 20px;
+}
+
+img.pfp.mt-5 {
+    margin-top: 5px;
 }
 
 img.pfp.clickable {

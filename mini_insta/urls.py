@@ -1,5 +1,5 @@
 # File: mini_insta/urls.py
-# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/10/2025
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
 # Description: Contains urls for the Mini Instagram app that redirect to
 # view classes within views.py.
 
@@ -15,6 +15,8 @@ urlpatterns = [
     path('profile/<int:pk>/update', UpdateProfileView.as_view(), name='update_profile'),
     path('profile/<int:pk>/followers', ShowFollowersDetailView.as_view(), name='show_followers'),
     path('profile/<int:pk>/following', ShowFollowingDetailView.as_view(), name='show_following'),
+    path('profile/<int:pk>/feed', PostFeedListView.as_view(), name='show_feed'),
+    path('profile/<int:pk>/search', SearchView.as_view(), name='search'),
 
     path('post/<int:pk>', PostDetailView.as_view(), name='show_post'),
     path('post/<int:pk>/update', UpdatePostView.as_view(), name='update_post'),

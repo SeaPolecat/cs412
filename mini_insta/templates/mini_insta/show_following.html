@@ -1,0 +1,34 @@
+<!--File: mini_insta/templates/mini_insta/show_following.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
+Description: A template to display all Profiles that a Profile follows.
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+    <h1 class="large centered">Following</h1>
+
+    <!-- if the profile doesn't follow anyone, show "No followers" -->
+    {% if not profile.get_following %}
+        <h1 class="medium centered">None following</h1>
+    {% endif %}
+
+    <!-- div containing profiles that this profile follows -->
+    <div class="profiles-grid mt-50">
+
+        <!-- a loop processing each profile in the list of profiles
+         to display all of them at once -->
+        {% for following in profile.get_following %}
+            <div>
+                <!-- link to a profile's page, using the profile's PK -->
+                <a href="{% url 'show_profile' following.pk %}">
+                    <img class="pfp square x-large clickable" src="{{following.profile_image_url}}">
+                </a>
+
+                <p>{{following.display_name}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

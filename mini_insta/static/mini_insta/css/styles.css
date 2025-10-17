@@ -1,6 +1,6 @@
 /*
 File: mini_insta/static/mini_insta/styles.css
-Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 9/26/2025
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/27/2025
 Description: A CSS stylesheet for the Mini Instagram app templates.
 */
 
@@ -73,6 +73,10 @@ p {
 
 p.no-margin {
     margin: 0;
+}
+
+p.mt-mb-8 {
+    margin: 8px 0;
 }
 
 p.inline {

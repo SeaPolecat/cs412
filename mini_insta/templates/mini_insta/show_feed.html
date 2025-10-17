@@ -1,0 +1,85 @@
+<!--File: mini_insta/templates/mini_insta/show_feed.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
+Description: A template to display a Profile's feed.
+-->
+
+{% extends 'mini_insta/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1 class="large centered">MiniInsta Post Feed</h1>
+
+    <!-- loop through each post in the feed to display them all at once -->
+    {% for post in post_feed %}
+        <div class="feed-div">
+
+            <!-- div that displays the profile that created the post  -->
+            <div class="feed-profile-div">
+                <img class="pfp circle small clickable mr-20" src="{{post.profile.profile_image_url}}">
+
+                <h1 class="small no-margin">@{{post.profile.username}}</h1>
+            </div>
+
+            <!-- div that displays the post's first photo and its caption -->
+            <div class="feed-post-div">
+                <!-- if the post has photos, display the first photo -->
+                {% if post.get_all_photos.0.get_image_url %}
+                    <a href="{% url 'show_post' post.pk %}">
+                        <img class="photo large clickable mr-20" src="{{post.get_all_photos.0.get_image_url}}">
+                    </a>
+
+                <!-- otherwise, display an alternate image saying 'no photo' -->
+                {% else %}
+                    <a href="{% url 'show_post' post.pk %}">
+                        <img class="photo large clickable mr-20" src="{% static 'mini_insta/img/no-photo.png' %}">
+                    </a>
+                {% endif %}
+
+                <p>{{post.caption}}</p>
+            </div>
+
+            <!-- div containing comments for the post -->
+            <div class="comments-wrapper feed">
+
+                <!-- show the first person who liked the post -->
+                {% if post.get_likes %}
+                    <p class="inline">
+                        Liked by <strong>@{{post.get_likes.0.profile.username}}</strong>
+                    </p>
+                {% endif %}
+
+                <!-- if there is more than 1 person who liked the post, show how many other liked it -->
+                {% if post.get_likes.count > 1%}
+                    <p class="inline">
+                        &nbsp;and <strong>{{post.get_likes.count | add:"-1"}} others</strong>
+                    </p>
+                {% endif %}
+
+                <h1 class="medium no-margin">Comments</h1>
+
+                {% if not post.get_all_comments %}
+                    <p>No comments</p>
+                {% endif %}
+
+                <!-- loop to show users who commented on the post and their comments -->
+                {% for comment in post.get_all_comments %}
+                    <div class="comment-div">
+                        <a href="{% url 'show_profile' comment.profile.pk %}">
+                            <img class="pfp circle small clickable mt-5 mr-30" src="{{comment.profile.profile_image_url}}">
+                        </a>
+
+                        <div>
+                            <a href="{% url 'show_profile' comment.profile.pk %}">
+                                <p class="mt-mb-8 clickable"><strong>@{{comment.profile.username}}</strong></p>
+                            </a>
+                            <p class="mt-mb-8">{{comment.text}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    {% endfor %}
+    
+{% endblock %}
