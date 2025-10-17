@@ -1,0 +1,61 @@
+/* for Django textarea form fields */
+textarea {
+    width: 100%;
+    height: 100px;
+    font: 20px var(--merriweather);
+    color: black;
+}
+
+/* for Django url form fields */
+input[type="url"] {
+    width: 100%;
+    font: 20px var(--merriweather);
+    color: black;
+}
+
+div.form-wrapper {
+    width: 50vw;
+    margin: 30px auto;
+    padding: 1px 0;
+    background-color: var(--black-translucent);
+    border-radius: 30px;
+}
+
+div.form-div {
+    width: 500px;
+    text-align: center;
+    margin: 50px auto;
+}
+
+label.photo-input-label {
+    padding: 10px 15px;
+    background: var(--wisteria-translucent);
+    font: 30px var(--merriweather);
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+label.photo-input-label:hover {
+    background-color: darkgray;
+}
+
+input.photo-input {
+    display: none;
+}
+
+input.button-input {
+    margin: 0 8px;
+    padding: 10px 15px;
+    background: var(--wisteria-translucent);
+    font: 20px var(--merriweather);
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+input.button-input:hover {
+    background-color: darkgray;
+}

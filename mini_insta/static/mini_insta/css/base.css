@@ -1,0 +1,43 @@
+img.background-img {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    filter: brightness(30%);
+    z-index: -1;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 110px;
+    top: 0;
+    background: black;
+    border-bottom: 3px solid white;
+}
+
+img.slayer-logo {
+    width: 80px;
+    margin-left: 20px;
+}
+
+table.icon-table {
+    margin-left: auto;
+    margin-right: 10px;
+    border-spacing: 25px 0;
+}
+
+img.icon {
+    width: 50px;
+    transition: 0.2s;
+}
+
+img.icon:hover {
+    filter: brightness(69%);
+}
+
+div.content-wrapper {
+    width: 90%;
+    margin: 160px auto 50px auto;
+}
