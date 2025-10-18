@@ -298,7 +298,9 @@ class SearchView(ListView):
         and becomes associated with context_object_name.
         """
 
-        # get the search query attached to the GET request
+        # get the search query attached to the GET request;
+        # data sent to the server via a GET request is appended to the 
+        # end of the URL (can see it in browser!), unlike POST which gives a dict
         query = self.request.GET.get('query')
 
         # # get a list of Profiles that match the search query,

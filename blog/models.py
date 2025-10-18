@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User # for authentication
 
 # Create your models here.
 
@@ -18,6 +19,7 @@ class Article(models.Model):
     published = models.DateTimeField(auto_now=True) # automatically sets published to the current time
     # image_url = models.URLField(blank=True) # holds any kind of url # url as a string
     image_file = models.ImageField(blank=True) # an actual image file
+    user = models.ForeignKey(User, on_delete=models.CASCADE) # user as a FK
 
 
     def __str__(self):

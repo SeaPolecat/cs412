@@ -1,0 +1,41 @@
+<!-- blog/login.html -->
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <h1>Login to our Blog</h1>
+
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+
+        <!-- form is provided by the generic LoginView -->
+        {{form}}
+
+        <input type="submit" value="Login">
+
+        <!-- This basic login form works, but after login it assumed
+         the existence of a page at /registration/profile, which does
+         not exist -->
+
+        <!-- if there's supposed to be a page after login
+        (determined by the view class, model get_absolute_url, etc.), go to that page -->
+        {% if request.GET.next %}
+
+            <!-- 'value' attribute gets sent to the server via the POST dict, with name 'next' -->
+            <!-- Django looks for this special 'next' name to redirect to the URL specified by 'value' -->
+            <input type="hidden" name="next" value="{{request.GET.next}}">
+
+        <!-- otherwise, go to the show_all page -->
+        {% else %}
+            <input type="hidden" name="next" value="{% url 'show_all' %}">
+        {% endif %}
+    </form>
+
+    <hr>
+
+    Don't have an account?
+
+    <a href="{% url 'register' %}">Register here</a>
+
+{% endblock %}

@@ -15,10 +15,34 @@
 
             <nav>
                 <ul>
+                    <!-- URLs for users who are not logged in -->
+
                     <li><a href="{% url 'random' %}">Random</a></li>
                     <li><a href="{% url 'show_all' %}">Show All</a></li>
-                    <li><a href="{% url 'create_article' %}">Create</a></li>
+
+                    <!-- URLs for logged in users only -->
+                    {% if request.user.is_authenticated %}
+
+                        <li><a href="{% url 'create_article' %}">Create</a></li>
+
+                        <form action="{% url 'logout' %}" method="POST">
+                            {% csrf_token %}
+                            <li><input type="submit" value="Logout"></li>
+                        </form>
+
+                    <!-- URLs for users who are not logged in -->
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
                 </ul>
+                <hr>
+
+                <!-- if the user is NOT an anonymous user -->
+                {% if request.user.is_authenticated %}
+                    Logged in as: {{request.user}}
+                {% else %}
+                    Not logged in.
+                {% endif %}
             </nav>
         </head>
 

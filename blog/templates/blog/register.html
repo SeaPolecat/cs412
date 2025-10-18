@@ -1,0 +1,18 @@
+<!-- blog/register.html -->
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <h1>Register for a new account</h1>
+
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+
+        <!-- form is provided by Django's UserCreationForm -->
+        {{form}}
+
+        <input type="submit">
+    </form>
+
+{% endblock %}
