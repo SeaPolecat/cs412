@@ -8,6 +8,20 @@ from .models import Profile, Post, Photo
 from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
 from django.urls import reverse
 from django.shortcuts import render
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class MyLoginRequiredMixin(LoginRequiredMixin):
+    """"""
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+        return reverse('login')
+    
+    def get_logged_in_profile(self):
+        """Return the Profile corresponding to the logged in User."""
+        return Profile.objects.get(user=self.request.user)
 
 
 class ProfileListView(ListView):
@@ -28,6 +42,21 @@ class ProfileDetailView(DetailView):
     context_object_name = 'profile'
 
 
+class MyProfileDetailView(MyLoginRequiredMixin, DetailView):
+    """"""
+
+    model = Profile
+    template_name = 'mini_insta/show_profile.html'
+    context_object_name = 'profile'
+
+    def get_object(self):
+        """Returns the model instance to be used as a context variable."""
+
+        profile = self.get_logged_in_profile()
+
+        return profile
+
+
 class PostDetailView(DetailView):
     """Define a view class to show a single post in detail."""
 
@@ -35,8 +64,23 @@ class PostDetailView(DetailView):
     template_name = 'mini_insta/show_post.html'
     context_object_name = 'post'
 
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
 
-class CreatePostView(CreateView):
+        pk = self.kwargs['pk'] # PK of this Post
+
+        # get this Post, and the Profile associated with it
+        post = Post.objects.get(pk=pk)
+        profile = post.profile
+
+        # get the context dict from the superclass, and add the Profile to it
+        context = super().get_context_data()
+        context['profile'] = profile
+
+        return context
+
+
+class CreatePostView(MyLoginRequiredMixin, CreateView):
     """A view to handle creation of a new Post on a Mini Instagram Profile."""
 
     form_class = CreatePostForm
@@ -45,18 +89,20 @@ class CreatePostView(CreateView):
     def get_success_url(self):
         """Provide a URL to redirect to after creating a new Post."""
 
-        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
+        profile = self.get_logged_in_profile()
 
         # redirect to the Profile page with primary key pk
-        return reverse('show_profile', kwargs={'pk': pk})
+        return reverse('show_profile', kwargs={'pk': profile.pk})
 
     def get_context_data(self):
         """Return the dictionary of context variables for use in the template."""
 
-        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
+        # pk = self.kwargs['pk'] # PK of the Profile associated with this Post
 
-        # get the Profile instance using pk
-        profile = Profile.objects.get(pk=pk)
+        # # get the Profile instance using pk
+        # profile = Profile.objects.get(pk=pk)
+
+        profile = self.get_logged_in_profile()
 
         # get the context dict from the superclass, and add the Profile to it
         context = super().get_context_data()
@@ -73,10 +119,7 @@ class CreatePostView(CreateView):
         print(form.cleaned_data)
 
         post = form.instance # the Post instance being created
-        profile_pk = self.kwargs['pk'] # PK of the Profile associated with this Post
-
-        # get the Profile instance using pk
-        profile = Profile.objects.get(pk=profile_pk)
+        profile = self.get_logged_in_profile()
 
         # attach the Profile's PK as a foreign key to the Post
         post.profile = profile
@@ -102,15 +145,22 @@ class CreatePostView(CreateView):
         return super().form_valid(form)
     
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(MyLoginRequiredMixin, UpdateView):
     """View class to handle update of a Mini Instagram Profile."""
 
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_insta/update_profile_form.html'
 
+    def get_object(self):
+        """Returns the model instance to be used as a context variable."""
 
-class UpdatePostView(UpdateView):
+        profile = self.get_logged_in_profile()
+
+        return profile
+
+
+class UpdatePostView(MyLoginRequiredMixin, UpdateView):
     """View class to update a Post on a Mini Instagram Profile."""
 
     model = Post
@@ -134,9 +184,24 @@ class UpdatePostView(UpdateView):
 
         # let the superclass' form_valid() handle the rest
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        pk = self.kwargs['pk'] # PK of this Post
+
+        # get this Post, and the Profile associated with it
+        post = Post.objects.get(pk=pk)
+        profile = post.profile
+
+        # get the context dict from the superclass, and add the Profile to it
+        context = super().get_context_data()
+        context['profile'] = profile
+
+        return context
 
 
-class DeletePostView(DeleteView):
+class DeletePostView(MyLoginRequiredMixin, DeleteView):
     """View class to delete a Post on a Mini Instagram Profile."""
 
     model = Post
@@ -170,7 +235,7 @@ class DeletePostView(DeleteView):
         return context
     
 
-class DeletePhotoView(DeleteView):
+class DeletePhotoView(MyLoginRequiredMixin, DeleteView):
     """View class to delete a Photo on a Mini Instagram Profile's Post."""
 
     model = Photo
@@ -223,7 +288,7 @@ class ShowFollowingDetailView(DetailView):
     context_object_name = 'profile'
 
 
-class PostFeedListView(ListView):
+class PostFeedListView(MyLoginRequiredMixin, ListView):
     """View class to display a list of Posts in the feed."""
 
     model = Post
@@ -235,10 +300,12 @@ class PostFeedListView(ListView):
         and becomes associated with context_object_name.
         """
 
-        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
+        # pk = self.kwargs['pk'] # PK of the Profile associated with this Post
 
-        # get the Profile instance using pk
-        profile = Profile.objects.get(pk=pk)
+        # # get the Profile instance using pk
+        # profile = Profile.objects.get(pk=pk)
+
+        profile = self.get_logged_in_profile()
 
         # get the Profile's post feed
         post_feed = profile.get_post_feed()
@@ -248,10 +315,12 @@ class PostFeedListView(ListView):
     def get_context_data(self):
         """Return the dictionary of context variables for use in the template."""
 
-        pk = self.kwargs['pk'] # PK of the Profile associated with this Post
+        # pk = self.kwargs['pk'] # PK of the Profile associated with this Post
 
-        # get the Profile instance using pk
-        profile = Profile.objects.get(pk=pk)
+        # # get the Profile instance using pk
+        # profile = Profile.objects.get(pk=pk)
+
+        profile = self.get_logged_in_profile()
 
         # get the context dict from the superclass, and add the Profile to it
         context = super().get_context_data()
@@ -260,7 +329,7 @@ class PostFeedListView(ListView):
         return context
     
 
-class SearchView(ListView):
+class SearchView(MyLoginRequiredMixin, ListView):
     """View class to display a template for the user to enter search
     queries, and another template containing the search results.
     """
@@ -274,14 +343,24 @@ class SearchView(ListView):
         this view through a URL.
         """
 
+        # since i already override dispatch here, i need to manually redirect to the login page
+        if not request.user.is_authenticated:
+            template_name = 'mini_insta/login.html'
+            context = {
+                'form': AuthenticationForm
+            }
+            return render(request, template_name, context)
+
         # if the GET request contains no data, render the search.html template
         # to prompt the user to enter a search query
         if not request.GET:
             template_name = 'mini_insta/search.html' # name of the template to render
 
-            # get the Profile that's doing the searching
-            pk = self.kwargs['pk']
-            profile = Profile.objects.get(pk=pk)
+            # # get the Profile that's doing the searching
+            # pk = self.kwargs['pk']
+            # profile = Profile.objects.get(pk=pk)
+
+            profile = self.get_logged_in_profile()
 
             # add the Profile to the context dict
             context = {
@@ -315,9 +394,11 @@ class SearchView(ListView):
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
 
-        # get the Profile that's doing the searching
-        pk = self.kwargs['pk']
-        profile = Profile.objects.get(pk=pk)
+        # # get the Profile that's doing the searching
+        # pk = self.kwargs['pk']
+        # profile = Profile.objects.get(pk=pk)
+
+        profile = self.get_logged_in_profile()
 
         # get the search query attached to the GET request
         query = self.request.GET.get('query')

@@ -1,0 +1,47 @@
+<!--File: mini_insta/templates/mini_insta/login.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
+Description: 
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+    <h1 class="large centered">Log In</h1>
+
+    <div class="form-wrapper">
+
+        <!-- form containing inputs for creating a new post -->
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="form-div">
+                <h1 class="small align-left">Username</h1>
+                {{form.username}}
+            </div>
+
+            <div class="form-div">
+                <h1 class="small align-left">Password</h1>
+                {{form.password}}
+            </div>
+
+            <!-- confirmation and cancel buttons -->
+            <div class="form-div">
+                <input class="button-input" type="submit" value="Log In">
+
+                <!-- return to all profiles page upon clicking cancel -->
+                <a href="{% url 'show_all_profiles' %}">
+                    <input class="button-input" type="button" value="Cancel">
+                </a>
+            </div>
+
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+            {% else %}
+                <input type="hidden" name="next" value="{% url 'my_profile' %}">
+            {% endif %}
+        </form>
+
+    </div>
+    
+{% endblock %}

@@ -12,7 +12,7 @@ Description: A template to create a new post for a profile.
     <div class="form-wrapper">
 
         <!-- form containing inputs for creating a new post -->
-        <form action="{% url 'create_post' profile.pk %}" method="POST"
+        <form action="{% url 'create_post' %}" method="POST"
         enctype="multipart/form-data">
             {% csrf_token %}
 

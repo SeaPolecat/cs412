@@ -21,8 +21,12 @@ Description: A template to display a single profile and its posts.
                 <h1 class="large inline ml-20">{{profile.display_name}}</h1>
 
                 <!-- button to update the profile -->
-                <a class="update-profile-link" href="{% url 'update_profile' profile.pk %}">
-                    <input class="button-input" type="button" value="Edit Profile">
+                <a class="update-profile-link" href="{% url 'update_profile' %}">
+
+                    <!-- if the user is logged in and is on their own profile, allow edit access -->
+                    {% if request.user.is_authenticated and request.user == profile.user %}
+                        <input class="button-input" type="button" value="Edit Profile">
+                    {% endif %}
                 </a>
 
                 <br>

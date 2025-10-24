@@ -12,7 +12,7 @@ Description: A template containing a form to search for other profiles and posts
     <div class="form-wrapper">
 
         <!-- form containing inputs for searching -->
-        <form action="{% url 'search' profile.pk %}" method="GET">
+        <form action="{% url 'search' %}" method="GET">
             {% csrf_token %}
 
             <!-- input to type a search query -->

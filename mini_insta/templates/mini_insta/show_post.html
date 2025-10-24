@@ -31,23 +31,30 @@ including its caption and all associated photos.
 
                 <!-- text with the photo's post date and a button to delete it -->
                 <p>
-                    {{photo.timestamp.date}} | 
-                    <a class="delete-photo-link" href="{% url 'delete_photo' photo.pk %}">Delete</a>
+                    {{photo.timestamp.date}}
+
+                    <!-- if the user is logged in and viewing their own post, allow them to delete photos -->
+                    {% if request.user.is_authenticated and request.user == profile.user %}
+                        | <a class="delete-photo-link" href="{% url 'delete_photo' photo.pk %}">Delete</a>
+                    {% endif %}
                 </p>
             </div>
         {% endfor %}
     </div>
 
-    <!-- div containing buttons to update or delete the post -->
-    <div class="post-actions-div">
-        <a href="{% url 'update_post' post.pk %}">
-            <input class="button-input" type="button" value="Edit Post">
-        </a>
+    <!-- if the user is logged in and viewing their own post, allow them to edit or delete the post -->
+    {% if request.user.is_authenticated and request.user == profile.user %}
+        <!-- div containing buttons to update or delete the post -->
+        <div class="post-actions-div">
+            <a href="{% url 'update_post' post.pk %}">
+                <input class="button-input" type="button" value="Edit Post">
+            </a>
 
-        <a href="{% url 'delete_post' post.pk %}">
-            <input class="button-input" type="button" value="Delete Post">
-        </a>
-    </div>
+            <a href="{% url 'delete_post' post.pk %}">
+                <input class="button-input" type="button" value="Delete Post">
+            </a>
+        </div>
+    {% endif %}
 
     <!-- div containing comments for the post -->
     <div class="comments-wrapper">

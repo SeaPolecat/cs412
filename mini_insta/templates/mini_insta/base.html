@@ -24,74 +24,56 @@ templates inherit from.
             <!-- decorative logo -->
             <img class="slayer-logo" src="{% static 'mini_insta/img/slayer-logo.png' %}">
 
+            {% if request.user.is_authenticated %}
+                <h1 class="medium">Logged in as: {{request.user}}</h1>
+
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="button-input" type="submit" value="Logout">
+                </form>
+            {% else %}
+                <h1 class="medium">Not logged in</h1>
+
+                <a href="{% url 'login' %}">
+                    <input class="button-input" type="submit" value="Login">
+                </a>
+            {% endif %}
+
             <!-- if viewing all profiles, display 'MiniInsta Profiles' -->
-            {% if profiles %}
-                <h1 class="medium">MiniInsta Profiles</h1>
+            <!-- {% if profiles %}
+                <h1 class="medium">MiniInsta Profiles</h1> -->
 
             <!-- if viewing a single profile, display that profile's username -->
-            {% elif profile %}
-                <h1 class="medium">@{{profile.username}}</h1>
+            <!-- {% elif profile %}
+                <h1 class="medium">@{{profile.username}}</h1> -->
 
             <!-- if viewing a post, display the username of the profile associated with it -->
-            {% elif post %}
+            <!-- {% elif post %}
                 <h1 class="medium">@{{post.profile.username}}</h1>
-            {% endif %}
+            {% endif %} -->
 
             <!-- table of navigation icons -->
             <table class="icon-table">
                 <tr>
-                    <!-- if displaying the post feed, include a button to return to the profile page -->
-                    {% if post_feed %}
+                    {% if request.user.is_authenticated %}
                         <td>
-                            <a href="{% url 'show_profile' profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/img/back-icon.png' %}">
-                            </a>
-                        </td>
-                    {% endif %}
-
-                    <!-- if displaying a profile, include 4 buttons: search, add post, feed, and profile -->
-                    {% if profile %}
-                        <td>
-                            <a href="{% url 'search' profile.pk %}">
+                            <a href="{% url 'search' %}">
                                 <img class="icon" src="{% static 'mini_insta/img/search-icon.png' %}">
                             </a>
                         </td>
                         <td>
-                            <a href="{% url 'create_post' profile.pk %}">
+                            <a href="{% url 'create_post' %}">
                                 <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}">
                             </a>
                         </td>
                         <td>
-                            <a href="{% url 'show_feed' profile.pk %}">
+                            <a href="{% url 'show_feed' %}">
                                 <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}">
                             </a>
                         </td>
                         <td>
-                            <a href="{% url 'show_profile' profile.pk %}">
-                                <img class="pfp circle small clickable" src="{{profile.profile_image_url}}">
-                            </a>
-                        </td>
-
-                    <!-- if displaying a post, include 4 buttons: search, add post, feed, and profile -->
-                    {% elif post %}
-                        <td>
-                            <a href="{% url 'search' post.profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/img/search-icon.png' %}">
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'create_post' post.profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/img/add-icon.png' %}">
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'show_feed' post.profile.pk %}">
-                                <img class="icon" src="{% static 'mini_insta/img/home-icon.png' %}">
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'show_profile' post.profile.pk %}">
-                                <img class="pfp circle small clickable" src="{{post.profile.profile_image_url}}">
+                            <a href="{% url 'my_profile' %}">
+                                <img class="pfp circle small clickable" src="{{request.user.profile.profile_image_url}}">
                             </a>
                         </td>
                     {% endif %}
