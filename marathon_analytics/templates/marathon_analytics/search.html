@@ -1,0 +1,19 @@
+<!-- marathon_analytics/templates/marathon_analytics/search.html -->
+
+<h1>Search Form</h1>
+
+<table>
+    <form action="{% url 'results_list' %}">
+
+        <tr>
+            <th>City:</th>
+            <td><input type="text" name="city"></td>
+        </tr>
+
+        <tr>
+            <td><input type="submit"></td>
+            <td></td>
+        </tr>
+
+    </form>
+</table>
