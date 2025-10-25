@@ -1,0 +1,2 @@
+username: kyojuro_rengoku
+password: abc123abc123
