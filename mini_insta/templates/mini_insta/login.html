@@ -1,6 +1,6 @@
 <!--File: mini_insta/templates/mini_insta/login.html
 Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
-Description: 
+Description: A template to handle logging in a Mini Insta user.
 -->
 
 {% extends 'mini_insta/base.html' %}
@@ -11,15 +11,17 @@ Description:
 
     <div class="form-wrapper">
 
-        <!-- form containing inputs for creating a new post -->
+        <!-- form containing inputs for logging in -->
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
 
+            <!-- input for username -->
             <div class="form-div">
                 <h1 class="small align-left">Username</h1>
                 {{form.username}}
             </div>
 
+            <!-- input for password -->
             <div class="form-div">
                 <h1 class="small align-left">Password</h1>
                 {{form.password}}
@@ -35,8 +37,21 @@ Description:
                 </a>
             </div>
 
+            <!-- option to sign up if the user doesn't have an account -->
+            <div class="form-div">
+                <h1 class="small">No account yet?</h1>
+
+                <a href="{% url 'create_profile' %}">
+                    <input class="button-input" type="button" value="Sign Up">
+                </a>
+            </div>
+
+            <!-- if there's supposed to be a page after login
+            (determined by the view class, model get_absolute_url, etc.), go to that page -->
             {% if request.GET.next %}
                 <input type="hidden" name="next" value="{{request.GET.next}}">
+
+            <!-- otherwise, show the newly logged in user's profile -->
             {% else %}
                 <input type="hidden" name="next" value="{% url 'my_profile' %}">
             {% endif %}

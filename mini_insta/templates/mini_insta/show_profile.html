@@ -20,14 +20,27 @@ Description: A template to display a single profile and its posts.
             <td>
                 <h1 class="large inline ml-20">{{profile.display_name}}</h1>
 
-                <!-- button to update the profile -->
-                <a class="update-profile-link" href="{% url 'update_profile' %}">
+                {% if request.user.is_authenticated %}
 
-                    <!-- if the user is logged in and is on their own profile, allow edit access -->
-                    {% if request.user.is_authenticated and request.user == profile.user %}
-                        <input class="button-input" type="button" value="Edit Profile">
+                    <!-- if the user is viewing their own Profile, allow them to edit it -->
+                    {% if request.user == profile.user %}
+                        <a class="update-profile-link" href="{% url 'update_profile' %}">
+                            <input class="button-input" type="button" value="Edit Profile">
+                        </a>
+                        
+                    <!-- otherwise, show buttons for following or unfollowing that Profile -->
+                    {% elif not already_followed %}
+                        <a class="update-profile-link" href="{% url 'follow_profile' profile.pk %}">
+                            <input class="button-input" type="button" value="Follow">
+                        </a>
+
+                    {% else %}
+                        <a class="update-profile-link" href="{% url 'unfollow_profile' profile.pk %}">
+                            <input class="button-input" type="button" value="Unfollow">
+                        </a>
                     {% endif %}
-                </a>
+
+                {% endif %}
 
                 <br>
 
@@ -61,11 +74,11 @@ Description: A template to display a single profile and its posts.
         <p>{{profile.bio_text | linebreaksbr}}</p>
 
         <h1 class="medium">Posts</h1>
-    </div>
 
-    {% if not profile.get_all_posts %}
-        <p>No posts</p>
-    {% endif %}
+        {% if not profile.get_all_posts %}
+            <p>No posts</p>
+        {% endif %}
+    </div>
 
     <!-- div containing the profile's posts -->
     <div class="posts-grid">

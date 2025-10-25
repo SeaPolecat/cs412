@@ -1,0 +1,58 @@
+<!--File: mini_insta/templates/mini_insta/create_profile_form.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/17/2025
+Description: A template to handle creation of a new Mini Insta profile.
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+    <h1 class="large centered">Sign Up</h1>
+
+    <div class="form-wrapper">
+
+        <!-- form containing inputs for creating a new profile -->
+        <form action="{% url 'create_profile' %}" method="POST">
+            {% csrf_token %}
+
+            <!-- form provided by Django for creating a Django user -->
+            {{django_form}}
+
+            <!-- input for username -->
+            <div class="form-div">
+                <h1 class="small align-left">Username</h1>
+                {{form.username}}
+            </div>
+
+            <!-- input for display name -->
+            <div class="form-div">
+                <h1 class="small align-left">Display Name</h1>
+                {{form.display_name}}
+            </div>
+
+            <!-- input for bio -->
+            <div class="form-div">
+                <h1 class="small align-left">Bio</h1>
+                {{form.bio_text}}
+            </div>
+
+            <!-- input for profile picture -->
+            <div class="form-div">
+                <h1 class="small align-left">Profile Picture</h1>
+                {{form.profile_image_url}}
+            </div>
+
+            <!-- confirmation and cancel buttons -->
+            <div class="form-div">
+                <input class="button-input" type="submit" value="Sign Up">
+
+                <!-- return to all profiles page upon clicking cancel -->
+                <a href="{% url 'show_all_profiles' %}">
+                    <input class="button-input" type="button" value="Cancel">
+                </a>
+            </div>
+        </form>
+
+    </div>
+    
+{% endblock %}

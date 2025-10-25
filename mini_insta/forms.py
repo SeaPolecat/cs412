@@ -7,6 +7,16 @@ from django import forms
 from .models import *
 
 
+class CreateProfileForm(forms.ModelForm):
+    """A form to create a new Mini Insta Profile."""
+
+    class Meta:
+        """Associate this form with the Profile model."""
+
+        model = Profile
+        fields = ['username', 'display_name', 'bio_text', 'profile_image_url']
+
+
 class UpdateProfileForm(forms.ModelForm):
     """A form to update a Mini Insta Profile."""
 

@@ -3,17 +3,22 @@
 # Description: Contains views for the Mini Insta app. These render templates,
 # pass in context variables, and handle form submissions.
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Profile, Post, Photo
-from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from .models import *
+from .forms import *
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.shortcuts import render
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 
 class MyLoginRequiredMixin(LoginRequiredMixin):
-    """"""
+    """My own subclass of the LoginRequiredMixin, which implements
+    some useful features.
+    """
 
     def get_login_url(self):
         """Return the URL for this app's login page."""
@@ -41,9 +46,29 @@ class ProfileDetailView(DetailView):
     template_name = 'mini_insta/show_profile.html'
     context_object_name = 'profile'
 
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        # get the Profile specified in the URL
+        context = super().get_context_data(**kwargs)
+        profile = context['profile']
+
+        # get the logged in Profile if the user is authenticated
+        if self.request.user.is_authenticated:
+            my_profile = self.request.user.profile
+
+            # set a boolean context variable to true or false depending on 
+            # if the logged in Profile follows the URL Profile
+            if my_profile.already_followed(profile):
+                context['already_followed'] = True
+            else:
+                context['already_followed'] = False
+
+        return context
+
 
 class MyProfileDetailView(MyLoginRequiredMixin, DetailView):
-    """"""
+    """View class to display a logged in user's own Profile."""
 
     model = Profile
     template_name = 'mini_insta/show_profile.html'
@@ -52,9 +77,7 @@ class MyProfileDetailView(MyLoginRequiredMixin, DetailView):
     def get_object(self):
         """Returns the model instance to be used as a context variable."""
 
-        profile = self.get_logged_in_profile()
-
-        return profile
+        return self.get_logged_in_profile()
 
 
 class PostDetailView(DetailView):
@@ -67,15 +90,20 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
 
-        pk = self.kwargs['pk'] # PK of this Post
+        # get the Post specified in the URL
+        context = super().get_context_data(**kwargs)
+        post = context['post']
 
-        # get this Post, and the Profile associated with it
-        post = Post.objects.get(pk=pk)
-        profile = post.profile
+        # get the logged in Profile if the user is authenticated
+        if self.request.user.is_authenticated:
+            my_profile = self.request.user.profile
 
-        # get the context dict from the superclass, and add the Profile to it
-        context = super().get_context_data()
-        context['profile'] = profile
+            # set a boolean context variable to true or false depending on 
+            # if the logged in Profile has liked the URL Post
+            if my_profile.already_liked(post):
+                context['already_liked'] = True
+            else:
+                context['already_liked'] = False
 
         return context
 
@@ -89,26 +117,8 @@ class CreatePostView(MyLoginRequiredMixin, CreateView):
     def get_success_url(self):
         """Provide a URL to redirect to after creating a new Post."""
 
-        profile = self.get_logged_in_profile()
-
-        # redirect to the Profile page with primary key pk
-        return reverse('show_profile', kwargs={'pk': profile.pk})
-
-    def get_context_data(self):
-        """Return the dictionary of context variables for use in the template."""
-
-        # pk = self.kwargs['pk'] # PK of the Profile associated with this Post
-
-        # # get the Profile instance using pk
-        # profile = Profile.objects.get(pk=pk)
-
-        profile = self.get_logged_in_profile()
-
-        # get the context dict from the superclass, and add the Profile to it
-        context = super().get_context_data()
-        context['profile'] = profile
-
-        return context
+        # redirect to the logged in user's profile page
+        return reverse('my_profile')
     
     def form_valid(self, form):
         """Handles the form submission and saves the new object 
@@ -119,10 +129,10 @@ class CreatePostView(MyLoginRequiredMixin, CreateView):
         print(form.cleaned_data)
 
         post = form.instance # the Post instance being created
-        profile = self.get_logged_in_profile()
+        my_profile = self.get_logged_in_profile()
 
         # attach the Profile's PK as a foreign key to the Post
-        post.profile = profile
+        post.profile = my_profile
         post.save()
 
         # get the photo URL that the user entered through an explicit form
@@ -155,9 +165,7 @@ class UpdateProfileView(MyLoginRequiredMixin, UpdateView):
     def get_object(self):
         """Returns the model instance to be used as a context variable."""
 
-        profile = self.get_logged_in_profile()
-
-        return profile
+        return self.get_logged_in_profile()
 
 
 class UpdatePostView(MyLoginRequiredMixin, UpdateView):
@@ -184,21 +192,6 @@ class UpdatePostView(MyLoginRequiredMixin, UpdateView):
 
         # let the superclass' form_valid() handle the rest
         return super().form_valid(form)
-    
-    def get_context_data(self, **kwargs):
-        """Return the dictionary of context variables for use in the template."""
-
-        pk = self.kwargs['pk'] # PK of this Post
-
-        # get this Post, and the Profile associated with it
-        post = Post.objects.get(pk=pk)
-        profile = post.profile
-
-        # get the context dict from the superclass, and add the Profile to it
-        context = super().get_context_data()
-        context['profile'] = profile
-
-        return context
 
 
 class DeletePostView(MyLoginRequiredMixin, DeleteView):
@@ -219,20 +212,6 @@ class DeletePostView(MyLoginRequiredMixin, DeleteView):
 
         # redirect to the Profile page whose Post was deleted
         return reverse('show_profile', kwargs={'pk': profile.pk})
-
-    def get_context_data(self, **kwargs):
-        """Return the dictionary of context variables for use in the template."""
-
-        # get the context dict from the superclass
-        context = super().get_context_data()
-
-        # use the Post in the context to find its associated Profile
-        profile = context['post'].profile
-
-        # add the Profile to the context
-        context['profile'] = profile
-
-        return context
     
 
 class DeletePhotoView(MyLoginRequiredMixin, DeleteView):
@@ -263,11 +242,9 @@ class DeletePhotoView(MyLoginRequiredMixin, DeleteView):
         # use the Photo in the context to find its associated 
         # Post and Profile
         post = context['photo'].post
-        profile = post.profile
 
         # add the Post and Profile to the context
         context['post'] = post
-        context['profile'] = profile
 
         return context
     
@@ -300,33 +277,13 @@ class PostFeedListView(MyLoginRequiredMixin, ListView):
         and becomes associated with context_object_name.
         """
 
-        # pk = self.kwargs['pk'] # PK of the Profile associated with this Post
-
-        # # get the Profile instance using pk
-        # profile = Profile.objects.get(pk=pk)
-
-        profile = self.get_logged_in_profile()
+        # get the logged in user's Profile
+        my_profile = self.get_logged_in_profile()
 
         # get the Profile's post feed
-        post_feed = profile.get_post_feed()
+        post_feed = my_profile.get_post_feed()
 
         return post_feed
-
-    def get_context_data(self):
-        """Return the dictionary of context variables for use in the template."""
-
-        # pk = self.kwargs['pk'] # PK of the Profile associated with this Post
-
-        # # get the Profile instance using pk
-        # profile = Profile.objects.get(pk=pk)
-
-        profile = self.get_logged_in_profile()
-
-        # get the context dict from the superclass, and add the Profile to it
-        context = super().get_context_data()
-        context['profile'] = profile
-
-        return context
     
 
 class SearchView(MyLoginRequiredMixin, ListView):
@@ -346,9 +303,8 @@ class SearchView(MyLoginRequiredMixin, ListView):
         # since i already override dispatch here, i need to manually redirect to the login page
         if not request.user.is_authenticated:
             template_name = 'mini_insta/login.html'
-            context = {
-                'form': AuthenticationForm
-            }
+            context = {'form': AuthenticationForm}
+
             return render(request, template_name, context)
 
         # if the GET request contains no data, render the search.html template
@@ -356,17 +312,7 @@ class SearchView(MyLoginRequiredMixin, ListView):
         if not request.GET:
             template_name = 'mini_insta/search.html' # name of the template to render
 
-            # # get the Profile that's doing the searching
-            # pk = self.kwargs['pk']
-            # profile = Profile.objects.get(pk=pk)
-
-            profile = self.get_logged_in_profile()
-
-            # add the Profile to the context dict
-            context = {
-                'profile': profile
-            }
-            return render(request, template_name, context)
+            return render(request, template_name)
 
         # otherwise, let the superclass' dispatch method handle the rest
         else:
@@ -394,12 +340,6 @@ class SearchView(MyLoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
 
-        # # get the Profile that's doing the searching
-        # pk = self.kwargs['pk']
-        # profile = Profile.objects.get(pk=pk)
-
-        profile = self.get_logged_in_profile()
-
         # get the search query attached to the GET request
         query = self.request.GET.get('query')
 
@@ -412,8 +352,144 @@ class SearchView(MyLoginRequiredMixin, ListView):
         # (I didn't add matching_profiles because it's already associated with 
         # the context_object_name as a result of overriding get_queryset)
         context = super().get_context_data()
-        context['profile'] = profile
         context['query'] = query
         context['matching_posts'] = matching_posts
 
         return context
+    
+
+class CreateProfileView(CreateView):
+    """View class to handle creating a new Profile."""
+
+    model = User
+    form_class = CreateProfileForm
+    template_name = 'mini_insta/create_profile_form.html'
+
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        # add Django's user creation form into the context
+        context = super().get_context_data()
+        context['django_form'] = UserCreationForm
+
+        return context
+    
+    def form_valid(self, form):
+        """Handles the form submission and saves the new object 
+        to the Django database.
+        """
+
+        # rebuild Django's user creation form
+        django_form = UserCreationForm(self.request.POST)
+
+        # save the new user to the db, and log them in
+        user = django_form.save()
+        login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+
+        # attach the user as a FK to the Profile
+        profile = form.instance
+        profile.user = user
+
+        return super().form_valid(form)
+    
+
+class FollowProfileView(MyLoginRequiredMixin, TemplateView):
+    """View class to handle following another Profile."""
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handles HTTP requests from the user that get mapped to
+        this view through a URL.
+        """
+
+        # get the Profile specified in the URL
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+
+        # get the logged in Profile
+        my_profile = self.get_logged_in_profile()
+
+        # if the logged in Profile isn't viewing itself, AND is not already
+        # following the URL Profile, create and save a new Follow instance
+        if my_profile != profile and not my_profile.already_followed(profile):
+            follow = Follow(profile=profile, follower_profile=my_profile)
+            follow.save()
+
+        # redirect to the show_profile page
+        return redirect('show_profile', pk=pk)
+    
+
+class UnfollowProfileView(MyLoginRequiredMixin, TemplateView):
+    """View class to handle unfollowing another Profile."""
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handles HTTP requests from the user that get mapped to
+        this view through a URL.
+        """
+
+        # get the Profile specified in the URL
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+
+        # get the logged in Profile
+        my_profile = self.get_logged_in_profile()
+
+        # get the Follow instance (if it exists)
+        follow = my_profile.already_followed(profile)
+
+        # if it exists, delete it
+        if follow:
+            follow.delete()
+
+        # redirect to the show_profile page
+        return redirect('show_profile', pk=pk)
+    
+
+class LikePostView(MyLoginRequiredMixin, TemplateView):
+    """View class to handle liking a Post."""
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handles HTTP requests from the user that get mapped to
+        this view through a URL.
+        """
+
+        # get the Post specified in the URL
+        pk = self.kwargs['pk']
+        post = Post.objects.get(pk=pk)
+
+        # get the logged in Profile
+        my_profile = self.get_logged_in_profile()
+
+        # if the logged in Profile isn't viewing its own Post, AND has not 
+        # already liked the URL Post, create and save a new Like instance
+        if my_profile != post.profile and not my_profile.already_liked(post):
+            like = Like(post=post, profile=my_profile)
+            like.save()
+
+        # redirect to the show_post page
+        return redirect('show_post', pk=pk)
+    
+
+class UnlikePostView(MyLoginRequiredMixin, TemplateView):
+    """View class to handle unliking a Post."""
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handles HTTP requests from the user that get mapped to
+        this view through a URL.
+        """
+
+        # get the Post specified in the URL
+        pk = self.kwargs['pk']
+        post = Post.objects.get(pk=pk)
+
+        # get the logged in Profile
+        my_profile = self.get_logged_in_profile()
+
+        # get the Like instance (if it exists)
+        like = my_profile.already_liked(post)
+
+        # if it exists, delete it
+        if like:
+            like.delete()
+
+        # redirect to the show_post page
+        return redirect('show_post', pk=pk)

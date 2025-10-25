@@ -24,37 +24,42 @@ templates inherit from.
             <!-- decorative logo -->
             <img class="slayer-logo" src="{% static 'mini_insta/img/slayer-logo.png' %}">
 
+            <!-- if the user is authenticated, show their username and a logout button -->
             {% if request.user.is_authenticated %}
-                <h1 class="medium">Logged in as: {{request.user}}</h1>
+                <h1 class="medium">@{{request.user.profile.username}}</h1>
 
                 <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
-                    <input class="button-input" type="submit" value="Logout">
+                    <input class="button-input" type="submit" value="Log Out">
                 </form>
-            {% else %}
-                <h1 class="medium">Not logged in</h1>
 
+            <!-- otherwise, show a login button -->
+            {% else %}
                 <a href="{% url 'login' %}">
-                    <input class="button-input" type="submit" value="Login">
+                    <input class="button-input" type="submit" value="Log In">
                 </a>
             {% endif %}
-
-            <!-- if viewing all profiles, display 'MiniInsta Profiles' -->
-            <!-- {% if profiles %}
-                <h1 class="medium">MiniInsta Profiles</h1> -->
-
-            <!-- if viewing a single profile, display that profile's username -->
-            <!-- {% elif profile %}
-                <h1 class="medium">@{{profile.username}}</h1> -->
-
-            <!-- if viewing a post, display the username of the profile associated with it -->
-            <!-- {% elif post %}
-                <h1 class="medium">@{{post.profile.username}}</h1>
-            {% endif %} -->
 
             <!-- table of navigation icons -->
             <table class="icon-table">
                 <tr>
+                    <!-- if viewing a post, show a button to return to the profile it belong to -->
+                    {% if post %}
+                        <td>
+                            <a href="{% url 'show_profile' post.profile.pk %}">
+                                <img class="icon" src="{% static 'mini_insta/img/back-icon.png' %}">
+                            </a>
+                        </td>
+                    {% endif %}
+
+                    <!-- button to return to the all profiles page -->
+                    <td>
+                        <a href="{% url 'show_all_profiles' %}">
+                            <img class="icon" src="{% static 'mini_insta/img/people-icon.png' %}">
+                        </a>
+                    </td>
+                    
+                    <!-- if the user is logged in, show 4 buttons: search, add post, feed, profile -->
                     {% if request.user.is_authenticated %}
                         <td>
                             <a href="{% url 'search' %}">

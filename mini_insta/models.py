@@ -76,6 +76,26 @@ class Profile(models.Model):
 
         return len(self.get_following())
     
+    def already_followed(self, profile):
+        """Return the Follow instance if this Profile follows the other Profile
+        specified in the parameter. Otherwise, return None.
+        """
+
+        try:
+            return Follow.objects.get(profile=profile, follower_profile=self)
+        except:
+            return None
+    
+    def already_liked(self, post):
+        """Return the Like instance if this Profile has liked the Post
+        specified in the parameter. Otherwise, return None.
+        """
+
+        try:
+            return Like.objects.get(post=post, profile=self)
+        except:
+            return None
+    
     def get_post_feed(self):
         """Return a list (or QuerySet) of Posts, specifically for the Profiles 
         being followed by the Profile on which the method was called.

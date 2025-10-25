@@ -7,6 +7,8 @@ from django.urls import path
 from .views import *
 from django.contrib.auth import views as auth_views
 
+# app_name = 'mini_insta' # could add a namespace to uniquely identify similar URLs across apps
+
 # list containing different url endings that redirect to view classes within views.py
 urlpatterns = [
 
@@ -27,9 +29,13 @@ urlpatterns = [
     path('profile/update', UpdateProfileView.as_view(), name='update_profile'),
     path('profile/feed', PostFeedListView.as_view(), name='show_feed'),
     path('profile/search', SearchView.as_view(), name='search'),
+    path('profile/<int:pk>/follow', FollowProfileView.as_view(), name='follow_profile'),
+    path('profile/<int:pk>/unfollow', UnfollowProfileView.as_view(), name='unfollow_profile'),
 
     path('post/<int:pk>/update', UpdatePostView.as_view(), name='update_post'),
     path('post/<int:pk>/delete', DeletePostView.as_view(), name='delete_post'),
+    path('post/<int:pk>/like', LikePostView.as_view(), name='like_post'),
+    path('post/<int:pk>/unlike', UnlikePostView.as_view(), name='unlike_post'),
 
     path('photo/<int:pk>/delete', DeletePhotoView.as_view(), name='delete_photo'),
 
@@ -37,4 +43,5 @@ urlpatterns = [
 
     path('login/', auth_views.LoginView.as_view(template_name='mini_insta/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='show_all_profiles'), name='logout'),
+    path('create_profile/', CreateProfileView.as_view(), name='create_profile'),
 ]

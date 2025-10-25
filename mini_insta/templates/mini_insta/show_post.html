@@ -9,6 +9,23 @@ including its caption and all associated photos.
 
 {% block content %}
 
+    <!-- if the user is logged in and is viewing someone else's Post, allow
+     them to like or unlike the Post -->
+    {% if request.user.is_authenticated and request.user != post.profile.user %}
+            
+        {% if not already_liked %}
+            <a href="{% url 'like_post' post.pk %}">
+                <img class="icon" src="{% static 'mini_insta/img/empty-heart-icon.png' %}">
+            </a>
+            
+        {% else %}
+            <a href="{% url 'unlike_post' post.pk %}">
+                <img class="icon" src="{% static 'mini_insta/img/full-heart-icon.png' %}">
+            </a>
+        {% endif %}
+    
+    {% endif %}
+
     <!-- div containing the post's caption -->
     <div class="caption-div">
         <p>{{post.caption}}</p>
@@ -33,8 +50,8 @@ including its caption and all associated photos.
                 <p>
                     {{photo.timestamp.date}}
 
-                    <!-- if the user is logged in and viewing their own post, allow them to delete photos -->
-                    {% if request.user.is_authenticated and request.user == profile.user %}
+                    <!-- if the user is logged in and viewing their own Post, allow them to delete Photos -->
+                    {% if request.user.is_authenticated and request.user == post.profile.user %}
                         | <a class="delete-photo-link" href="{% url 'delete_photo' photo.pk %}">Delete</a>
                     {% endif %}
                 </p>
@@ -43,7 +60,7 @@ including its caption and all associated photos.
     </div>
 
     <!-- if the user is logged in and viewing their own post, allow them to edit or delete the post -->
-    {% if request.user.is_authenticated and request.user == profile.user %}
+    {% if request.user.is_authenticated and request.user == post.profile.user %}
         <!-- div containing buttons to update or delete the post -->
         <div class="post-actions-div">
             <a href="{% url 'update_post' post.pk %}">
