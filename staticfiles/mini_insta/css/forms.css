@@ -19,6 +19,20 @@ input[type="url"] {
     color: black;
 }
 
+/* for Django text form fields */
+input[type="text"] {
+    width: 100%;
+    font: 20px var(--merriweather);
+    color: black;
+}
+
+/* for Django password form fields */
+input[type="password"] {
+    width: 100%;
+    font: 20px var(--merriweather);
+    color: black;
+}
+
 div.form-wrapper {
     width: 50vw;
     margin: 30px auto;
