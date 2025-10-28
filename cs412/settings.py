@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "blog", # Module 3: blog example
     "mini_insta", # Assignment 3: mini insta app
     "marathon_analytics", # Module 8: Loading external data; searching; graphing
+    "voter_analytics", # Assignment 8: External Data, Filtering and Graphing
 ]
 
 MIDDLEWARE = [
