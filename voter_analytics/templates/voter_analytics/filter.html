@@ -1,4 +1,11 @@
-<div>
+<!--File: voter_analytics/templates/voter_analytics/filter.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+Description: Modular template that contains various graphs containing 
+distributions about the filtered Voters.
+-->
+
+<!-- filter for party -->
+<div class="filter-div">
     <label for="party">Party</label>
 
     <select name="party">
@@ -12,7 +19,8 @@
     </select>
 </div>
 
-<div>
+<!-- filter for voter score -->
+<div class="filter-div">
     <label for="score">Voter Score</label>
     <select name="score">
         <option selected disabled hidden>Choose</option>
@@ -25,7 +33,8 @@
     </select>
 </div>
 
-<div>
+<!-- filter for min. birth year -->
+<div class="filter-div">
     <label for="min_birth_year">Min. Year of Birth</label>
     <select name="min_birth_year">
         <option selected disabled hidden>Choose</option>
@@ -38,7 +47,8 @@
     </select>
 </div>
 
-<div>
+<!-- filter for max. birth year -->
+<div class="filter-div">
     <label for="max_birth_year">Max. Year of Birth</label>
     <select name="max_birth_year">
         <option selected disabled hidden>Choose</option>
@@ -51,7 +61,8 @@
     </select>
 </div>
 
-<div>
+<!-- filter for different elections -->
+<div class="filter-div">
     <input type="checkbox" name="elections" value="v20state" {% if v20state_choice %} checked {% endif %}>v20state <br>
     <input type="checkbox" name="elections" value="v21town" {% if v21town_choice %} checked {% endif %}>v21town <br>
     <input type="checkbox" name="elections" value="v21primary" {% if v21primary_choice %} checked {% endif %}>v21primary <br>

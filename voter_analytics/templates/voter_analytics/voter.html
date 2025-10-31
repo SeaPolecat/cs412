@@ -1,14 +1,16 @@
-<!-- voter_analytics/templates/voter_analytics/voter.html -->
+<!--File: voter_analytics/templates/voter_analytics/voter.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+Description: Template that shows a single Voter and their data.
+-->
 
 {% extends 'voter_analytics/base.html' %}
 
 {% block content %}
 
-<div>
+    <div class="row">
 
-    <!-- table of results -->
-    <div>
-        <table>
+        <!-- table showing all attributes of a single Voter -->
+        <table class="voters">
             <tr>
                 <td><strong>Name</strong></td>
                 <td>{{v.first_name}} {{v.last_name}}</td>
@@ -16,7 +18,10 @@
             <tr>
                 <td><strong>Address</strong></td>
                 <td>
-                    <a href="https://www.google.com/maps/place/{{v.street_number}} {{v.street_name}}, Apartment {{v.apt_number}}, {{v.zip}}, Newton, MA">
+                    <!-- a link to the Google Maps location of their address (spooky!) -->
+                    <a href="https://www.google.com/maps/place/
+                    {{v.street_number}} {{v.street_name}}, Apartment {{v.apt_number}}, {{v.zip}}, Newton, MA"
+                    target="_blank">
                         {{v.street_number}} {{v.street_name}}, Apartment {{v.apt_number}}, {{v.zip}}, Newton, MA
                     </a>
                 </td>
@@ -62,8 +67,10 @@
                 <td>{{v.score}}</td>
             </tr>
         </table>
-    </div>
 
-</div>
+        <a href="{% url 'voters' %}">
+            <input type="button" value="Back">
+        </a>
+    </div>
 
 {% endblock %}

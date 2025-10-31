@@ -1,3 +1,8 @@
+# File: voter_analytics/models.py
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+# Description: Defines what attributes the Voter models 
+# in the database should have.
+
 from django.db import models
 
 

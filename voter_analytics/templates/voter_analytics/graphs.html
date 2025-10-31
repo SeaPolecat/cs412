@@ -1,4 +1,8 @@
-<!-- voter_analytics/templates/voter_analytics/graphs.html -->
+<!--File: voter_analytics/templates/voter_analytics/graphs.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+Description: Template that shows graphs pertaining to the filtered
+set of Voters.
+-->
 
 {% extends 'voter_analytics/base.html' %}
 
@@ -6,21 +10,33 @@
 
 <div>
 
-    <form action="{% url 'graphs' %}" method="GET">
-        {% include "voter_analytics/filter.html" %}
-
-        <input type="submit" value="Submit">
+    <!-- section for filtering the Voters -->
+    <div class="row">
+        <form action="{% url 'graphs' %}" method="GET">
+            {% include "voter_analytics/filter.html" %}
         
-        <a href="{% url 'graphs' %}">
-            <input type="button" value="Cancel">
-        </a>
-    </form>
+            <input type="submit" value="Submit">
+        
+            <a href="{% url 'graphs' %}">
+                <input type="button" value="Cancel">
+            </a>
+        </form>
+    </div>
 
-    {{graph_div_birth_years | safe}}
+    <!-- bar graph of voter distribution by birth years -->
+    <div class="row">
+        {{graph_div_birth_years | safe}}
+    </div>
 
-    {{graph_div_parties | safe}}
-    
-    {{graph_div_elections | safe}}
+    <!-- pie graph of voter distribution by parties -->
+    <div class="row">
+        {{graph_div_parties | safe}}
+    </div>
+
+    <!-- bar graph of voter distribution by elections -->
+    <div class="row">
+        {{graph_div_elections | safe}}
+    </div>
 
 </div>
 

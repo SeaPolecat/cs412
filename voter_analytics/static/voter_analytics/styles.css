@@ -1,0 +1,76 @@
+/* File: voter_analytics/static/voter_analytics/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+Description: A CSS stylesheet for the Voter Analytics app templates.
+*/
+
+body {
+    font-family: 'arial';
+    background: black;
+    margin-top: 30px;
+}
+
+header {
+    text-align: center;
+}
+
+div.row {
+    text-align: center;
+    width: 80%;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffc859;
+    border-radius: 20px;
+}
+
+li.menu-list {
+    display: inline;
+    margin: 0 20px;
+}
+
+a.menu-link {
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
+    transition: 0.2s;
+}
+
+a.menu-link:hover {
+    color: #ffc859;
+}
+
+table.voters {
+    margin: 0 auto;
+    border-spacing: 50px 0;
+}
+
+th {
+    font-size: 30px;
+}
+
+td {
+    font-size: 18px;
+}
+
+div.pagination-div {
+    display: flex;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+h3.pagination-header {
+    margin: 0 10px;
+}
+
+div.filter-div {
+    text-align: left;
+    width: 20%;
+    margin: 15px auto;
+}
+
+label {
+    font-size: 20px;
+}
+
+input {
+    font-size: 20px;
+}

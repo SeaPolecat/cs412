@@ -1,33 +1,36 @@
-<!-- voter_analytics/templates/voter_analytics/voters.html -->
+<!--File: voter_analytics/templates/voter_analytics/voters.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+Description: Template that shows all Voters and their data.
+-->
 
 {% extends 'voter_analytics/base.html' %}
 
 {% block content %}
 
-<div>
-
-    <form action="{% url 'voters' %}" method="GET">
-        {% include "voter_analytics/filter.html" %}
-
-        <input type="submit" value="Submit">
-        
-        <a href="{% url 'voters' %}">
-            <input type="button" value="Cancel">
-        </a>
-    </form>
-
-    <h1>Voters</h1>
-
-    <h3>Found {{page_obj.paginator.count}} voters</h3>
-
-    <!-- navigation links for different pages of results -->
+    <!-- section for filtering the Voters -->
     <div class="row">
-        {% include "voter_analytics/paginate.html" %}
+        <form action="{% url 'voters' %}" method="GET">
+            {% include "voter_analytics/filter.html" %}
+        
+            <input type="submit" value="Submit">
+        
+            <a href="{% url 'voters' %}">
+                <input type="button" value="Cancel">
+            </a>
+        </form>
     </div>
 
-    <!-- table of results -->
-    <div>
-        <table>
+    <!-- section containing Voters matching the filter (100 per page) -->
+    <div class="row">
+        <h1>Voters</h1>
+        
+        <h3>Found {{page_obj.paginator.count}} voters</h3>
+        
+        <!-- include buttons to flip between pages -->
+        {% include "voter_analytics/paginate.html" %}
+
+        <!-- table of matching Voters -->
+        <table class="voters">
             <tr>
                 <th>Name</th>
                 <th>Address</th>
@@ -35,7 +38,8 @@
                 <th>Party</th>
                 <th>Voter Score</th>
             </tr>
-            
+        
+            <!-- loop through the 100 Voters to display them all -->
             {% for v in voters %}
                 <tr>
                     <td>
@@ -49,7 +53,5 @@
             {% endfor %}
         </table>
     </div>
-
-</div>
 
 {% endblock %}

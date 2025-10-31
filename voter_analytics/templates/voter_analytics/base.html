@@ -1,4 +1,8 @@
-<!-- voter_analytics/templates/voter_analytics/base.html -->
+<!--File: voter_analytics/templates/voter_analytics/base.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+Description: The base template of the Voter Analytics web app, which all other 
+templates inherit from.
+-->
 
 {% load static %}
 
@@ -6,21 +10,24 @@
 
 <head>
     <title>Voter Analytics</title>
+
+    <!-- link the stylesheet -->
     <link rel="stylesheet" href="{% static 'voter_analytics/styles.css' %}">
 </head>
 
 <body>
 
+    <!-- header that contains navigation links -->
     <header>
-        <h1>Voter Analytics</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'voters' %}">View Voters</a></li>
-                <li><a href="{% url 'graphs' %}">View Graphs</a></li>
+                <li class="menu-list"><a class="menu-link" href="{% url 'voters' %}">View Voters</a></li>
+                <li class="menu-list"><a class="menu-link" href="{% url 'graphs' %}">View Graphs</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- where the content in child templates will go -->
     {% block content %}{% endblock %}
 
 </body>

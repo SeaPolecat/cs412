@@ -1,23 +1,30 @@
-<!-- navigation links for different pages of results -->
+<!--File: voter_analytics/templates/voter_analytics/paginate.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+Description: Modular template that contains buttons to flip between different
+pages of Voters.
+-->
 
 {% if is_paginated %}
 
-    <ul class="pagination">
-        {% if page_obj.has_previous %}
-            <li>
-                <span><a href="?page={{ page_obj.previous_page_number }}&{{ querystring }}">Previous</a></span>
-            </li>
-        {% endif %}
+    <h3>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</h3>
 
-        <li class="">
-            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-        </li>
+    <!-- buttons to flip between the pages -->
+    <div class="pagination-div">
+        {% if page_obj.has_previous %}
+
+            <!-- if the page parameter already exists, the view would delete it, which
+             would allow the link below to re-add it and append the querystring
+             of all the parameters we had before, so we don't lose filter data! -->
+            <a href="?page={{ page_obj.previous_page_number }}&{{ querystring }}">
+                <h3 class="pagination-header">Previous</h3>
+            </a>
+        {% endif %}
 
         {% if page_obj.has_next %}
-            <li>
-                <span><a href="?page={{ page_obj.next_page_number }}&{{ querystring }}">Next</a></span>
-            </li>
+            <a href="?page={{ page_obj.next_page_number }}&{{ querystring }}">
+                <h3 class="pagination-header">Next</h3>
+            </a>
         {% endif %}
-    </ul>
+    </div>
 
 {% endif %}

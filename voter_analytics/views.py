@@ -1,3 +1,8 @@
+# File: voter_analytics/views.py
+# Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 10/31/2025
+# Description: Contains views for the Voter Analytics app. These render templates,
+# pass in context variables, and handle form submissions.
+
 from django.views.generic import ListView, DetailView
 from . models import *
 import plotly
