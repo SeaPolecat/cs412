@@ -11,6 +11,7 @@ distributions about the filtered Voters.
     <select name="party">
         <option selected disabled hidden>Choose</option>
     
+        <!-- add every unique party as a drop-down option -->
         {% for party in parties %}
             <option value="{{party}}" {% if party_choice == party %} selected {% endif %}>
                 {{party}}
@@ -25,6 +26,7 @@ distributions about the filtered Voters.
     <select name="score">
         <option selected disabled hidden>Choose</option>
     
+        <!-- add every unique score as a drop-down option -->
         {% for score in scores %}
             <option value="{{score}}" {% if score_choice == score %} selected {% endif %}>
                 {{score}}
@@ -39,6 +41,7 @@ distributions about the filtered Voters.
     <select name="min_birth_year">
         <option selected disabled hidden>Choose</option>
 
+        <!-- add every unique birth year as a drop-down option -->
         {% for year in birth_years %}
             <option value="{{year}}" {% if min_birth_year_choice == year %} selected {% endif %}>
                 {{year}}
@@ -53,6 +56,7 @@ distributions about the filtered Voters.
     <select name="max_birth_year">
         <option selected disabled hidden>Choose</option>
 
+        <!-- add every unique birth year as a drop-down option -->
         {% for year in birth_years %}
             <option value="{{year}}" {% if max_birth_year_choice == year %} selected {% endif %}>
                 {{year}}
