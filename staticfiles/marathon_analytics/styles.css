@@ -1,0 +1,228 @@
+body {
+    background-color: #fff;
+    color: slategray;
+    font-family: arial;
+}
+
+h1,h2,h3,h4,h5{
+    font-weight: normal;
+    background:aliceblue;
+    margin: 0;
+}
+
+a, a:visited {
+    color: slategrey;
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkblue;
+    text-decoration: none;
+    background-color: white;
+    /* font-weight: bold; */
+}
+
+body {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px auto;
+}
+
+header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:aliceblue;
+    position: fixed;
+    top: 0px;
+    z-index: 999;
+    /* padding-right: 50px auto; */
+}
+
+footer {
+    width: 100%;
+    background:aliceblue;
+    position: fixed;
+    bottom: 0px;
+}
+
+
+.wrapper {              /* centering and margin around whole wrapper element */
+    border: 2px solid;
+    max-width: 100%;
+    position: relative;
+    top: 50px;
+    scroll-padding-top: 100px;
+    /* scroll-padding-bottom: 100px; */
+    padding-bottom: 50px;
+    
+    /* top:100px; */
+    /* bottom: 100px; */
+}
+
+
+div.wrapper h1 {
+    text-align: center;
+    color: darkblue;
+    margin: 10px auto;
+    font-size: 2.4 em; 
+
+}
+
+div.wrapper h2 {
+    text-align: left;
+    color: darkblue;
+    margin: 5px auto;
+    font-size: 2 em; 
+}
+
+
+section {
+    border: 2px solid darkblue;    /* border around each event */
+    position: relative;
+    padding-bottom: 4px;
+}
+
+
+nav {
+    justify-self: end;
+    background: none;
+    color: darkblue;
+    /* border: 1px solid; */
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav button {
+    background: none;
+    color: slategray;
+    font-family: Arial;
+    cursor: pointer; 
+    border: 0;
+    font-size: 1.2 em;
+}
+
+.mc-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+
+.mc-table-head {
+    border: 1px dashed darkblue;    /*border around each row */
+    display: table-row;
+    font-size: 1.2em;
+}
+
+.mc-table-head .detail {
+    display: table-cell;
+    color:darkblue;
+    font-weight: bold;
+    background-color: white;
+    padding: 5px;
+    position: relative;
+   
+}
+
+.mc-table-row  {
+    display: table-row;
+    border: 1px dashed darkblue;    /*border around each row */
+    background-color: white;
+}
+
+
+.mc-table-row .detail {
+    color:darkblue;
+    display: table-cell;
+   
+    padding: 5px;
+}
+
+.mc-table-row .detail img {
+    max-height: 75px;
+    align-content: right;
+}
+
+/* must have no space before :hover */
+.mc-table-row:hover {
+    background-color: aliceblue;    
+    border: 1px solid;
+}
+
+.site-form {
+    margin-top: 10px;
+    /* border: 2px solid darkblue; */
+    padding: 10px;
+}
+
+/* style the forms with class site-form */
+.site-form input, .site-form textarea, .site-form select {
+    display: block;
+    margin: 5px 0 0 0;
+    padding: 5px;
+}
+
+/* style the submit button ; didn't quite work?? */
+.site-form input [type="submit"] {
+    background: slategray;
+    border: 0;
+    color: fff;
+    font-size: 1.2em;
+    border-radius: 4px;
+    margin: 5px 0;
+}
+
+
+/* style the help text in the forms */
+.helptext, .helptext.ul {
+    margin-top: 0 auto;
+    bottom: 20px;
+    color: #bbb;
+    font-size: 0.9em;
+}
+
+/* style the error list in the forms validation */
+.errorlist li {
+    padding: 10px;
+    list-style-type: none;
+    border: 1px solid crimson;
+    color: crimson;
+    margin: 10px 0;
+}
+
+
+.errorlist {
+    padding: 0px;
+}
+
+
+/* responsive styles when width is less than 1400px */
+@media screen and (max-width: 560px) {
+    header h1 {
+        size: 0.8em;
+    }
+
+    nav li {
+        display: block;
+        margin-left: 0px;
+        font-size: 14px;
+        width: 100%;
+    }
+    
+    nav button {
+        background: none;
+        color: slategray;
+        font-family: Arial;
+        cursor: pointer; 
+        border: 0;
+        font-size: 20px;
+    }
+    /* on mobile, display image as max 95% of available width*/
+    img {
+        max-width: 95%;
+    }
+}
