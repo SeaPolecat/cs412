@@ -1,0 +1,23 @@
+<!-- navigation links for different pages of results -->
+
+{% if is_paginated %}
+
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li>
+                <span><a href="?page={{ page_obj.previous_page_number }}&{{ querystring }}">Previous</a></span>
+            </li>
+        {% endif %}
+
+        <li class="">
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+        </li>
+
+        {% if page_obj.has_next %}
+            <li>
+                <span><a href="?page={{ page_obj.next_page_number }}&{{ querystring }}">Next</a></span>
+            </li>
+        {% endif %}
+    </ul>
+
+{% endif %}

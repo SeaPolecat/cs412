@@ -1,0 +1,60 @@
+<div>
+    <label for="party">Party</label>
+
+    <select name="party">
+        <option selected disabled hidden>Choose</option>
+    
+        {% for party in parties %}
+            <option value="{{party}}" {% if party_choice == party %} selected {% endif %}>
+                {{party}}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <label for="score">Voter Score</label>
+    <select name="score">
+        <option selected disabled hidden>Choose</option>
+    
+        {% for score in scores %}
+            <option value="{{score}}" {% if score_choice == score %} selected {% endif %}>
+                {{score}}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <label for="min_birth_year">Min. Year of Birth</label>
+    <select name="min_birth_year">
+        <option selected disabled hidden>Choose</option>
+
+        {% for year in birth_years %}
+            <option value="{{year}}" {% if min_birth_year_choice == year %} selected {% endif %}>
+                {{year}}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <label for="max_birth_year">Max. Year of Birth</label>
+    <select name="max_birth_year">
+        <option selected disabled hidden>Choose</option>
+
+        {% for year in birth_years %}
+            <option value="{{year}}" {% if max_birth_year_choice == year %} selected {% endif %}>
+                {{year}}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <input type="checkbox" name="elections" value="v20state" {% if v20state_choice %} checked {% endif %}>v20state <br>
+    <input type="checkbox" name="elections" value="v21town" {% if v21town_choice %} checked {% endif %}>v21town <br>
+    <input type="checkbox" name="elections" value="v21primary" {% if v21primary_choice %} checked {% endif %}>v21primary <br>
+    <input type="checkbox" name="elections" value="v22general" {% if v22general_choice %} checked {% endif %}>v22general <br>
+    <input type="checkbox" name="elections" value="v23town" {% if v23town_choice %} checked {% endif %}>v23town <br>
+</div>

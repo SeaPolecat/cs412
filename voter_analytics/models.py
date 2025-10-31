@@ -6,8 +6,14 @@ class Voter(models.Model):
 
     last_name = models.TextField()
     first_name = models.TextField()
+
+    street_number = models.TextField()
+    street_name = models.TextField()
+    apt_number = models.TextField()
     zip = models.TextField()
+
     birth_date = models.TextField()
+    birth_year = models.TextField()
     registration_date = models.TextField()
     party = models.TextField()
     precinct = models.TextField()
@@ -17,16 +23,18 @@ class Voter(models.Model):
     v21primary = models.TextField()
     v22general = models.TextField()
     v23town = models.TextField()
-    
-    score = models.IntegerField()
+    score = models.TextField()
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} (voter score: {self.score})'
+        """Return a string representation of this Voter instance."""
 
+        return f'{self.first_name} {self.last_name} (voter score: {self.score})'
+    
 
 def load_data():
     """Function to load data records from CSV file into the Django database."""
 
+    # open the CSV file containing the data
     filename = '/Users/waynewang/Downloads/CS412/data/newton_voters.csv'
     f = open(filename, 'r')
 
@@ -40,17 +48,28 @@ def load_data():
 
     # Voter.objects.all().delete()
 
+    # discard the first line containing the column headers
     f.readline()
 
+    # add each line as a separate Voter instance to the database
     for line in f:
         try:
+            # get a list of the fields
             fields = line.strip().split(',')
 
+            # create a new Voter instance using the fields 
+            # and save it to the db
             voter = Voter(
                 last_name = fields[1],
                 first_name = fields[2],
+
+                street_number = fields[3],
+                street_name = fields[4],
+                apt_number = fields[5],
                 zip = fields[6],
+
                 birth_date = fields[7],
+                birth_year = fields[7][0:4],
                 registration_date = fields[8],
                 party = fields[9],
                 precinct = fields[10],
@@ -65,6 +84,7 @@ def load_data():
             )
             voter.save()
 
+        # skip the line if there was an error
         except Exception as e:
             print(f'AAAAAAAAAAA AN ERROR!!! in line: {line}\n')
             print(e)

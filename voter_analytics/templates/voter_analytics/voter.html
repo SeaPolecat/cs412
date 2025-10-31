@@ -1,0 +1,69 @@
+<!-- voter_analytics/templates/voter_analytics/voter.html -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<div>
+
+    <!-- table of results -->
+    <div>
+        <table>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td>{{v.first_name}} {{v.last_name}}</td>
+            </tr>
+            <tr>
+                <td><strong>Address</strong></td>
+                <td>
+                    <a href="https://www.google.com/maps/place/{{v.street_number}} {{v.street_name}}, Apartment {{v.apt_number}}, {{v.zip}}, Newton, MA">
+                        {{v.street_number}} {{v.street_name}}, Apartment {{v.apt_number}}, {{v.zip}}, Newton, MA
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Birth Date</strong></td>
+                <td>{{v.birth_date}}</td>
+            </tr>
+            <tr>
+                <td><strong>Registration Date</strong></td>
+                <td>{{v.registration_date}}</td>
+            </tr>
+            <tr>
+                <td><strong>Party</strong></td>
+                <td>{{v.party}}</td>
+            </tr>
+            <tr>
+                <td><strong>Precint</strong></td>
+                <td>{{v.precinct}}</td>
+            </tr>
+            <tr>
+                <td><strong>v20state</strong></td>
+                <td>{{v.v20state}}</td>
+            </tr>
+            <tr>
+                <td><strong>v21town</strong></td>
+                <td>{{v.v21town}}</td>
+            </tr>
+            <tr>
+                <td><strong>v21primary</strong></td>
+                <td>{{v.v21primary}}</td>
+            </tr>
+            <tr>
+                <td><strong>v22general</strong></td>
+                <td>{{v.v22general}}</td>
+            </tr>
+            <tr>
+                <td><strong>v23town</strong></td>
+                <td>{{v.v23town}}</td>
+            </tr>
+            <tr>
+                <td><strong>Voter Score</strong></td>
+                <td>{{v.score}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

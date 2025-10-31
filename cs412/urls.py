@@ -28,7 +28,7 @@ urlpatterns = [
     path("blog/", include("blog.urls")), # Module 3: blog example
     path("mini_insta/", include("mini_insta.urls")), # Assignment 3: mini insta app
     path("marathon_analytics/", include("marathon_analytics.urls")), # Module 8: Loading external data; searching; graphing
-    # path("voter_analytics/", include("voter_analytics.urls")), # Assignment 8: External Data, Filtering and Graphing
+    path("voter_analytics/", include("voter_analytics.urls")), # Assignment 8: External Data, Filtering and Graphing
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

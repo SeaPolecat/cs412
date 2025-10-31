@@ -1,0 +1,27 @@
+<!-- voter_analytics/templates/voter_analytics/graphs.html -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<div>
+
+    <form action="{% url 'graphs' %}" method="GET">
+        {% include "voter_analytics/filter.html" %}
+
+        <input type="submit" value="Submit">
+        
+        <a href="{% url 'graphs' %}">
+            <input type="button" value="Cancel">
+        </a>
+    </form>
+
+    {{graph_div_birth_years | safe}}
+
+    {{graph_div_parties | safe}}
+    
+    {{graph_div_elections | safe}}
+
+</div>
+
+{% endblock %}
