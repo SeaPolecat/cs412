@@ -1,0 +1,17 @@
+<!--File: dadjokes/templates/dadjokes/show_all_jokes.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 11/13/2025
+Description: Template to show all Jokes.
+-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+    <!-- loop to show all jokes -->
+    {% for joke in jokes %}
+        <div>
+            <h3>{{joke.text}} - by {{joke.name}} on {{joke.timestamp}}</h3>
+        </div>
+    {% endfor %}
+
+{% endblock %}

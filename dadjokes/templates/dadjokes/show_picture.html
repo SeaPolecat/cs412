@@ -1,0 +1,16 @@
+<!--File: dadjokes/templates/dadjokes/show_picture.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 11/13/2025
+Description: Template to show a single Picture.
+-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+    <div>
+        <img src="{{picture.image_url}}">
+
+        <p>by {{picture.name}} on {{picture.timestamp}}</p>
+    </div>
+
+{% endblock %}

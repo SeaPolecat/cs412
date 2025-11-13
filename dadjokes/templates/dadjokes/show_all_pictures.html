@@ -1,0 +1,19 @@
+<!--File: dadjokes/templates/dadjokes/show_all_pictures.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 11/13/2025
+Description: Template to show all Pictures.
+-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+    <!-- loop to show all pictures -->
+    {% for picture in pictures %}
+        <div>
+            <img src="{{picture.image_url}}">
+
+            <p>by {{picture.name}} on {{picture.timestamp}}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}
