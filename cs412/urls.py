@@ -29,6 +29,7 @@ urlpatterns = [
     path("mini_insta/", include("mini_insta.urls")), # Assignment 3: mini insta app
     path("marathon_analytics/", include("marathon_analytics.urls")), # Module 8: Loading external data; searching; graphing
     path("voter_analytics/", include("voter_analytics.urls")), # Assignment 8: External Data, Filtering and Graphing
+    path("dadjokes/", include("dadjokes.urls")), # Assignment 10: Django REST API and React Native Client
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

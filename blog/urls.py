@@ -19,4 +19,8 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='blog/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='show_all'), name='logout'), # next_page does something similar
     path('register/', UserRegistrationView.as_view(), name='register'), # create a new User account
+
+    ## API URLs:
+    path('api/articles', ArticleListAPIView().as_view()),
+    path('api/article/<int:pk>', ArticleDetailAPIView().as_view()),
 ]

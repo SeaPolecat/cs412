@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['*']
 
 # every new app will need to be added here
 INSTALLED_APPS = [
+    "rest_framework", # Django REST framework (needed for Assignment 10)
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     "mini_insta", # Assignment 3: mini insta app
     "marathon_analytics", # Module 8: Loading external data; searching; graphing
     "voter_analytics", # Assignment 8: External Data, Filtering and Graphing
+    "dadjokes", # Assignment 10: Django REST API and React Native Client
 ]
 
 MIDDLEWARE = [
@@ -150,3 +153,9 @@ CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'
 if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
     STATIC_URL = '/waynew/static/'
     MEDIA_URL = '/waynew/media/'
+
+
+REST_FRAMEWORK = {
+  'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+  'PAGE_SIZE': 10
+}
