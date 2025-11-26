@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "marathon_analytics", # Module 8: Loading external data; searching; graphing
     "voter_analytics", # Assignment 8: External Data, Filtering and Graphing
     "dadjokes", # Assignment 10: Django REST API and React Native Client
+    "project", # Final Project
 ]
 
 MIDDLEWARE = [
