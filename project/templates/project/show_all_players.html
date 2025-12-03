@@ -1,0 +1,17 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h1>All Players</h1>
+
+    {% for player in players %}
+        <h2>{{player.username}}</h2>
+
+        <div>
+            <a href="{% url 'show_player' player.pk %}">
+                <img class="box" src="{{player.profile_image.url}}" alt="">
+            </a>
+        </div>
+    {% endfor %}
+
+{% endblock %}

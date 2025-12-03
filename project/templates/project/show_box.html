@@ -1,0 +1,27 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h1>{{box.name}}</h1>
+
+    <img class="box" src="{{box.cover_image.url}}">
+
+    <a href="{% url 'open_box' box.pk %}">
+        <h1>Open</h1>
+    </a>
+
+    <h2>Items:</h2>
+
+    {% for item in items %}
+        <div>
+            <h3>{{item.rarity}}</h3>
+
+            {% if item.rarity != 'SE' %}
+                <img class="box" src="{{item.image.url}}" style="border: 3px solid {{item.get_rarity_color}}">
+            {% else %}
+                <img class="box" src="https://media.forgecdn.net/avatars/thumbnails/491/203/256/256/637799866799448709.png" style="border: 3px solid {{item.get_rarity_color}}">
+            {% endif %}
+        </div>
+    {% endfor %}
+
+{% endblock %}

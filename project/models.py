@@ -50,6 +50,16 @@ class Item(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.rarity}) --> {self.box}'
+    
+    def get_rarity_color(self):
+        RARITY_COLORS = {
+            self.COMMON: 'gray',
+            self.UNCOMMON: 'green',
+            self.RARE: 'blue',
+            self.SUPER_RARE: 'purple',
+            self.SECRET: 'yellow',
+        }
+        return RARITY_COLORS[self.rarity]
 
 
 class OwnedItem(models.Model):
@@ -60,9 +70,7 @@ class OwnedItem(models.Model):
     date_owned = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"""
-        {self.item} || owned by {self.player.username} (x {self.quantity})
-        """
+        return f'{self.item} || owned by {self.player.username} (x {self.quantity})'
 
 
 class DisplayItem(models.Model):
@@ -71,9 +79,7 @@ class DisplayItem(models.Model):
     display_slot = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"""
-        {self.owned_item} || display slot {self.display_slot}
-        """
+        return f'{self.owned_item} || display slot {self.display_slot}'
 
 
 class Trade(models.Model):

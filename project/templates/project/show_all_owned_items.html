@@ -1,0 +1,13 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h1>Items owned by {{player.username}}</h1>
+
+    {% for oi in owned_items %}
+        <h3>{{oi.item.name}} (x {{oi.quantity}})</h3>
+        
+        <img class="box" src="{{oi.item.image.url}}" style="border: 3px solid {{oi.item.get_rarity_color}}">
+    {% endfor %}
+
+{% endblock %}

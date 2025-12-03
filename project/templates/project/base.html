@@ -1,0 +1,19 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Blind Box</title>
+
+    <link rel="stylesheet" href="{% static 'project/css/styles.css' %}">
+</head>
+
+<body>
+
+    <header></header>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
