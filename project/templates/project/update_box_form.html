@@ -1,0 +1,16 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h2>Update Box</h2>
+
+    <form action="{% url 'update_box' player.pk box.pk %}" method="POST"
+    enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{form}}
+
+        <button type="submit">Update</button>
+    </form>
+
+{% endblock %}

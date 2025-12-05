@@ -2,14 +2,18 @@
 
 {% block content %}
 
-    <h1>All Boxes</h1>
+    <h1>All Boxes made by {{player.username}}</h1>
+
+    <a href="{% url 'create_box' player.pk %}">
+        <h2>Create Box</h2>
+    </a>
 
     {% for box in boxes %}
         <h2>{{box.name}}</h2>
 
         <div>
-            <a href="{% url 'show_box' box.pk %}">
-                <img class="box" src="{{box.cover_image.url}}" alt="">
+            <a href="{% url 'show_box' player.pk box.pk %}">
+                <img class="box" src="{{box.cover_image.url}}">
             </a>
         </div>
     {% endfor %}

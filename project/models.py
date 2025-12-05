@@ -1,4 +1,18 @@
 from django.db import models
+from django.urls import reverse
+from django.contrib.auth.models import User
+
+
+## CONSTANTS ############################################################################################
+
+
+COMMON = 'C'
+UNCOMMON = 'U'
+RARE = 'R'
+SUPER_RARE = 'SR'
+SECRET = 'SE'
+
+RARITY_ORDER = {COMMON: 1, UNCOMMON: 2, RARE: 3, SUPER_RARE: 4, SECRET: 5}
 
 
 class Player(models.Model):
@@ -7,6 +21,7 @@ class Player(models.Model):
     profile_image = models.ImageField(blank=True)
     coins = models.IntegerField(default=0)
     date_joined = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.username} ({self.coins} coins)'
@@ -14,12 +29,22 @@ class Player(models.Model):
 
 class Box(models.Model):
     
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
     name = models.TextField(blank=False)
     cover_image = models.ImageField(blank=False)
+    published = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} ({self.player.username}, {self.published})'
+    
+    # make more of these methods to use directly in views/templates lol
+    def get_all_items(self):
+        items = list(Item.objects.filter(box=self))
+
+        items.sort(key=lambda item: RARITY_ORDER[item.rarity])
+
+        return items
 
 
 class Item(models.Model):
@@ -27,12 +52,6 @@ class Item(models.Model):
     box = models.ForeignKey(Box, on_delete=models.CASCADE)
     name = models.TextField(blank=False)
     image = models.ImageField(blank=False)
-
-    COMMON = 'C'
-    UNCOMMON = 'U'
-    RARE = 'R'
-    SUPER_RARE = 'SR'
-    SECRET = 'SE'
 
     RARITY_CHOICES = {
         COMMON: 'Common',
@@ -53,11 +72,11 @@ class Item(models.Model):
     
     def get_rarity_color(self):
         RARITY_COLORS = {
-            self.COMMON: 'gray',
-            self.UNCOMMON: 'green',
-            self.RARE: 'blue',
-            self.SUPER_RARE: 'purple',
-            self.SECRET: 'yellow',
+            COMMON: 'gray',
+            UNCOMMON: 'green',
+            RARE: 'blue',
+            SUPER_RARE: 'purple',
+            SECRET: 'yellow',
         }
         return RARITY_COLORS[self.rarity]
 

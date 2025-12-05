@@ -10,6 +10,10 @@
         <h3>See Owned Items!</h3>
     </a>
 
+    <a href="{% url 'show_all_boxes' player.pk %}">
+        <h3>See Boxes!</h3>
+    </a>
+
     {% for di in display_items %}
         {% if di == 0 %}
             <a href="{% url 'choose_display_item' player.pk forloop.counter0 %}">
