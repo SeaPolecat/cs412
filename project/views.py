@@ -139,6 +139,11 @@ class CreateBoxView(MyLoginRequiredMixin, CreateView):
 
         return super().form_valid(form)
     
+    def get_success_url(self):
+        pk = self.object.pk
+
+        return reverse('show_box', kwargs={'pk': pk})
+    
 
 class UpdateBoxView(MyLoginRequiredMixin, UpdateView):
 
@@ -163,6 +168,7 @@ class DeleteBoxView(MyLoginRequiredMixin, DeleteView):
 
 class CreateItemView(MyLoginRequiredMixin, CreateView):
 
+    model = Item
     form_class = CreateItemForm
     template_name = 'project/create_item_form.html'
 
@@ -188,6 +194,53 @@ class CreateItemView(MyLoginRequiredMixin, CreateView):
         pk = self.kwargs['pk']
 
         return reverse('show_box', kwargs={'pk': pk})
+    
+
+class UpdateItemView(MyLoginRequiredMixin, UpdateView):
+
+    model = Item
+    form_class = CreateItemForm
+    template_name = 'project/update_item_form.html'
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
+        item = Item.objects.get(pk=pk)
+        box = item.box
+
+        context = super().get_context_data(**kwargs)
+        context['box'] = box
+
+        return context
+    
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        item = Item.objects.get(pk=pk)
+        box = item.box
+
+        return reverse('show_box', kwargs={'pk': box.pk})
+    
+
+class DeleteItemView(MyLoginRequiredMixin, DeleteView):
+
+    model = Item
+    template_name = 'project/delete_item_form.html'
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
+        item = Item.objects.get(pk=pk)
+        box = item.box
+
+        context = super().get_context_data(**kwargs)
+        context['box'] = box
+
+        return context
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        item = Item.objects.get(pk=pk)
+        box = item.box
+
+        return reverse('show_box', kwargs={'pk': box.pk})
     
 
 ## CUSTOM VIEWS ############################################################################################

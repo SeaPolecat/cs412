@@ -26,6 +26,8 @@ urlpatterns = [
     path('creator/box/<int:pk>/unpublish', UnpublishBoxView.as_view(), name='unpublish_box'),
 
     path('creator/box/<int:pk>/create_item', CreateItemView.as_view(), name='create_item'),
+    path('creator/item/<int:pk>/update', UpdateItemView.as_view(), name='update_item'),
+    path('creator/item/<int:pk>/delete', DeleteItemView.as_view(), name='delete_item'),
 
     path('shop/boxes', ShopBoxListView.as_view(), name='show_all_shop_boxes'),
     path('shop/box/<int:pk>', ShopBoxDetailView.as_view(), name='show_shop_box'),

@@ -60,9 +60,6 @@ class Box(models.Model):
     def __str__(self):
         return f'{self.name} ({self.player.username}, {self.published})'
     
-    def get_absolute_url(self):
-        return reverse('show_box', self.pk)
-    
     # make more of these methods to use directly in views/templates lol
     def get_all_items(self):
         items = list(Item.objects.filter(box=self))

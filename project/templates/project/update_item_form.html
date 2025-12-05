@@ -1,0 +1,16 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h2>Update Item</h2>
+
+    <form action="{% url 'update_item' item.pk %}" method="POST"
+    enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{form}}
+
+        <button type="submit">Update</button>
+    </form>
+
+{% endblock %}
