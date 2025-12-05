@@ -1,34 +1,38 @@
 from django.urls import path
-from . import views
 from .views import *
 from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('players', PlayerListView.as_view(), name='show_all_players'),
 
-    # get rid of all player pk's after implementing login/logout
+    ## login NOT required
 
+    path('', PlayerListView.as_view(), name='show_all_players'),
     path('player/<int:pk>', PlayerDetailView.as_view(), name='show_player'),
-    path('player/<int:pk>/items', OwnedItemListView.as_view(), name='show_all_owned_items'),
-    path('player/<int:pk>/boxes', BoxListView.as_view(), name='show_all_boxes'),
-    path('player/<int:pk>/box/<int:boxpk>', BoxDetailView.as_view(), name='show_box'),
-    path('player/<int:pk>/display/<int:slot>', views.choose_display_item, name='choose_display_item'),
+    path('player/<int:pk>/items', ShowItemsDetailView.as_view(), name='show_items'),
 
-    # creation
-    path('player/<int:pk>/boxes/create', CreateBoxView.as_view(), name='create_box'),
-    path('player/<int:pk>/box/<int:boxpk>/update', UpdateBoxView.as_view(), name='update_box'),
-    path('player/<int:pk>/box/<int:boxpk>/delete', DeleteBoxView.as_view(), name='delete_box'),
+    ## login required
 
-    path('player/<int:pk>/box/<int:boxpk>/create', CreateItemView.as_view(), name='create_item'),
-    
-    path('player/<int:pk>/box/<int:boxpk>/publish', views.publish_box, name='publish_box'),
-    path('player/<int:pk>/box/<int:boxpk>/unpublish', views.unpublish_box, name='unpublish_box'),
+    path('player', MyPlayerDetailView.as_view(), name='show_my_player'),
+    path('player/display/<int:slot>', ItemDisplayView.as_view(), name='item_display'),
+
+    path('creator/boxes', BoxListView.as_view(), name='show_all_boxes'),
+    path('creator/box/<int:pk>', BoxDetailView.as_view(), name='show_box'),
+
+    path('creator/create_box', CreateBoxView.as_view(), name='create_box'),
+    path('creator/box/<int:pk>/update', UpdateBoxView.as_view(), name='update_box'),
+    path('creator/box/<int:pk>/delete', DeleteBoxView.as_view(), name='delete_box'),
+    path('creator/box/<int:pk>/publish', PublishBoxView.as_view(), name='publish_box'),
+    path('creator/box/<int:pk>/unpublish', UnpublishBoxView.as_view(), name='unpublish_box'),
+
+    path('creator/box/<int:pk>/create_item', CreateItemView.as_view(), name='create_item'),
 
     path('shop/boxes', ShopBoxListView.as_view(), name='show_all_shop_boxes'),
     path('shop/box/<int:pk>', ShopBoxDetailView.as_view(), name='show_shop_box'),
-    path('shop/box/<int:pk>/open', views.open_box, name='open_box'),
+    path('shop/box/<int:pk>/open', OpenBoxView.as_view(), name='open_box'),
+
+    ## authentication
 
     path('login', auth_views.LoginView.as_view(template_name='project/login.html'), name='login'),
-    path('logout', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout', auth_views.LogoutView.as_view(next_page='show_all_players'), name='logout'),
 ]

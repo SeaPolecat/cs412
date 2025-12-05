@@ -2,9 +2,9 @@
 
 {% block content %}
 
-    <h1>All Boxes made by {{player.username}}</h1>
+    <h1>My Box Workshop</h1>
 
-    <a href="{% url 'create_box' player.pk %}">
+    <a href="{% url 'create_box' %}">
         <h2>Create Box</h2>
     </a>
 
@@ -12,7 +12,7 @@
         <h2>{{box.name}}</h2>
 
         <div>
-            <a href="{% url 'show_box' player.pk box.pk %}">
+            <a href="{% url 'show_box' box.pk %}">
                 <img class="box" src="{{box.cover_image.url}}">
             </a>
         </div>

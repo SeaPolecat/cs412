@@ -4,7 +4,7 @@
 
     <h2>Delete Box</h2>
 
-    <form action="{% url 'delete_box' player.pk box.pk %}" method="POST"
+    <form action="{% url 'delete_box' box.pk %}" method="POST"
     enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -12,7 +12,7 @@
 
         <button type="submit">DELETE</button>
 
-        <a href="{% url 'show_box' player.pk box.pk %}">
+        <a href="{% url 'show_box' box.pk %}">
             <h4>Go back</h4>
         </a>
     </form>

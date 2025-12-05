@@ -25,6 +25,28 @@ class Player(models.Model):
 
     def __str__(self):
         return f'{self.username} ({self.coins} coins)'
+    
+    def get_all_owned_items(self):
+        owned_items = list(OwnedItem.objects.filter(player=self))
+
+        owned_items.sort(key=lambda oi: RARITY_ORDER[oi.item.rarity])
+
+        return owned_items
+    
+    def get_all_boxes(self):
+        return Box.objects.filter(player=self).order_by('-date_created')
+    
+    def get_slots(self):
+        display_items = DisplayItem.objects.filter(owned_item__player=self)
+        slots = [0] * 9
+
+        for i in range(len(slots)):
+            try:
+                slots[i] = display_items.get(display_slot=i)
+            except:
+                pass
+
+        return slots
 
 
 class Box(models.Model):
@@ -37,6 +59,9 @@ class Box(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.player.username}, {self.published})'
+    
+    def get_absolute_url(self):
+        return reverse('show_box', self.pk)
     
     # make more of these methods to use directly in views/templates lol
     def get_all_items(self):

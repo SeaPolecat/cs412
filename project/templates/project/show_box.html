@@ -6,32 +6,36 @@
 
     <img class="box" src="{{box.cover_image.url}}">
 
-    <a href="{% url 'update_box' player.pk box.pk %}">
+    <a href="{% url 'update_box' box.pk %}">
         <h2>Update Box</h2>
     </a>
 
-    <a href="{% url 'delete_box' player.pk box.pk %}">
+    <a href="{% url 'delete_box' box.pk %}">
         <h2>Delete Box</h2>
     </a>
 
-    <h2>Items in the box made by {{player.username}}:</h2>
+    <h2>Items in the box made by {{request.user.player.username}}:</h2>
 
     {% if box.published %}
-        <a href="{% url 'unpublish_box' player.pk box.pk %}">
+        {% if success %}
+            <h4 style="color:green">Published box to the shop!</h4>
+        {% endif %}
+
+        <a href="{% url 'unpublish_box' box.pk %}">
             <h2>Unpublish Box</h2>
         </a>
 
     {% else %}
-        {% if error %}
+        {% if failure %}
             <h4 style="color:red">Box must contain an item of each rarity type!</h4>
         {% endif %}
 
-        <a href="{% url 'publish_box' player.pk box.pk %}">
+        <a href="{% url 'publish_box' box.pk %}">
             <h2>Publish Box</h2>
         </a>
     {% endif %}
 
-    <a href="{% url 'create_item' player.pk box.pk %}">
+    <a href="{% url 'create_item' box.pk %}">
         <h2>Create Item</h2>
     </a>
 

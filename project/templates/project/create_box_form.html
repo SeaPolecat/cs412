@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form action="{% url 'create_box' player.pk %}" method="POST"
+    <form action="{% url 'create_box' %}" method="POST"
     enctype="multipart/form-data">
         {% csrf_token %}
 

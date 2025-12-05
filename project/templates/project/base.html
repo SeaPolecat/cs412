@@ -9,7 +9,22 @@
 
 <body>
 
-    <header></header>
+    <header>
+        {% if request.user.is_authenticated %}
+            <h2>{{request.user.player.username}}</h2>
+
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+
+                <input type="submit" value="Logout">
+            </form>
+
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button>Login</button>
+            </a>
+        {% endif %}
+    </header>
 
     <div class="content">
         {% block content %}{% endblock %}

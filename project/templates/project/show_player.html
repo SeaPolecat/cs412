@@ -6,28 +6,28 @@
 
     <img class="box" src="{{player.profile_image.url}}">
 
-    <a href="{% url 'show_all_owned_items' player.pk %}">
-        <h3>See Owned Items!</h3>
+    <a href="{% url 'show_items' player.pk %}">
+        <h3>See Items!</h3>
     </a>
 
-    <a href="{% url 'show_all_boxes' player.pk %}">
+    <a href="{% url 'show_all_boxes' %}">
         <h3>See Boxes!</h3>
     </a>
 
-    {% for di in display_items %}
-        {% if di == 0 %}
-            <a href="{% url 'choose_display_item' player.pk forloop.counter0 %}">
+    {% for slot in player.get_slots %}
+        {% if slot == 0 %}
+            <a href="{% url 'item_display' forloop.counter0 %}">
                 <div class="case"></div>
             </a>
 
         {% else %}
-            {% with oi=di.owned_item %}
+            {% with oi=slot.owned_item %}
                 <h3>{{oi.item.name}} (x {{oi.quantity}})</h3>
                 
                 <img class="box" src="{{oi.item.image.url}}" style="border: 3px solid {{oi.item.get_rarity_color}}">
             {% endwith %}
 
-            <a href="{% url 'choose_display_item' player.pk forloop.counter0 %}">
+            <a href="{% url 'item_display' forloop.counter0 %}">
                 <h4>Edit</h4>
             </a>
         {% endif %}

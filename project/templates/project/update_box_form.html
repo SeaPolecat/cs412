@@ -4,7 +4,7 @@
 
     <h2>Update Box</h2>
 
-    <form action="{% url 'update_box' player.pk box.pk %}" method="POST"
+    <form action="{% url 'update_box' box.pk %}" method="POST"
     enctype="multipart/form-data">
         {% csrf_token %}
 
