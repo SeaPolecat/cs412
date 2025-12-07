@@ -1,0 +1,48 @@
+div.case {
+    display: block;
+    background-color: plum;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+
+div.delete {
+    display: block;
+    background-color: red;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+
+div.case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    width: 90%;
+    margin: 0 auto;
+    row-gap: 60px;
+}
+
+a.case {
+    width: 380px;
+    height: 380px;
+    color: var(--dark-gray);
+    background-color: rgba(166, 166, 166, 0.1);
+    border: 4px outset var(--light-gray);
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+a.case:hover {
+    background-color: var(--palevioletred-translucent);
+    border-color: var(--salmon);
+    cursor: pointer;
+}
+
+img.item {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border: 5px outset;
+    border-radius: 20px;
+}

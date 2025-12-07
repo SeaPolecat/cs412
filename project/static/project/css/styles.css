@@ -1,37 +1,91 @@
+/* import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+/* import other stylesheets */
+@import url('base.css');
+@import url('box.css');
+@import url('item.css');
+@import url('display.css');
+@import url('buttons.css');
+@import url('player.css');
+@import url('forms.css');
+
+/* font + colour variables */
+:root {
+    --font: 'varela round';
+    --palevioletred: rgba(216, 112, 147);
+    --palevioletred-translucent: rgba(216, 112, 147, 0.2);
+    --off-white: #faf7f9;
+    --rose-fog: #f9f3f5;
+    --dark-gray: #2e2e2e;
+    --salmon: #e06c8f;
+    --light-gray: #a6a6a6;
+}
+
 body {
+    text-align: center;
+    margin: 0;
+    font-family: var(--font);
+    color: var(--dark-gray);
+    background-color: var(--off-white);
+    background: repeating-linear-gradient(
+        -45deg, var(--rose-fog), 
+        var(--rose-fog) 15px, 
+        var(--off-white) 15px, 
+        var(--off-white) 55px
+    );
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    /* border: 2px solid blue; */
+}
+
+form {
     margin: 0;
 }
 
-img.box {
-    width: 300px;
-    height: 300px;
-    margin: 20px;
+h1.large {
+    font-size: 35px;
 }
 
-div.case {
-    display: block;
-    background-color: plum;
-    width: 200px;
-    height: 200px;
-    margin: 20px;
+h1.medium {
+    font-size: 25px;
 }
 
-div.delete {
-    display: block;
-    background-color: red;
-    width: 200px;
-    height: 200px;
-    margin: 20px;
+h1.small {
+    font-size: 20px;
 }
 
-header {
-    position: fixed;
-    width: 100%;
-    height: 100px;
-    top: 0;
-    background-color: palevioletred;
+h1.white {
+    color: white;
 }
 
-div.content {
-    margin-top: 100px;
+h1.left {
+    margin-right: auto;
+}
+
+h1.inline {
+    display: inline;
+}
+
+h1.no-margin {
+    margin: 0;
+}
+
+h1.mb-30 {
+    margin-bottom: 30px;
+}
+
+h1.mt-5 {
+    margin-top: 5px;
+}
+
+h1.mb-5 {
+    margin-bottom: 5px;
+}
+
+h1.mb-30 {
+    margin-bottom: 30px;
 }

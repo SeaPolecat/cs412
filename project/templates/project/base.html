@@ -2,33 +2,53 @@
 
 <html>
 <head>
-    <title>Blind Box</title>
+    <title>Blindbox Buddy</title>
 
     <link rel="stylesheet" href="{% static 'project/css/styles.css' %}">
 </head>
 
 <body>
 
-    <header>
-        {% if request.user.is_authenticated %}
-            <h2>{{request.user.player.username}}</h2>
-
-            <form action="{% url 'logout' %}" method="POST">
-                {% csrf_token %}
-
-                <input type="submit" value="Logout">
-            </form>
-
-        {% else %}
-            <a href="{% url 'login' %}">
-                <button>Login</button>
-            </a>
-        {% endif %}
-    </header>
-
     <div class="content">
         {% block content %}{% endblock %}
     </div>
+
+    <header>
+        <a class="menu-nav" href="{% url 'show_all_players' %}">
+            <img class="icon" src="{% static 'project/img/people.png' %}">
+            <h1 class="medium white">People</h1>
+        </a>
+
+        <a class="menu-nav" href="{% url 'show_all_shop_boxes' %}">
+            <img class="icon" src="{% static 'project/img/shop.png' %}">
+            <h1 class="medium white">Shop</h1>
+        </a>
+
+        <a class="menu-nav" href="{% url 'show_all_boxes' %}">
+            <img class="icon" src="{% static 'project/img/creator.png' %}">
+            <h1 class="medium white">Creator</h1>
+        </a>
+
+        <a href="" class="menu-nav">
+            <img class="icon" src="{% static 'project/img/trades.png' %}">
+            <h1 class="medium white">Trades</h1>
+        </a>
+
+        {% if request.user.is_authenticated %}
+            <a class="menu-nav" href="{% url 'show_my_player' %}">
+                <img class="icon" src="{% static 'project/img/me.png' %}">
+                <h1 class="medium white">Me!</h1>
+            </a>
+            
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
+        
+        {% else %}
+            <a class="button small white ml-20 mr-20" href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </header>
 
 </body>
 </html>

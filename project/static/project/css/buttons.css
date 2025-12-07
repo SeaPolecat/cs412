@@ -1,0 +1,77 @@
+button.logout-button {
+    color: var(--palevioletred);
+    font: 25px var(--font);
+    font-weight: 700;
+    padding: 8px 15px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    transition: 0.2s;
+    margin: 0 20px;
+}
+
+button.logout-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+a.button {
+    width: fit-content;
+    padding: 8px 15px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+a.button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+a.button.small {
+    font-size: 25px;
+}
+
+a.button.large {
+    font-size: 30px;
+}
+
+a.button.white {
+    color: var(--palevioletred);
+    background-color: white;
+}
+
+a.button.gray {
+    color: white;
+    background-color: var(--light-gray);
+}
+
+a.button.salmon {
+    color: white;
+    background-color: var(--salmon);
+}
+
+a.button.centered {
+    margin: 0 auto;
+}
+
+a.button.ml-20 {
+    margin-left: 20px;
+}
+
+a.button.mr-20 {
+    margin-right: 20px;
+}
+
+a.edit-item-link {
+    margin-top: 5px;
+    font-size: 20px;
+    color: var(--light-gray);
+    transition: 0.2s;
+}
+
+a.edit-item-link:hover {
+    font-size: 20px;
+    color: var(--salmon);
+}

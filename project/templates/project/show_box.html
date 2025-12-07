@@ -1,58 +1,76 @@
 {% extends 'project/base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-    <h1>{{box.name}}</h1>
-
-    <img class="box" src="{{box.cover_image.url}}">
-
-    <a href="{% url 'update_box' box.pk %}">
-        <h2>Update Box</h2>
-    </a>
-
-    <a href="{% url 'delete_box' box.pk %}">
-        <h2>Delete Box</h2>
-    </a>
-
-    <h2>Items in the box made by {{request.user.player.username}}:</h2>
-
     {% if box.published %}
+        <a class="button large gray centered" href="{% url 'unpublish_box' box.pk %}">Unpublish Box</a>
+
         {% if success %}
-            <h4 style="color:green">Published box to the shop!</h4>
+            <h1 class="small" style="color:green">Published box to the shop!</h1>
         {% endif %}
-
-        <a href="{% url 'unpublish_box' box.pk %}">
-            <h2>Unpublish Box</h2>
-        </a>
-
+    
     {% else %}
+        <a class="button large salmon centered" href="{% url 'publish_box' box.pk %}">Publish Box</a>
+
         {% if failure %}
             <h4 style="color:red">Box must contain an item of each rarity type!</h4>
         {% endif %}
-
-        <a href="{% url 'publish_box' box.pk %}">
-            <h2>Publish Box</h2>
-        </a>
     {% endif %}
 
-    <a href="{% url 'create_item' box.pk %}">
-        <h2>Create Item</h2>
-    </a>
+    <table class="hi">
+        <tr>
+            <td>
+                <div class="cube-wrapper">
+                    {% include 'project/components/box.html' %}
+                </div>
+            </td>
+    
+            <td>
+                <h1 class="large">{{box.name}}</h1>
+                <h1 class="small">Created on {{box.date_created.date}}</h1>
+    
+                <div class="bye">
+                    <a class="button small gray mr-20" href="{% url 'update_box' box.pk %}">Update Box</a>
+                    <a class="button small gray mr-20" href="{% url 'delete_box' box.pk %}">Delete Box</a>
+                </div>
+            </td>
+        </tr>
+    </table>
 
-    {% for item in box.get_all_items %}
-        <div>
-            <h3>{{item.rarity}}</h3>
+    <h1 class="large">Items in this Blindbox:</h1>
 
-            <img class="box" src="{{item.image.url}}" style="border: 3px solid {{item.get_rarity_color}}">
+    <div class="items-grid">
 
-            <a href="{% url 'update_item' item.pk %}">
-                <h4>Update Item</h4>
-            </a>
+        <div class="item-wrapper">
+            <h1 class="medium mb-5">&nbsp;</h1>
+            <h1 class="small mt-5 mb-5">&nbsp;</h1>
 
-            <a href="{% url 'delete_item' item.pk %}">
-                <h4>Delete Item</h4>
+            <a href="{% url 'create_item' box.pk %}">
+                <div class="create-item">
+                    <h1 class="large no-margin">Create Item</h1>
+
+                    <img class="create-item-icon" src="{% static 'project/img/plus.png' %}">
+                </div>
             </a>
         </div>
-    {% endfor %}
+
+        {% for item in box.get_all_items %}
+
+            <div class="item-wrapper">
+                <h1 class="medium mb-5">{{item.name}}</h1>
+                <h1 class="small mt-5 mb-5" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}}</h1>
+            
+                <img class="item" src="{{item.image.url}}" style="border-color: {{item.get_rarity_color}}">
+
+                <div class="edit-item-div">
+                    <a class="edit-item-link" href="{% url 'update_item' item.pk %}">Update |</a>
+                    <a class="edit-item-link" href="{% url 'delete_item' item.pk %}">| Delete</a>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
 
 {% endblock %}

@@ -1,21 +1,34 @@
 {% extends 'project/base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-    <h1>My Box Workshop</h1>
+    <h1 class="large">My Blindboxes</h1>
 
-    <a href="{% url 'create_box' %}">
-        <h2>Create Box</h2>
-    </a>
+    <div class="boxes-grid">
 
-    {% for box in boxes %}
-        <h2>{{box.name}}</h2>
+        <a href="{% url 'create_box' %}">
+            <div class="create-box">
+                <h1 class="large no-margin">Create Blindbox</h1>
+                
+                <img class="create-item-icon" src="{% static 'project/img/plus.png' %}">
+            </div>
+        </a>
 
-        <div>
-            <a href="{% url 'show_box' box.pk %}">
-                <img class="box" src="{{box.cover_image.url}}">
-            </a>
-        </div>
-    {% endfor %}
+        {% for box in boxes %}
+
+            <div class="box-wrapper">
+                <h1 class="medium">{{box.name}}</h1>
+
+                <h1 class="small mb-30">Created on {{box.date_created.date}}</h1>
+                
+                <a class="box-nav" href="{% url 'show_box' box.pk %}">
+                    {% include 'project/components/box.html' %}
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
 
 {% endblock %}

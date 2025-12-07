@@ -1,0 +1,40 @@
+a.menu-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    opacity: 1;
+    transition: 0.2s;
+}
+
+a.menu-nav:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+img.icon {
+    position: relative;
+    bottom: 3px;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+header {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    top: 0;
+    background-color: var(--palevioletred);
+    border-bottom: 15px solid #f9f3f5;
+    color: white;
+}
+
+div.content {
+    display: block;
+    margin-top: 150px;
+    margin-bottom: 30px;
+}

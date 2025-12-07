@@ -1,0 +1,45 @@
+div.players-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    width: 95%;
+    margin: 0 auto;
+}
+
+div.player-wrapper {
+    margin: 10px 0;
+    border-radius: 20px;
+}
+
+img.pfp {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+img.small {
+    width: 200px;
+    height: 200px;
+}
+
+img.mr-50 {
+    margin-right: 50px;
+}
+
+img.pfp.square {
+    border-radius: 10px;
+    border: 5px solid var(--palevioletred-translucent);
+}
+
+img.pfp.circle {
+    border-radius: 50%;
+    border: 5px solid var(--palevioletred-translucent);
+}
+
+img.pfp.clickable {
+    transition: 0.2s;
+}
+
+img.pfp.clickable:hover {
+    border: 5px solid var(--palevioletred);
+}

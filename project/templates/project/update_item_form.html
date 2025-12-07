@@ -2,15 +2,33 @@
 
 {% block content %}
 
-    <h2>Update Item</h2>
+    <h1 class="large">Update Item</h1>
 
-    <form action="{% url 'update_item' item.pk %}" method="POST"
+    <form class="form-wrapper" action="{% url 'update_item' item.pk %}" method="POST"
     enctype="multipart/form-data">
         {% csrf_token %}
 
-        {{form}}
-
-        <button type="submit">Update</button>
+        <div class="form-div">
+            <h1 class="medium">Item Name</h1>
+            {{form.name}}
+        </div>
+        
+        <div class="form-div">
+            <h1 class="medium">Item Image</h1>
+            <label class="photo-input-label" for="{{form.image.id_for_label}}">Upload File</label>
+            {{form.image}}
+        </div>
+        
+        <div class="form-div">
+            <h1 class="medium">Item Rarity</h1>
+            {{form.rarity}}
+        </div>
+        
+        <div class="form-div horizontal">
+            <button class="submit salmon" type="submit">Update</button>
+        
+            <a class="button small gray" href="{% url 'show_box' box.pk %}">Back</a>
+        </div>
     </form>
 
 {% endblock %}

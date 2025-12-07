@@ -2,35 +2,41 @@
 
 {% block content %}
 
-    <h1>{{player.username}}</h1>
+    <table class="hi">
+        <tr>
+            <td>
+                <img class="pfp circle small mr-50" src="{{player.profile_image.url}}">
+            </td>
+    
+            <td>
+                <h1 class="large">{{player.username}}</h1>
+                <h1 class="small">Joined on {{player.date_joined.date}}</h1>
+                <h1 class="small mb-30">{{player.get_all_boxes|length}} Blindboxes Created</h1>
 
-    <img class="box" src="{{player.profile_image.url}}">
+                <a class="button small salmon" href="{% url 'show_items' player.pk %}">See All Items</a>
+            </td>
+        </tr>
+    </table>
 
-    <a href="{% url 'show_items' player.pk %}">
-        <h3>See Items!</h3>
-    </a>
+    <div class="case-grid">
+        {% for slot in player.get_slots %}
 
-    <a href="{% url 'show_all_boxes' %}">
-        <h3>See Boxes!</h3>
-    </a>
+            <!-- <a href="{% url 'item_display' forloop.counter0 %}"> -->
+                {% if slot == 0 %}
+                    <a class="case" href="{% url 'item_display' forloop.counter0 %}"></a>
 
-    {% for slot in player.get_slots %}
-        {% if slot == 0 %}
-            <a href="{% url 'item_display' forloop.counter0 %}">
-                <div class="case"></div>
-            </a>
+                {% else %}
+                    {% with oi=slot.owned_item %}
+                        <a class="case" href="{% url 'item_display' forloop.counter0 %}">
+                            <h1 class="medium">{{oi.item.name}}</h1>
+                        
+                            <img class="item" src="{{oi.item.image.url}}" style="border: 3px solid {{oi.item.get_rarity_color}}">
+                        </a>
+                    {% endwith %}
+                {% endif %}
+            <!-- </a> -->
 
-        {% else %}
-            {% with oi=slot.owned_item %}
-                <h3>{{oi.item.name}} (x {{oi.quantity}})</h3>
-                
-                <img class="box" src="{{oi.item.image.url}}" style="border: 3px solid {{oi.item.get_rarity_color}}">
-            {% endwith %}
-
-            <a href="{% url 'item_display' forloop.counter0 %}">
-                <h4>Edit</h4>
-            </a>
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

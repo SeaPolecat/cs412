@@ -2,16 +2,22 @@
 
 {% block content %}
 
-    <h1>All Boxes</h1>
+    <h1 class="large">Blindbox Shop</h1>
 
-    {% for box in boxes %}
-        <h2>{{box.name}}</h2>
-
-        <div>
-            <a href="{% url 'show_shop_box' box.pk %}">
-                <img class="box" src="{{box.cover_image.url}}" alt="">
-            </a>
-        </div>
-    {% endfor %}
+    <div class="boxes-grid">
+        {% for box in boxes %}
+    
+            <div class="box-wrapper">
+                <h1 class="medium">{{box.name}}</h1>
+        
+                <h1 class="small mb-30">Created by {{box.player.username}}</h1>
+        
+                <a class="box-nav" href="{% url 'show_shop_box' box.pk %}">
+                    {% include 'project/components/box.html' %}
+                </a>
+            </div>
+    
+        {% endfor %}
+    </div>
 
 {% endblock %}

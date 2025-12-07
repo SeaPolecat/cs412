@@ -1,0 +1,72 @@
+textarea {
+    height: 40px;
+    font: 20px var(--font);
+    color: black;
+}
+
+select {
+    height: 40px;
+    font: 20px var(--font);
+    color: black;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label.photo-input-label {
+    padding: 8px 15px;
+    background: var(--salmon);
+    font: 20px var(--font);
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+label.photo-input-label:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+form.form-wrapper {
+    width: 50%;
+    margin: 30px auto;
+    padding: 1px 0;
+    background-color: var(--palevioletred-translucent);
+    border-radius: 30px;
+}
+
+div.form-div {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    text-align: center;
+    margin: 50px auto;
+}
+
+div.form-div.horizontal {
+    width: fit-content;
+    flex-direction: row;
+}
+
+button.submit {
+    width: fit-content;
+    padding: 8px 15px;
+    font-weight: 700;
+    font: 25px var(--font);
+    margin: 0 10px;
+    border: none;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+button.submit:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button.submit.salmon {
+    color: white;
+    background-color: var(--salmon);
+}

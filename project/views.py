@@ -39,6 +39,9 @@ class PlayerListView(ListView):
     template_name = 'project/show_all_players.html'
     context_object_name = 'players'
 
+    def get_queryset(self):
+        return Player.objects.all().order_by('-date_joined')
+
 
 class PlayerDetailView(DetailView):
 
