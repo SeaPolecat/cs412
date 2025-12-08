@@ -142,8 +142,6 @@ class Trade(models.Model):
 
     trader_item = models.ForeignKey(OwnedItem, related_name='trader_item',  on_delete=models.CASCADE)
     tradee_item = models.ForeignKey(OwnedItem, related_name='tradee_item', on_delete=models.CASCADE)
-    trader_confirmed = models.BooleanField(default=False)
-    tradee_confirmed = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

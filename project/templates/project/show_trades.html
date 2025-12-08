@@ -9,41 +9,7 @@
     {% endif %}
 
     {% for trade in player.get_incoming_trades %}
-
-        <table class="trade-table">
-            <tr>
-                <td>
-                    {% with item=trade.trader_item.item %}
-                        <h1 class="medium mb-5"><em>{{trade.trader_item.player.username}} is giving:</em></h1>
-
-                        {% include 'project/components/C_item.html' with rarity=1 origin=1 %}
-                    {% endwith %}
-                </td>
-
-                <td>
-                    <div>
-                        <a href="{% url 'show_player' trade.trader_item.player.pk %}">
-                            <img class="pfp small circle clickable" src="{{trade.trader_item.player.profile_image.url}}">
-                        </a>
-                        <h1 class="large mb-50">{{trade.trader_item.player.username}}</h1>
-                    </div>
-
-                    <div class="button-wrapper centered">
-                        <a class="button small salmon mr-20" href="{% url 'accept_trade' trade.pk %}">Accept</a>
-                        <a class="button small salmon" href="{% url 'reject_trade' trade.pk %}">Reject</a>
-                    </div>
-                </td>
-
-                <td>
-                    {% with item=trade.tradee_item.item %}
-                        <h1 class="medium mb-5"><em>{{trade.trader_item.player.username}} wants:</em></h1>
-
-                        {% include 'project/components/C_item.html' with rarity=1 origin=1 %}
-                    {% endwith %}
-                </td>
-            </tr>
-        </table>
-
+        {% include 'project/components/C_trade.html' with incoming=1 %}
     {% endfor %}
 
     {% if player.get_outgoing_trades|length == 0 %}
@@ -53,38 +19,7 @@
     {% endif %}
 
     {% for trade in player.get_outgoing_trades %}
-        
-        <table class="trade-table">
-            <tr>
-                <td>
-                    {% with item=trade.trader_item.item %}
-                        <h1 class="medium mb-5"><em>You are giving:</em></h1>
-        
-                        {% include 'project/components/C_item.html' with rarity=1 origin=1 %}
-                    {% endwith %}
-                </td>
-        
-                <td>
-                    <div>
-                        <a href="{% url 'show_player' trade.tradee_item.player.pk %}">
-                            <img class="pfp small circle clickable" src="{{trade.tradee_item.player.profile_image.url}}">
-                        </a>
-                        <h1 class="large mb-50">{{trade.tradee_item.player.username}}</h1>
-                    </div>
-
-                    <a class="button small gray centered" href="{% url 'reject_trade' trade.pk %}">Cancel</a>
-                </td>
-        
-                <td>
-                    {% with item=trade.tradee_item.item %}
-                        <h1 class="medium mb-5"><em>You want:</em></h1>
-        
-                        {% include 'project/components/C_item.html' with rarity=1 origin=1 %}
-                    {% endwith %}
-                </td>
-            </tr>
-        </table>
-    
+        {% include 'project/components/C_trade.html' %}
     {% endfor %}
 
 {% endblock %}
