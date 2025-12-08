@@ -2,10 +2,23 @@
 
 {% block content %}
 
-    <h1>YOU GOT:</h1>
+    {% if item.rarity == 'U' %}
+        <h1 class="large inline">You pulled an </h1>
+        <h1 class="large inline" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}} </h1>
+        <h1 class="large inline">{{item.name}}</h1>
+    {% else %}
+        <h1 class="large inline">You pulled a </h1>
+        <h1 class="large inline" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}} </h1>
+        <h1 class="large inline">{{item.name}}</h1>
+    {% endif %}
 
-    <h3>{{item.name}}</h3>
+    <h1 class="medium">
+        from <a class="inline salmon" href="{% url 'show_shop_box' box.pk %}">{{box.name}}</a>
+    </h1>
+    <h1 class="small">{{item.get_number_in_existence}} in existence</h1>
     
-    <img class="box" src="{{item.image.url}}" style="border: 3px solid {{item.get_rarity_color}}">
+    <img class="item large mt-20 mb-40" src="{{item.image.url}}" style="color: {{item.get_rarity_color}}">
+
+    <a class="button large salmon centered" href="{% url 'open_box' box.pk %}">Open Another!</a>
 
 {% endblock %}

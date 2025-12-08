@@ -4,16 +4,25 @@
 
     <h1>Login</h1>
 
-    <form action="{% url 'login' %}" method="POST">
+    <form class="form-wrapper" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
 
-        {{form}}
+        <div class="form-div">
+            <h1 class="medium">Username</h1>
+            {{form.username}}
+        </div>
 
-        <input type="submit" value="Login">
+        <div class="form-div">
+            <h1 class="medium">Password</h1>
+            {{form.password}}
+        </div>
+
+        <div class="form-div horizontal">
+            <button class="submit salmon" type="submit">Login</button>
+        </div>
 
         {% if request.GET.next %}
             <input type="hidden" name="next" value="{{request.GET.next}}">
-
         {% else %}
             <input type="hidden" name="next" value="{% url 'show_all_players' %}">
         {% endif %}

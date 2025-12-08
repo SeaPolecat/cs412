@@ -1,0 +1,19 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h1 class="large">Are you sure you want to delete this item?</h1>
+
+    <form action="{% url 'delete_item' item.pk %}" method="POST"
+    enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="button-wrapper centered mb-50">
+            <button class="submit salmon" type="submit">Delete</button>
+            <a class="button small gray" href="{% url 'show_box' box.pk %}">Cancel</a>
+        </div>
+
+        {% include 'project/components/C_item.html' with rarity=1 origin=1 %}
+    </form>
+
+{% endblock %}

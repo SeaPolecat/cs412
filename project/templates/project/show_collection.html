@@ -1,0 +1,21 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    {% if player.get_all_owned_items|length == 0 %}
+        <h1 class="medium">{{player.username}} doesn't have any items yet :(</h1>
+    {% else %}
+        <h1 class="large">Items owned by {{player.username}}</h1>
+    {% endif %}
+
+    <a class="button small centered gray mt-30 mb-30" href="{% url 'show_player' player.pk %}">Back</a>
+
+    <div class="items-grid">
+        {% for oi in player.get_all_owned_items %}
+        {% with item=oi.item %}
+            {% include 'project/components/C_item.html' with quantity=oi.quantity rarity=1 origin=1 %}
+        {% endwith %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

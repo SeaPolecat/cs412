@@ -1,0 +1,18 @@
+{% if clickable %}
+    <a href="{% url 'display_collection' forloop.counter0 %}">
+{% endif %}
+
+{% if slot == 0 %}
+    <div class="case {% if clickable %} clickable {% endif %}"></div>
+
+{% else %}
+{% with item=slot.owned_item.item %}
+    <div class="case {% if clickable %} clickable {% endif %}" href="{% url 'display_collection' forloop.counter0 %}">
+        {% include 'project/components/C_item.html' %}
+    </div>
+{% endwith %}
+{% endif %}
+
+{% if clickable %}
+    </a>
+{% endif %}

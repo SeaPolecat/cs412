@@ -1,0 +1,71 @@
+{% load static %}
+
+{% if create_item %}
+
+    <div class="item-div">
+        <h1 class="medium mb-5">&nbsp;</h1>
+        <h1 class="small mt-5 mb-5">&nbsp;</h1>
+    
+        <a href="{% url 'create_item' box.pk %}">
+            <div class="dummy-item">
+                <h1 class="large no-margin">Create Item</h1>
+                <img class="dummy-item-icon" src="{% static 'project/img/plus.png' %}">
+            </div>
+        </a>
+    
+        <div class="edit-item-div">
+            <h1 class="small inline">&nbsp;</h1>
+        </div>
+    </div>
+
+{% elif remove_display_item %}
+
+    <div class="item-div">
+        <h1 class="medium mb-5 inline">&nbsp;</h1>
+        <h1 class="small mt-5 mb-5">&nbsp;</h1>
+    
+        <button class="hidden" type="submit" name="delete" value="delete">
+            <div class="dummy-item">
+                <h1 class="large no-margin">Clear Display</h1>
+                <img class="dummy-item-icon" src="{% static 'project/img/x.png' %}">
+            </div>
+        </button>
+
+        <h1 class="small mt-5 mb-5">&nbsp;</h1>
+    </div>
+
+{% else %}
+
+    <div class="item-div">
+
+        <h1 class="medium mb-5 {% if quantity %} inline {% endif %}">{{item.name}}</h1>
+
+        {% if quantity %}
+            <h1 class="medium mb-5 inline"> (x {{quantity}})</h1>
+        {% endif %}
+
+        {% if rarity %}
+            <h1 class="small mt-5 mb-5" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}}</h1>
+        {% endif %}
+
+        <img class="item small" src="{{item.image.url}}" style="border-color: {{item.get_rarity_color}}">
+
+        {% if origin %}
+            <h1 class="small mt-5 mb-5">
+                from <a class="inline salmon" href="{% url 'show_shop_box' item.box.pk %}">{{item.box.name}}</a>
+            </h1>
+        {% endif %}
+
+        {% if edit %}
+            <div class="edit-item-div">
+
+                <h1 class="small inline">
+                    <a class="inline light-gray" href="{% url 'update_item' item.pk %}">Update |</a>
+                    <a class="inline light-gray" href="{% url 'delete_item' item.pk %}">| Delete</a>
+                </h1>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endif %}

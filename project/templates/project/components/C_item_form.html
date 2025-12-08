@@ -1,0 +1,34 @@
+{% if create %}
+    <form class="form-wrapper" action="{% url 'create_item' box.pk %}" method="POST" enctype="multipart/form-data">
+{% else %}
+    <form class="form-wrapper" action="{% url 'update_item' item.pk %}" method="POST" enctype="multipart/form-data">
+{% endif %}
+
+    {% csrf_token %}
+
+    <div class="form-div">
+        <h1 class="medium">Item Name</h1>
+        {{form.name}}
+    </div>
+
+    <div class="form-div">
+        <h1 class="medium">Item Image</h1>
+        <label class="file-input-label" for="{{form.image.id_for_label}}">Upload File</label>
+        {{form.image}}
+    </div>
+
+    <div class="form-div">
+        <h1 class="medium">Item Rarity</h1>
+        {{form.rarity}}
+    </div>
+
+    <div class="button-wrapper centered">
+        {% if create %}
+            <button class="submit salmon" type="submit">Create</button>
+            <a class="button small gray" href="{% url 'show_box' box.pk %}">Cancel</a>
+        {% else %}
+            <button class="submit salmon" type="submit">Update</button>
+            <a class="button small gray" href="{% url 'show_box' box.pk %}">Cancel</a>
+        {% endif %}
+    </div>
+</form>

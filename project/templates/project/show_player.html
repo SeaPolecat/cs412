@@ -2,40 +2,40 @@
 
 {% block content %}
 
-    <table class="hi">
+    <table class="mb-60">
         <tr>
             <td>
-                <img class="pfp circle small mr-50" src="{{player.profile_image.url}}">
+                <img class="pfp medium circle mr-50" src="{{player.profile_image.url}}">
             </td>
     
             <td>
                 <h1 class="large">{{player.username}}</h1>
                 <h1 class="small">Joined on {{player.date_joined.date}}</h1>
-                <h1 class="small mb-30">{{player.get_all_boxes|length}} Blindboxes Created</h1>
 
-                <a class="button small salmon" href="{% url 'show_items' player.pk %}">See All Items</a>
+                {% if player.boxes_opened == 1 %}
+                    <h1 class="small mb-50">{{player.boxes_opened}} Blindbox Opened</h1>
+                {% else %}
+                    <h1 class="small mb-50">{{player.boxes_opened}} Blindboxes Opened</h1>
+                {% endif %}
+
+                <div class="button-wrapper">
+                    <a class="button small salmon mr-20" href="{% url 'show_collection' player.pk %}">Collection</a>
+                    
+                    {% if request.user.is_authenticated and player != request.user.player %}
+                        <a class="button small salmon" href="{% url 'start_trade' player.pk %}">Trade</a>
+                    {% endif %}
+                </div>
             </td>
         </tr>
     </table>
 
     <div class="case-grid">
         {% for slot in player.get_slots %}
-
-            <!-- <a href="{% url 'item_display' forloop.counter0 %}"> -->
-                {% if slot == 0 %}
-                    <a class="case" href="{% url 'item_display' forloop.counter0 %}"></a>
-
-                {% else %}
-                    {% with oi=slot.owned_item %}
-                        <a class="case" href="{% url 'item_display' forloop.counter0 %}">
-                            <h1 class="medium">{{oi.item.name}}</h1>
-                        
-                            <img class="item" src="{{oi.item.image.url}}" style="border: 3px solid {{oi.item.get_rarity_color}}">
-                        </a>
-                    {% endwith %}
-                {% endif %}
-            <!-- </a> -->
-
+            {% if player == request.user.player %}
+                {% include 'project/components/C_display_case.html' with clickable=1 %}
+            {% else %}
+                {% include 'project/components/C_display_case.html' %}
+            {% endif %}
         {% endfor %}
     </div>
 

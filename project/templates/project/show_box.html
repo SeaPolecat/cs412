@@ -8,30 +8,28 @@
         <a class="button large gray centered" href="{% url 'unpublish_box' box.pk %}">Unpublish Box</a>
 
         {% if success %}
-            <h1 class="small" style="color:green">Published box to the shop!</h1>
+            <h1 class="small green">Published blindbox to the shop!</h1>
         {% endif %}
     
     {% else %}
         <a class="button large salmon centered" href="{% url 'publish_box' box.pk %}">Publish Box</a>
 
         {% if failure %}
-            <h4 style="color:red">Box must contain an item of each rarity type!</h4>
+            <h1 class="small red">Blindbox must contain at least 1 item of each rarity!</h1>
         {% endif %}
     {% endif %}
 
-    <table class="hi">
+    <table>
         <tr>
             <td>
-                <div class="cube-wrapper">
-                    {% include 'project/components/box.html' %}
-                </div>
+                {% include 'project/components/C_box.html' %}
             </td>
     
             <td>
                 <h1 class="large">{{box.name}}</h1>
-                <h1 class="small">Created on {{box.date_created.date}}</h1>
-    
-                <div class="bye">
+                <h1 class="small mb-50">Created on {{box.date_created.date}}</h1>
+
+                <div class="button-wrapper">
                     <a class="button small gray mr-20" href="{% url 'update_box' box.pk %}">Update Box</a>
                     <a class="button small gray mr-20" href="{% url 'delete_box' box.pk %}">Delete Box</a>
                 </div>
@@ -42,34 +40,10 @@
     <h1 class="large">Items in this Blindbox:</h1>
 
     <div class="items-grid">
-
-        <div class="item-wrapper">
-            <h1 class="medium mb-5">&nbsp;</h1>
-            <h1 class="small mt-5 mb-5">&nbsp;</h1>
-
-            <a href="{% url 'create_item' box.pk %}">
-                <div class="create-item">
-                    <h1 class="large no-margin">Create Item</h1>
-
-                    <img class="create-item-icon" src="{% static 'project/img/plus.png' %}">
-                </div>
-            </a>
-        </div>
+        {% include 'project/components/C_item.html' with create_item=1 %}
 
         {% for item in box.get_all_items %}
-
-            <div class="item-wrapper">
-                <h1 class="medium mb-5">{{item.name}}</h1>
-                <h1 class="small mt-5 mb-5" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}}</h1>
-            
-                <img class="item" src="{{item.image.url}}" style="border-color: {{item.get_rarity_color}}">
-
-                <div class="edit-item-div">
-                    <a class="edit-item-link" href="{% url 'update_item' item.pk %}">Update |</a>
-                    <a class="edit-item-link" href="{% url 'delete_item' item.pk %}">| Delete</a>
-                </div>
-            </div>
-
+            {% include 'project/components/C_item.html' with rarity=1 edit=1 %}
         {% endfor %}
     </div>
 

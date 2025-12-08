@@ -1,0 +1,25 @@
+<!-- cube tutorial from https://www.youtube.com/watch?v=L7YFIsGFpDc -->
+
+{% if nav %}
+    {% if shop %}
+        <a class="box-nav clickable" href="{% url 'show_shop_box' box.pk %}">
+    {% else %}
+        <a class="box-nav clickable" href="{% url 'show_box' box.pk %}">
+    {% endif %}
+
+{% else %}
+    <a class="box-nav" href="">
+{% endif %}
+
+    <div class="face left">
+        <img src="{{box.cover_image.url}}" class="texture left">
+    </div>
+
+    <div class="face right">
+        <img src="{{box.cover_image.url}}" class="texture right">
+    </div>
+
+    <div class="face top">
+        <img src="{{box.cover_image.url}}" class="texture top">
+    </div>
+</a>

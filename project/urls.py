@@ -9,12 +9,16 @@ urlpatterns = [
 
     path('', PlayerListView.as_view(), name='show_all_players'),
     path('player/<int:pk>', PlayerDetailView.as_view(), name='show_player'),
-    path('player/<int:pk>/items', ShowItemsDetailView.as_view(), name='show_items'),
+    path('player/<int:pk>/collection', ShowCollectionDetailView.as_view(), name='show_collection'),
 
     ## login required
 
     path('player', MyPlayerDetailView.as_view(), name='show_my_player'),
-    path('player/display/<int:slot>', ItemDisplayView.as_view(), name='item_display'),
+    path('player/display/<int:slot>', DisplayCollectionView.as_view(), name='display_collection'),
+    path('player/trades', ShowTradesDetailView.as_view(), name='show_trades'),
+    path('player/<int:pk>/start_trade', StartTradeView.as_view(), name='start_trade'),
+    path('player/trade/<int:pk>/accept', AcceptTradeView.as_view(), name='accept_trade'),
+    path('player/trade/<int:pk>/reject', RejectTradeView.as_view(), name='reject_trade'),
 
     path('creator/boxes', BoxListView.as_view(), name='show_all_boxes'),
     path('creator/box/<int:pk>', BoxDetailView.as_view(), name='show_box'),

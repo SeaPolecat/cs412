@@ -1,24 +1,33 @@
-button.logout-button {
-    color: var(--palevioletred);
-    font: 25px var(--font);
-    font-weight: 700;
-    padding: 8px 15px;
-    background-color: white;
-    border: none;
-    border-radius: 10px;
+a {
+    display: block;
+    text-decoration: none;
     transition: 0.2s;
-    margin: 0 20px;
 }
 
-button.logout-button:hover {
+a.inline {
+    display: inline;
+}
+
+a.salmon {
+    color: var(--salmon);
+}
+
+a.salmon:hover {
     opacity: 0.8;
-    cursor: pointer;
+}
+
+a.light-gray {
+    color: var(--light-gray);
+}
+
+a.light-gray:hover {
+    color: var(--salmon);
 }
 
 a.button {
     width: fit-content;
     padding: 8px 15px;
-    font-weight: 700;
+    font-weight: var(--bold);
     border: none;
     border-radius: 10px;
     transition: 0.2s;
@@ -26,19 +35,18 @@ a.button {
 
 a.button:hover {
     opacity: 0.8;
-    cursor: pointer;
 }
 
 a.button.small {
-    font-size: 25px;
+    font-size: var(--medium);
 }
 
 a.button.large {
-    font-size: 30px;
+    font-size: var(--large);
 }
 
 a.button.white {
-    color: var(--palevioletred);
+    color: var(--salmon);
     background-color: white;
 }
 
@@ -64,14 +72,72 @@ a.button.mr-20 {
     margin-right: 20px;
 }
 
-a.edit-item-link {
-    margin-top: 5px;
-    font-size: 20px;
-    color: var(--light-gray);
+a.button.mt-30 {
+    margin-top: 30px;
+}
+
+a.button.mb-30 {
+    margin-bottom: 30px;
+}
+
+a.button.mb-50 {
+    margin-bottom: 50px;
+}
+
+button.submit {
+    width: fit-content;
+    margin: 0 10px;
+    padding: 8px 15px;
+    font: var(--medium) var(--font);
+    font-weight: var(--bold);
+    border: none;
+    border-radius: 10px;
     transition: 0.2s;
 }
 
-a.edit-item-link:hover {
-    font-size: 20px;
+button.submit:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button.submit.white {
     color: var(--salmon);
+    background-color: white;
+}
+
+button.submit.salmon {
+    color: white;
+    background-color: var(--salmon);
+}
+
+button.submit.ml-20 {
+    margin-left: 20px;
+}
+
+button.submit.mr-20 {
+    margin-right: 20px;
+}
+
+button.hidden {
+    font-family: var(--font);
+    background: none;
+    border: none;
+    transition: 0.2s;
+}
+
+button.hidden:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+div.button-wrapper {
+    display: flex;
+}
+
+div.button-wrapper.centered {
+    justify-content: center;
+}
+
+div.button-wrapper.mb-50 {
+    margin-bottom: 50px;
 }

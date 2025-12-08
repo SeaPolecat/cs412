@@ -60,11 +60,21 @@ class MyPlayerDetailView(MyLoginRequiredMixin, DetailView):
         return self.get_logged_in_player()
 
 
-class ShowItemsDetailView(DetailView):
+class ShowCollectionDetailView(DetailView):
 
     model = Player
-    template_name = 'project/show_items.html'
+    template_name = 'project/show_collection.html'
     context_object_name = 'player'
+
+
+class ShowTradesDetailView(MyLoginRequiredMixin, DetailView):
+
+    model = Player
+    template_name = 'project/show_trades.html'
+    context_object_name = 'player'
+
+    def get_object(self):
+        return self.get_logged_in_player()
 
 
 class BoxListView(MyLoginRequiredMixin, ListView):
@@ -132,7 +142,7 @@ class CreateBoxView(MyLoginRequiredMixin, CreateView):
     
     model = Box
     form_class = CreateBoxForm
-    template_name = 'project/create_box_form.html'
+    template_name = 'project/create_box.html'
     
     def form_valid(self, form):
         player = self.get_logged_in_player()
@@ -152,7 +162,7 @@ class UpdateBoxView(MyLoginRequiredMixin, UpdateView):
 
     model = Box
     form_class = CreateBoxForm
-    template_name = 'project/update_box_form.html'
+    template_name = 'project/update_box.html'
     
     def get_success_url(self):
         pk = self.kwargs['pk']
@@ -163,7 +173,7 @@ class UpdateBoxView(MyLoginRequiredMixin, UpdateView):
 class DeleteBoxView(MyLoginRequiredMixin, DeleteView):
 
     model = Box
-    template_name = 'project/delete_box_form.html'
+    template_name = 'project/delete_box.html'
 
     def get_success_url(self):
         return reverse('show_all_boxes')
@@ -173,7 +183,7 @@ class CreateItemView(MyLoginRequiredMixin, CreateView):
 
     model = Item
     form_class = CreateItemForm
-    template_name = 'project/create_item_form.html'
+    template_name = 'project/create_item.html'
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs['pk']
@@ -203,7 +213,7 @@ class UpdateItemView(MyLoginRequiredMixin, UpdateView):
 
     model = Item
     form_class = CreateItemForm
-    template_name = 'project/update_item_form.html'
+    template_name = 'project/update_item.html'
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs['pk']
@@ -226,7 +236,7 @@ class UpdateItemView(MyLoginRequiredMixin, UpdateView):
 class DeleteItemView(MyLoginRequiredMixin, DeleteView):
 
     model = Item
-    template_name = 'project/delete_item_form.html'
+    template_name = 'project/delete_item.html'
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs['pk']
@@ -294,22 +304,26 @@ class OpenBoxView(MyLoginRequiredMixin, View):
 
         owned_item.save()
 
+        player.boxes_opened += 1
+        player.save()
+
         template_name = 'project/open_box.html'
 
         context = {
-            'item': item
+            'box': box,
+            'item': item,
         }
         return render(request, template_name, context)
     
 
-class ItemDisplayView(MyLoginRequiredMixin, View):
+class DisplayCollectionView(MyLoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         slot = self.kwargs['slot']
         player = self.get_logged_in_player()
         owned_items = player.get_all_owned_items()
 
-        template_name = 'project/item_display.html'
+        template_name = 'project/display_collection.html'
         context = {
             'slot': slot,
             'owned_items': owned_items,
@@ -389,3 +403,109 @@ class UnpublishBoxView(MyLoginRequiredMixin, View):
         box.save()
 
         return redirect('show_box', pk)
+    
+
+class StartTradeView(MyLoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs['pk']
+        tradee: Player = Player.objects.get(pk=pk)
+
+        if tradee == self.get_logged_in_player():
+            return redirect('show_my_player')
+
+        owned_items = tradee.get_all_owned_items()
+
+        template_name = 'project/start_trade.html'
+        context = {
+            'tradee': tradee,
+            'owned_items': owned_items,
+        }
+        return render(request, template_name, context)
+    
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+
+        if not request.POST.get('step2'):
+            tradee_item_pk = request.POST['tradee_item_pk']
+            request.session['tradee_item_pk'] = tradee_item_pk
+
+            trader = self.get_logged_in_player()
+
+            owned_items = trader.get_all_owned_items()
+
+            template_name = 'project/start_trade.html'
+            context = {
+                'trader': trader,
+                'owned_items': owned_items,
+            }
+            return render(request, template_name, context)
+
+        trader_item_pk = request.POST['trader_item_pk']
+        tradee_item_pk = request.session['tradee_item_pk']
+
+        trader_item = OwnedItem.objects.get(pk=trader_item_pk)
+        tradee_item = OwnedItem.objects.get(pk=tradee_item_pk)
+
+        trade = Trade(trader_item=trader_item, tradee_item=tradee_item)
+        trade.save()
+
+        return redirect('show_trades')
+    
+
+class AcceptTradeView(MyLoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs['pk']
+        trade = Trade.objects.get(pk=pk)
+
+        trader_item: OwnedItem = trade.trader_item
+        tradee_item: OwnedItem = trade.tradee_item
+
+        trader: Player = trade.trader_item.player
+        tradee: Player = trade.tradee_item.player
+
+        # add items
+        try:
+            owned_item = OwnedItem.objects.get(player=tradee, item=trader_item.item)
+            owned_item.quantity += 1
+        except:
+            owned_item = OwnedItem(player=tradee, item=trader_item.item)
+
+        owned_item.save()
+
+        try:
+            owned_item = OwnedItem.objects.get(player=trader, item=tradee_item.item)
+            owned_item.quantity += 1
+        except:
+            owned_item = OwnedItem(player=trader, item=tradee_item.item)
+
+        owned_item.save()
+
+        # subtract items
+        if trader_item.quantity == 1:
+            trader_item.delete()
+        else:
+            trader_item.quantity -= 1
+            trader_item.save()
+
+        if tradee_item.quantity == 1:
+            tradee_item.delete()
+        else:
+            tradee_item.quantity -= 1
+            tradee_item.save()
+
+        trade.delete()
+
+        return redirect('show_trades')
+
+
+class RejectTradeView(MyLoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs['pk']
+        trade = Trade.objects.get(pk=pk)
+
+        trade.delete()
+        
+        return redirect('show_trades')

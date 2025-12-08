@@ -1,0 +1,28 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    {% if tradee %}
+        {% if tradee.get_all_owned_items|length == 0 %}
+            <h1 class="medium">{{tradee.username}} doesn't have any items to trade :(</h1>
+        {% else %}
+            <h1 class="large">Which item would you like to have?</h1>
+        {% endif %}
+
+        <a class="button small centered gray mt-30 mb-30" href="{% url 'show_player' tradee.pk %}">Cancel</a>
+
+        {% include 'project/components/C_trade_form.html' with button_name='tradee_item_pk' %}
+
+    {% elif trader %}
+        {% if trader.get_all_owned_items|length == 0 %}
+            <h1 class="medium">You don't have any items to trade :(</h1>
+        {% else %}
+            <h1 class="large">Which item are you giving away?</h1>
+        {% endif %}
+
+        <a class="button small centered gray mt-30 mb-30" href="{% url 'show_my_player' %}">Cancel</a>
+
+        {% include 'project/components/C_trade_form.html' with button_name='trader_item_pk' step2=1 %}
+    {% endif %}
+
+{% endblock %}

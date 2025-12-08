@@ -1,0 +1,24 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h1 class="large">Choose an item to display!</h1>
+
+    <form action="{% url 'display_collection' slot %}" method="POST">
+        {% csrf_token %}
+
+        <div class="items-grid">
+            {% include 'project/components/C_item.html' with remove_display_item=1 %}
+
+            {% for oi in owned_items %}
+            {% with item=oi.item %}
+                <button class="hidden" type="submit" name="oi_pk" value="{{oi.pk}}">
+                    {% include 'project/components/C_item.html' with quantity=oi.quantity rarity=1 origin=1 %}
+                </button>
+            {% endwith %}
+            {% endfor %}
+        </div>
+
+    </form>
+
+{% endblock %}

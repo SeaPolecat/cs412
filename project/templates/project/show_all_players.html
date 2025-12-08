@@ -2,14 +2,14 @@
 
 {% block content %}
 
-    <h1>All Players</h1>
+    <h1 class="large">Blindbox Buddy Community</h1>
 
     <div class="players-grid">
         {% for player in players %}
 
-            <div class="player-wrapper">
+            <div class="player-div">
                 <a href="{% url 'show_player' player.pk %}">
-                    <img class="pfp square clickable" src="{{player.profile_image.url}}">
+                    <img class="pfp large square clickable" src="{{player.profile_image.url}}">
                 </a>
 
                 <h1 class="medium">{{player.username}}</h1>

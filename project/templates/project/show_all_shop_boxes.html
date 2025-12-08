@@ -7,14 +7,14 @@
     <div class="boxes-grid">
         {% for box in boxes %}
     
-            <div class="box-wrapper">
+            <div class="box-div">
                 <h1 class="medium">{{box.name}}</h1>
         
-                <h1 class="small mb-30">Created by {{box.player.username}}</h1>
-        
-                <a class="box-nav" href="{% url 'show_shop_box' box.pk %}">
-                    {% include 'project/components/box.html' %}
-                </a>
+                <h1 class="small mb-30">
+                    Created by <a class="inline salmon" href="{% url 'show_player' box.player.pk %}">{{box.player.username}}</a>
+                </h1>
+
+                {% include 'project/components/C_box.html' with nav=1 shop=1 %}
             </div>
     
         {% endfor %}

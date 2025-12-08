@@ -1,0 +1,47 @@
+h1.large {
+    font-size: var(--large);
+}
+
+h1.medium {
+    font-size: var(--medium);
+}
+
+h1.small {
+    font-size: var(--small);
+}
+
+h1.white {
+    color: white;
+}
+
+h1.red {
+    color: red;
+}
+
+h1.green {
+    color: limegreen;
+}
+
+h1.inline {
+    display: inline;
+}
+
+h1.no-margin {
+    margin: 0;
+}
+
+h1.mt-5 {
+    margin-top: 5px;
+}
+
+h1.mb-5 {
+    margin-bottom: 5px;
+}
+
+h1.mb-30 {
+    margin-bottom: 30px;
+}
+
+h1.mb-50 {
+    margin-bottom: 50px;
+}

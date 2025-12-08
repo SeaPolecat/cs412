@@ -1,0 +1,17 @@
+<form action="{% url 'start_trade' request.user.player.pk %}" method="POST">
+    {% csrf_token %}
+
+    <div class="items-grid">
+        {% for oi in owned_items %}
+        {% with item=oi.item %}
+            <button class="hidden" type="submit" name="{{button_name}}" value="{{oi.pk}}">
+                {% include 'project/components/C_item.html' with quantity=oi.quantity rarity=1 origin=1 %}
+            </button>
+        {% endwith %}
+        {% endfor %}
+    </div>
+
+    {% if step2 %}
+        <input type="hidden" name="step2" value="step2">
+    {% endif %}
+</form>
