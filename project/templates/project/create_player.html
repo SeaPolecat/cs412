@@ -11,13 +11,13 @@ Description: Template to create a new Player via signing up.
 
     <!-- form to enter the Player's data -->
      
-    <form class="form-wrapper wide" action="{% url 'create_player' %}" method="POST">
+    <form class="form-wrapper wide" action="{% url 'create_player' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- fields for creating a Django account -->
 
         <div class="form-div">
-            <h1 class="medium no-margin">Login Name</h1>
+            <h1 class="medium no-margin">Username</h1>
             <h1 class="small">{{django_form.username.help_text|safe}}</h1>
             {{django_form.username}}
         </div>
@@ -35,12 +35,6 @@ Description: Template to create a new Player via signing up.
         </div>
 
         <!-- fields for creating a Player -->
-
-        <div class="form-div">
-            <h1 class="medium no-margin">Username</h1>
-            <h1 class="small">The name that other people see!</h1>
-            {{form.username}}
-        </div>
 
         <div class="form-div">
             <h1 class="medium">Profile Picture</h1>

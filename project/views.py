@@ -258,15 +258,25 @@ class CreatePlayerView(CreateView):
         # rebuild Django's user creation form
         django_form = UserCreationForm(self.request.POST)
 
+        # print any validation errors
+        if not django_form.is_valid():
+            print(django_form.errors)
+
         # save the new user to the db, and log them in
         user = django_form.save()
         login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
 
-        # attach the user as a FK to the Profile
+        # attach the given username and user to the newly created Player
         profile = form.instance
+        profile.username = user.username
         profile.user = user
 
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        """Redirect to the logged in Player's page after successful creation."""
+
+        return reverse('show_my_player')
     
 
 class UpdateBoxView(MyLoginRequiredMixin, UpdateView):
