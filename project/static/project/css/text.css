@@ -1,3 +1,8 @@
+/* File: project/static/project/text.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for all text.
+*/
+
 h1.large {
     font-size: var(--large);
 }

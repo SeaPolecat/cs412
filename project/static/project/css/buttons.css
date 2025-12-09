@@ -1,3 +1,8 @@
+/* File: project/static/project/buttons.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for all clickable things.
+*/
+
 a {
     display: block;
     text-decoration: none;
