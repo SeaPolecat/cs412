@@ -399,10 +399,10 @@ class PublishBoxView(MyLoginRequiredMixin, View):
             box.save()
 
             # display the Box's creator page with the success state
-            return redirect(f'/project/creator/box/{pk}?success=1')
+            return redirect(f'/project/creator/box/{pk}/?success=1')
         
         # otherwise, display the Box's creator page with the failure state
-        return redirect(f'/project/creator/box/{pk}?failure=1')
+        return redirect(f'/project/creator/box/{pk}/?failure=1')
 
 
 class UnpublishBoxView(MyLoginRequiredMixin, View):
