@@ -1,12 +1,24 @@
+<!--File: project/templates/project/show_player.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to show a single Player.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
+    <!-- table containing some info about the Player -->
+
     <table class="mb-60">
         <tr>
+
+            <!-- the Player's profile image -->
+
             <td>
                 <img class="pfp medium circle mr-50" src="{{player.profile_image.url}}">
             </td>
+
+            <!-- some text info, along with buttons to see collection, edit profile, and trade -->
     
             <td>
                 <h1 class="large">{{player.username}}</h1>
@@ -33,10 +45,20 @@
         </tr>
     </table>
 
+    <!-- 9 display slots to display the Player's favourite OwnedItems -->
+
     <div class="case-grid">
         {% for slot in player.get_slots %}
+
+            <!-- if the Player is viewing their own Profile, give the option to click a display slot
+            and trigger the form process for displaying an OwnedItem 
+            -->
+
             {% if player == request.user.player %}
                 {% include 'project/components/C_display_case.html' with clickable=1 %}
+
+            <!-- otherwise, just show whatever was in the display slot before -->
+
             {% else %}
                 {% include 'project/components/C_display_case.html' %}
             {% endif %}

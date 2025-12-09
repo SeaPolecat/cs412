@@ -1,3 +1,8 @@
+<!--File: project/templates/project/show_collection.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to show all the OwnedItems belonging to a Player.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
@@ -8,7 +13,11 @@
         <h1 class="large">Items owned by {{player.username}}</h1>
     {% endif %}
 
+    <!-- back button -->
+
     <a class="button small centered gray mt-30 mb-30" href="{% url 'show_player' player.pk %}">Back</a>
+
+    <!-- grid of OwnedItems -->
 
     <div class="items-grid">
         {% for oi in player.get_all_owned_items %}

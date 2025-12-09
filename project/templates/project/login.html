@@ -1,11 +1,20 @@
+<!--File: project/templates/project/login.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template for a Player to login.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
     <h1 class="large">Login</h1>
 
+    <!-- form for the Player to enter their login credentials -->
+
     <form class="form-wrapper" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
+
+        <!-- form fields -->
 
         <div class="form-div">
             <h1 class="medium">Login Name</h1>
@@ -17,10 +26,14 @@
             {{form.password}}
         </div>
 
+        <!-- confirm / cancel buttons -->
+
         <div class="button-wrapper centered">
             <button class="submit salmon" type="submit">Login</button>
             <a class="button small gray" href="{% url 'show_all_players' %}">Cancel</a>
         </div>
+
+        <!-- button to sign up for a new account -->
 
         <h1 class="medium mt-50">No account yet?</h1>
 
@@ -28,8 +41,13 @@
             <a class="button small salmon centered" href="{% url 'create_player' %}">Sign Up</a>
         </div>
 
+        <!-- go to the appropriate next page after login, if it exists -->
+
         {% if request.GET.next %}
             <input type="hidden" name="next" value="{{request.GET.next}}">
+
+        <!-- otherwise, show all Players -->
+        
         {% else %}
             <input type="hidden" name="next" value="{% url 'show_all_players' %}">
         {% endif %}

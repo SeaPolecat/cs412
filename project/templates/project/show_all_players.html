@@ -1,8 +1,15 @@
+<!--File: project/templates/project/show_all_players.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to show all Players.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
     <h1 class="large">Blindbox Buddy Community</h1>
+
+    <!-- grid of Players -->
 
     <div class="players-grid">
         {% for player in players %}

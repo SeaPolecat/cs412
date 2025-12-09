@@ -1,5 +1,15 @@
+<!--File: project/templates/project/C_trade.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Component template containing a Trade.
+-->
+
+<!-- table containing key info about the Trade -->
+
 <table class="trade-table">
     <tr>
+
+        <!-- shows the OwnedItem that the trader is offering -->
+
         <td>
             {% with item=trade.trader_item.item %}
                 {% if incoming %}
@@ -12,7 +22,12 @@
             {% endwith %}
         </td>
 
+        <!-- shows info about the trader / tradee, along with buttons -->
+
         <td>
+
+            <!-- if this is an incoming Trade, show who the trader is, and accept / reject buttons -->
+
             {% if incoming %}
                 <div>
                     <a href="{% url 'show_player' trade.trader_item.player.pk %}">
@@ -26,6 +41,8 @@
                     <a class="button small salmon" href="{% url 'reject_trade' trade.pk %}">Reject</a>
                 </div>
 
+            <!-- if this is an outgoing Trade, show who the tradee is, and a cancel button -->
+
             {% else %}
                 <div>
                     <a href="{% url 'show_player' trade.tradee_item.player.pk %}">
@@ -37,6 +54,8 @@
                 <a class="button small gray centered" href="{% url 'reject_trade' trade.pk %}">Cancel</a>
             {% endif %}
         </td>
+
+        <!-- shows the OwnedItem that the trader wants from the tradee -->
 
         <td>
             {% with item=trade.tradee_item.item %}

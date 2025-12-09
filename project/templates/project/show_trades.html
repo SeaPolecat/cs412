@@ -1,3 +1,8 @@
+<!--File: project/templates/project/show_trades.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to show all of a Player's Trades.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
@@ -8,6 +13,8 @@
         <h1 class="large">Incoming Trades</h1>
     {% endif %}
 
+    <!-- all incoming Trades -->
+
     {% for trade in player.get_incoming_trades %}
         {% include 'project/components/C_trade.html' with incoming=1 %}
     {% endfor %}
@@ -17,6 +24,8 @@
     {% else %}
         <h1 class="large">Outgoing Trades</h1>
     {% endif %}
+
+    <!-- all outgoing Trades -->
 
     {% for trade in player.get_outgoing_trades %}
         {% include 'project/components/C_trade.html' %}

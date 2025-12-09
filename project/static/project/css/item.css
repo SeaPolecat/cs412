@@ -37,7 +37,7 @@ img.item.mb-40 {
 
 div.edit-item-div {
     display: flex;
-    margin-top: 3px;
+    justify-content: center;
 }
 
 div.dummy-item {

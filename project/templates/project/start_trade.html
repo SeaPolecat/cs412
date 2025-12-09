@@ -1,6 +1,13 @@
+<!--File: project/templates/project/start_trade.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to select OwnedItems for trading.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
+
+    <!-- step 1: form to collect which OwnedItem the trader wants from the tradee -->
 
     {% if tradee %}
         {% if tradee.get_all_owned_items|length == 0 %}
@@ -12,6 +19,8 @@
         <a class="button small centered gray mt-30 mb-30" href="{% url 'show_player' tradee.pk %}">Cancel</a>
 
         {% include 'project/components/C_trade_form.html' with button_name='tradee_item_pk' %}
+
+    <!-- step 2: form to collect which OwnedItem the trader is offering in exchange -->
 
     {% elif trader %}
         {% if trader.get_all_owned_items|length == 0 %}

@@ -1,9 +1,16 @@
+<!--File: project/templates/project/create_box.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to create a new Box.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
     <h1 class="large">Create Blindbox</h1>
 
+    <!-- form to enter the Box's data -->
+     
     {% include 'project/components/C_box_form.html' with create=1 %}
 
 {% endblock %}

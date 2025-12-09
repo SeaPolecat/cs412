@@ -1,29 +1,49 @@
+<!--File: project/templates/project/show_box.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to show a single Box a Player has created.
+-->
+
 {% extends 'project/base.html' %}
 
 {% load static %}
 
 {% block content %}
 
+    <!-- if the Box is published, show a button to unpublish it -->
+
     {% if box.published %}
         <a class="button large gray centered" href="{% url 'unpublish_box' box.pk %}">Unpublish Box</a>
+
+        <!-- if the context contains a success status, say that the Box was successfully published -->
 
         {% if success %}
             <h1 class="small green">Published blindbox to the shop!</h1>
         {% endif %}
+
+    <!-- otherwise, show a button to publish it -->
     
     {% else %}
         <a class="button large salmon centered" href="{% url 'publish_box' box.pk %}">Publish Box</a>
+
+        <!-- if the context contains a failure status, say that the Box failed to publish -->
 
         {% if failure %}
             <h1 class="small red">Blindbox must contain at least 1 item of each rarity!</h1>
         {% endif %}
     {% endif %}
 
+    <!-- table with some info about the Box -->
+
     <table>
         <tr>
+
+            <!-- the Box itself -->
+
             <td>
                 {% include 'project/components/C_box.html' %}
             </td>
+
+            <!-- some text info, along with 2 buttons to update /delete -->
     
             <td>
                 <h1 class="large">{{box.name}}</h1>
@@ -39,7 +59,12 @@
 
     <h1 class="large">Items in this Blindbox:</h1>
 
+    <!-- grid of all Items contained in this Box -->
+
     <div class="items-grid">
+
+        <!-- clickable object to add a new Item -->
+
         {% include 'project/components/C_item.html' with create_item=1 %}
 
         {% for item in box.get_all_items %}

@@ -1,13 +1,26 @@
+<!--File: project/templates/project/C_display_case.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Component template containing a display slot possibly containing an OwnedItem.
+-->
+
+<!-- if it should be clickable (viewed from a Player's own profile), 
+wrap an anchor tag around it and pass in the display slot number to the view 
+-->
+
 {% if clickable %}
     <a href="{% url 'display_collection' forloop.counter0 %}">
 {% endif %}
 
+<!-- if the display slot is empty, show a div with nothing inside -->
+
 {% if slot == 0 %}
     <div class="case {% if clickable %} clickable {% endif %}"></div>
 
+<!-- otherwise, show the OwnedItem displayed within -->
+
 {% else %}
 {% with item=slot.owned_item.item %}
-    <div class="case {% if clickable %} clickable {% endif %}" href="{% url 'display_collection' forloop.counter0 %}">
+    <div class="case {% if clickable %} clickable {% endif %}">
         {% include 'project/components/C_item.html' %}
     </div>
 {% endwith %}

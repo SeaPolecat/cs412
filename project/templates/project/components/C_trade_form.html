@@ -1,15 +1,27 @@
+<!--File: project/templates/project/C_trade_form.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Component template containing a form to collect OwnedItems that a trader wants / is offering.
+-->
+
+<!-- form to collect input about which OwnedItem a trader wants or is offering -->
+
 <form action="{% url 'start_trade' request.user.player.pk %}" method="POST">
     {% csrf_token %}
 
     <div class="items-grid">
         {% for oi in owned_items %}
         {% with item=oi.item %}
-            <button class="hidden" type="submit" name="{{button_name}}" value="{{oi.pk}}">
+
+            <!-- this button is KEY! {{button_name}} determines if this is a trader_item or tradee_item -->
+
+            <button class="invisible" type="submit" name="{{button_name}}" value="{{oi.pk}}">
                 {% include 'project/components/C_item.html' with quantity=oi.quantity rarity=1 origin=1 %}
             </button>
         {% endwith %}
         {% endfor %}
     </div>
+
+    <!-- if this is step 2, pass "step2" through POST -->
 
     {% if step2 %}
         <input type="hidden" name="step2" value="step2">

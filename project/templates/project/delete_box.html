@@ -1,24 +1,35 @@
+<!--File: project/templates/project/delete_box.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to delete a Box.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
     <h1 class="large">Are you sure you want to delete this box?</h1>
 
+    <!-- form to confirm deletion -->
+
     <form action="{% url 'delete_box' box.pk %}" method="POST"
     enctype="multipart/form-data">
         {% csrf_token %}
+
+        <!-- submit / cancel buttons -->
 
         <div class="button-wrapper centered mb-50">
             <button class="submit salmon" type="submit">Delete</button>
             <a class="button small gray" href="{% url 'show_box' box.pk %}">Cancel</a>
         </div>
-
-        <div class="box-div">
-            <h1 class="medium">{{box.name}}</h1>
-            <h1 class="small mb-30">Created on {{box.date_created.date}}</h1>
-        
-            {% include 'project/components/C_box.html' %}
-        </div>
     </form>
+
+    <!-- show the Box to be deleted -->
+    
+    <div class="box-div">
+        <h1 class="medium">{{box.name}}</h1>
+        <h1 class="small mb-30">Created on {{box.date_created.date}}</h1>
+    
+        {% include 'project/components/C_box.html' %}
+    </div>
 
 {% endblock %}

@@ -1,18 +1,31 @@
+<!--File: project/templates/project/display_collection.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to select an OwnedItem to display on a Player's profile page.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
     <h1 class="large">Choose an item to display!</h1>
 
+    <!-- form for the Player to select which OwnedItem they want to display -->
+
     <form action="{% url 'display_collection' slot %}" method="POST">
         {% csrf_token %}
 
         <div class="items-grid">
+
+            <!-- clickable object to remove the OwnedItem from the chosen display slot -->
+
             {% include 'project/components/C_item.html' with remove_display_item=1 %}
 
             {% for oi in owned_items %}
             {% with item=oi.item %}
-                <button class="hidden" type="submit" name="oi_pk" value="{{oi.pk}}">
+
+                <!-- button to pass in the chosen OwnedItem's PK through POST -->
+
+                <button class="invisible" type="submit" name="oi_pk" value="{{oi.pk}}">
                     {% include 'project/components/C_item.html' with quantity=oi.quantity rarity=1 origin=1 %}
                 </button>
             {% endwith %}

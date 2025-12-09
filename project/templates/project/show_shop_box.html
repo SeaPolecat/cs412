@@ -1,16 +1,27 @@
+<!--File: project/templates/project/show_shop_box.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to show a single Box from the shop that can be opened.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
+    <!-- table with some info about the Box -->
+
     <table>
         <tr>
+
+            <!-- the Box itself -->
+
             <td>
                 {% include 'project/components/C_box.html' %}
             </td>
+
+            <!-- some text info, along with a button to open the Box -->
     
             <td>
                 <h1 class="large">{{box.name}}</h1>
-
                 <h1 class="small mb-50">
                     Created by <a class="inline salmon" href="{% url 'show_player' box.player.pk %}">{{box.player.username}}</a>
                 </h1>
@@ -21,6 +32,8 @@
     </table>
 
     <h1 class="large">Items in this Blindbox:</h1>
+
+    <!-- grid of all Items contained in this Box -->
 
     <div class="items-grid">
         {% for item in box.get_all_items %}

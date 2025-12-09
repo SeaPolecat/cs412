@@ -1,3 +1,8 @@
+<!--File: project/templates/project/show_all_boxes.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to show all Boxes that a Player has created.
+-->
+
 {% extends 'project/base.html' %}
 
 {% load static %}
@@ -6,15 +11,18 @@
 
     <a class="button large centered salmon mb-50" href="{% url 'create_box' %}">Create Blindbox</a>
 
-    <div class="boxes-grid">
+    <!-- grid of Boxes the Player has created -->
 
+    <div class="boxes-grid">
         {% for box in boxes %}
+
             <div class="box-div">
                 <h1 class="medium">{{box.name}}</h1>
                 <h1 class="small mb-30">Created on {{box.date_created.date}}</h1>
                 
                 {% include 'project/components/C_box.html' with nav=1 %}
             </div>
+            
         {% endfor %}
     </div>
 

@@ -1,7 +1,14 @@
+<!--File: project/templates/project/base.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: The base template, which all other templates inherit from.
+-->
+
 {% load static %}
 
 <html>
 <head>
+    <!-- define a title, stylesheet, and favicon -->
+
     <title>Blindbox Buddy</title>
     <link rel="stylesheet" href="{% static 'project/css/styles.css' %}">
     <link rel="icon" href="{% static 'project/img/favicon.ico' %}" type="image/x-icon">
@@ -9,9 +16,13 @@
 
 <body>
 
+    <!-- all children templates will be inserted here -->
+
     <div class="content">
         {% block content %}{% endblock %}
     </div>
+
+    <!-- header at the top with navigation between pages -->
 
     <header>
         <a class="menu-nav" href="{% url 'show_all_players' %}">
@@ -34,6 +45,8 @@
             <h1 class="medium white">Trades</h1>
         </a>
 
+        <!-- if the user is logged in, show a navigation to their profile, and a logout button -->
+
         {% if request.user.is_authenticated %}
             <a class="menu-nav" href="{% url 'show_my_player' %}">
                 <img class="icon" src="{% static 'project/img/me.png' %}">
@@ -45,6 +58,8 @@
                 <button class="submit white ml-20 mr-20" type="submit">Logout</button>
             </form>
         
+        <!-- otherwise, show a login button -->
+         
         {% else %}
             <a class="button small white ml-20 mr-20" href="{% url 'login' %}">Login</a>
         {% endif %}

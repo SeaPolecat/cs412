@@ -1,11 +1,20 @@
+<!--File: project/templates/project/create_player.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Template to create a new Player via signing up.
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
     <h1 class="large">Sign Up</h1>
 
+    <!-- form to enter the Player's data -->
+     
     <form class="form-wrapper wide" action="{% url 'create_player' %}" method="POST">
         {% csrf_token %}
+
+        <!-- fields for creating a Django account -->
 
         <div class="form-div">
             <h1 class="medium no-margin">Login Name</h1>
@@ -25,6 +34,8 @@
             {{django_form.password2}}
         </div>
 
+        <!-- fields for creating a Player -->
+
         <div class="form-div">
             <h1 class="medium no-margin">Username</h1>
             <h1 class="small">The name that other people see!</h1>
@@ -36,6 +47,8 @@
             <label class="file-input-label" for="{{form.profile_image.id_for_label}}">Upload File</label>
             {{form.profile_image}}
         </div>
+
+        <!-- submit / cancel buttons -->
 
         <div class="button-wrapper centered">
             <button class="submit salmon" type="submit">Sign Up</button>

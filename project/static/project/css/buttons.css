@@ -117,14 +117,14 @@ button.submit.mr-20 {
     margin-right: 20px;
 }
 
-button.hidden {
+button.invisible {
     font-family: var(--font);
     background: none;
     border: none;
     transition: 0.2s;
 }
 
-button.hidden:hover {
+button.invisible:hover {
     opacity: 0.8;
     cursor: pointer;
 }

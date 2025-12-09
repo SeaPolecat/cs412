@@ -1,15 +1,32 @@
-<!-- cube tutorial from https://www.youtube.com/watch?v=L7YFIsGFpDc -->
+<!--File: project/templates/project/C_box.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Component template containing a cube graphic representing a Box.
+-->
+
+<!-- cube graphic tutorial from https://www.youtube.com/watch?v=L7YFIsGFpDc -->
+
+<!-- if the Box is clickable, have the anchor tag lead somewhere -->
 
 {% if nav %}
+
+    <!-- if the Box is shown in the shop, go to 'show_shop_box' (shop page) -->
+
     {% if shop %}
         <a class="box-nav clickable" href="{% url 'show_shop_box' box.pk %}">
+
+    <!-- otherwise, go to 'show_box' (creator page) -->
+
     {% else %}
         <a class="box-nav clickable" href="{% url 'show_box' box.pk %}">
     {% endif %}
 
+<!-- otherwise, the anchor doesn't lead anywhere -->
+
 {% else %}
     <a class="box-nav" href="">
 {% endif %}
+
+    <!-- divs that create the cube graphic with the Box cover_image -->
 
     <div class="face left">
         <img src="{{box.cover_image.url}}" class="texture left">

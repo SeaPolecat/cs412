@@ -1,10 +1,22 @@
+<!--File: project/templates/project/C_box_form.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Component template containing a form to collect input for creating / updating a Box.
+-->
+
+<!-- if creating a Box, submit to the CreateView -->
+
 {% if create %}
     <form class="form-wrapper" action="{% url 'create_box' %}" method="POST" enctype="multipart/form-data">
+
+<!-- otherwise, submit to the UpdateView -->
+
 {% else %}
     <form class="form-wrapper" action="{% url 'update_box' box.pk %}" method="POST" enctype="multipart/form-data">
 {% endif %}
 
     {% csrf_token %}
+
+    <!-- form fields -->
 
     <div class="form-div">
         <h1 class="medium">Blindbox Name</h1>
@@ -13,11 +25,11 @@
 
     <div class="form-div">
         <h1 class="medium">Blindbox Image</h1>
-
         <label class="file-input-label" for="{{form.cover_image.id_for_label}}">Upload File</label>
-
         {{form.cover_image}}
     </div>
+
+    <!-- confirm / cancel buttons -->
 
     <div class="button-wrapper centered">
         {% if create %}

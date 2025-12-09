@@ -1,4 +1,11 @@
+<!--File: project/templates/project/C_item.html
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: Component template containing an Item.
+-->
+
 {% load static %}
+
+<!-- make a clickable object that creates an Item if you click it -->
 
 {% if create_item %}
 
@@ -18,13 +25,15 @@
         </div>
     </div>
 
+<!-- make a clickable object that removes an OwnedItem from a display slot if you click it -->
+
 {% elif remove_display_item %}
 
     <div class="item-div">
         <h1 class="medium mb-5 inline">&nbsp;</h1>
         <h1 class="small mt-5 mb-5">&nbsp;</h1>
     
-        <button class="hidden" type="submit" name="delete" value="delete">
+        <button class="invisible" type="submit" name="delete" value="delete">
             <div class="dummy-item">
                 <h1 class="large no-margin">Clear Display</h1>
                 <img class="dummy-item-icon" src="{% static 'project/img/x.png' %}">
@@ -34,9 +43,13 @@
         <h1 class="small mt-5 mb-5">&nbsp;</h1>
     </div>
 
+<!-- otherwise, it's a normal Item -->
+
 {% else %}
 
     <div class="item-div">
+
+        <!-- show the Item's name (use ??? if it's secret rare) -->
 
         {% if shop and item.rarity == 'SE' %}
             <h1 class="medium mb-5 {% if quantity %} inline {% endif %}">???</h1>
@@ -44,13 +57,19 @@
             <h1 class="medium mb-5 {% if quantity %} inline {% endif %}">{{item.name}}</h1>
         {% endif %}
 
+        <!-- show how much of the Item a Player owns -->
+
         {% if quantity %}
             <h1 class="medium mb-5 inline"> (x {{quantity}})</h1>
         {% endif %}
 
+        <!-- show the Item's rarity -->
+
         {% if rarity %}
             <h1 class="small mt-5 mb-5" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}}</h1>
         {% endif %}
+
+        <!-- show the Item's image (use a question mark png if it's secret rare) -->
 
         {% if shop and item.rarity == 'SE' %}
             <img class="item small" src="{% static 'project/img/question.png' %}" style="border-color: {{item.get_rarity_color}}">
@@ -58,11 +77,15 @@
             <img class="item small" src="{{item.image.url}}" style="border-color: {{item.get_rarity_color}}">
         {% endif %}
 
+        <!-- show which Box the Item came from -->
+
         {% if origin %}
             <h1 class="small mt-5 mb-5">
                 from <a class="inline salmon" href="{% url 'show_shop_box' item.box.pk %}">{{item.box.name}}</a>
             </h1>
         {% endif %}
+
+        <!-- show buttons to update / delete the Item -->
 
         {% if edit %}
             <div class="edit-item-div">
@@ -73,7 +96,6 @@
                 </h1>
             </div>
         {% endif %}
-
     </div>
 
 {% endif %}
