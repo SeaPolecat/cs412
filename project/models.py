@@ -18,12 +18,12 @@ SUPER_RARE = 'SR'
 SECRET = 'SE'
 
 # rarities and their full names
-RARITY_NAMES = {
-    COMMON: 'Common',
-    UNCOMMON: 'Uncommon',
-    RARE: 'Rare',
-    SUPER_RARE: 'Super Rare',
-    SECRET: 'Secret',
+RARITY_CHOICES = {
+    (COMMON, 'Common'),
+    (UNCOMMON, 'Uncommon'),
+    (RARE, 'Rare'),
+    (SUPER_RARE, 'Super Rare'),
+    (SECRET, 'Secret'),
 }
 
 # colours that represent each rarity, in hexadecimal format
@@ -193,7 +193,7 @@ class Item(models.Model):
     image = models.ImageField(blank=False) # this Item's image
 
     # this Item's rarity level (rarer == smaller chance of obtaining it from a Box)
-    rarity = models.CharField(max_length=2, choices=RARITY_NAMES, default=COMMON)
+    rarity = models.CharField(max_length=2, choices=RARITY_CHOICES, default=COMMON)
 
     def __str__(self):
         """Return a string representation of this Item."""
@@ -220,11 +220,6 @@ class Item(models.Model):
         """
 
         return RARITY_COLOURS[self.rarity]
-    
-    def get_rarity_full_name(self):
-        """Return the full name of this Item's rarity."""
-
-        return RARITY_NAMES[self.rarity]
 
 
 class OwnedItem(models.Model):
