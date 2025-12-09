@@ -1,0 +1,72 @@
+/* File: project/static/project/forms.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for all form related things.
+*/
+
+form {
+    margin: 0;
+}
+
+textarea {
+    height: 40px;
+    font: var(--small) var(--font);
+    color: var(--dark-gray);
+}
+
+input[type=text] {
+    height: 40px;
+    font: var(--small) var(--font);
+    color: var(--dark-gray);
+}
+
+input[type=password] {
+    height: 40px;
+    font: var(--small) var(--font);
+    color: var(--dark-gray);
+}
+
+select {
+    height: 40px;
+    font: var(--small) var(--font);
+    color: var(--dark-gray);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label.file-input-label {
+    padding: 8px 15px;
+    font: 20px var(--font);
+    color: white;
+    background: var(--salmon);
+    border: 1px solid white;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+label.file-input-label:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+form.form-wrapper {
+    width: 50%;
+    margin: 30px auto;
+    padding-top: 1px;
+    padding-bottom: 60px;
+    background-color: var(--palevioletred-translucent);
+    border-radius: 30px;
+}
+
+form.form-wrapper.wide {
+    width: 60%;
+}
+
+div.form-div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 80%;
+    margin: 50px auto;
+}

@@ -1,0 +1,55 @@
+/* File: project/static/project/player.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for things related to the Player model.
+*/
+
+div.players-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    width: 95%;
+    margin: 0 auto;
+    row-gap: 20px;
+}
+
+div.player-div {
+    margin: 10px 0;
+    border-radius: 20px;
+}
+
+img.pfp {
+    object-fit: cover;
+    border: 5px solid var(--palevioletred-translucent);
+}
+
+img.large {
+    width: 300px;
+    height: 300px;
+} 
+
+img.pfp.medium {
+    width: 250px;
+    height: 250px;
+}
+
+img.pfp.small {
+    width: 150px;
+    height: 150px;
+}
+
+img.pfp.square {
+    border-radius: 10px;
+}
+
+img.pfp.circle {
+    border-radius: 50%;
+}
+
+img.pfp.clickable:hover {
+    border-color: var(--salmon);
+    transition: 0.2s;
+}
+
+img.mr-50 {
+    margin-right: 50px;
+}

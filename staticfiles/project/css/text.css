@@ -1,0 +1,60 @@
+/* File: project/static/project/text.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for all text.
+*/
+
+h1.large {
+    font-size: var(--large);
+}
+
+h1.medium {
+    font-size: var(--medium);
+}
+
+h1.small {
+    font-size: var(--small);
+}
+
+h1.white {
+    color: white;
+}
+
+h1.red {
+    color: red;
+}
+
+h1.green {
+    color: limegreen;
+}
+
+h1.inline {
+    display: inline;
+}
+
+h1.no-margin {
+    margin: 0;
+}
+
+h1.mt-5 {
+    margin-top: 5px;
+}
+
+h1.mt-50 {
+    margin-top: 50px;
+}
+
+h1.mb-5 {
+    margin-bottom: 5px;
+}
+
+h1.mb-30 {
+    margin-bottom: 30px;
+}
+
+h1.mb-50 {
+    margin-bottom: 50px;
+}
+
+h1.mr-15 {
+    margin-right: 15px;
+}

@@ -1,0 +1,29 @@
+/* File: project/static/project/display.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for things related to displaying OwnedItems.
+*/
+
+div.case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    row-gap: 60px;
+}
+
+div.case {
+    width: 380px;
+    height: 380px;
+    color: var(--dark-gray);
+    background-color: var(--light-gray-translucent);
+    border: 5px ridge var(--light-gray);
+    border-radius: 10px;
+}
+
+div.case.clickable:hover {
+    background-color: var(--palevioletred-translucent);
+    border-color: var(--salmon);
+    cursor: pointer;
+    transition: 0.2s;
+}

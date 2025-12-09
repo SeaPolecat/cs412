@@ -1,0 +1,39 @@
+/* File: project/static/project/styles.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for the Blindbox Buddy app templates.
+*/
+
+/* import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+/* import other stylesheets */
+@import url('text.css');
+@import url('buttons.css');
+@import url('tables.css');
+@import url('forms.css');
+@import url('base.css');
+@import url('player.css');
+@import url('box.css');
+@import url('item.css');
+@import url('display.css');
+
+/* define variables */
+:root {
+    /* font */
+    --font: 'varela round';
+    --bold: 700;
+    --large: 35px;
+    --medium: 25px;
+    --small: 20px;
+
+    /* colours */
+    --dark-gray: #2e2e2e;
+    --light-gray: #a6a6a6;
+    --light-gray-translucent: rgba(166, 166, 166, 0.1);
+    --super-light-gray: #c9c9c9;
+    --off-white: #faf7f9;
+    --rose-fog: #f9f3f5;
+    --palevioletred: #d87093;
+    --palevioletred-translucent: rgba(216, 112, 147, 0.2);
+    --salmon: #e06c8f;
+}

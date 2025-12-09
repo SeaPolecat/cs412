@@ -1,0 +1,32 @@
+/* File: project/static/project/tables.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for all tables.
+*/
+
+td {
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+table {
+    table-layout: fixed;
+    white-space: nowrap;
+    width: fit-content;
+    margin: 50px auto;
+    padding: 30px 60px;
+    background-color: var(--palevioletred-translucent);
+    border-radius: 20px;
+}
+
+table.trade-table {
+    table-layout: fixed;
+    text-align: center;
+    width: 75%;
+    margin: 50px auto;
+    background-color: var(--palevioletred-translucent);
+    border-radius: 20px;
+}
+
+table.mb-60 {
+    margin-bottom: 60px;
+}

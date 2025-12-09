@@ -1,0 +1,78 @@
+/* File: project/static/project/box.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for things related to the Box model.
+*/
+
+div.boxes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: stretch;
+    width: 90%;
+    margin: 0 auto;
+    row-gap: 40px;
+    column-gap: 30px;
+}
+
+div.box-div {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0 50px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    background-color: var(--palevioletred-translucent);
+    border-radius: 20px;
+}
+
+/* BOX CUBE DESIGN */
+
+a.box-nav {
+    width: 0;
+    height: 0;
+    padding: 160px;
+    border-radius: 50%;
+}
+
+a.box-nav.clickable:hover {
+    filter: brightness(80%);
+    transition: 0.2s;
+}
+
+div.face {
+    position: relative;
+    width: 10em;
+    height: 10em;
+    transform-origin: 0 0;
+}
+
+div.face.left {
+    transform: rotate(90deg) skewX(-30deg) scaleY(0.864);
+}
+
+div.face.right {
+    transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+    bottom: 10em;
+}
+
+div.face.top {
+    transform: rotate(210deg) skew(-30deg) scaleY(0.864);
+    bottom: 20em;
+}
+
+img.texture {
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+    border: 2px solid var(--dark-gray);
+}
+
+img.texture.left {
+    transform: rotate(-90deg);
+}
+
+img.texture.right {
+    filter: brightness(80%);
+}
+
+img.texture.top {
+    transform: rotate(180deg);
+}

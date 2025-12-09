@@ -1,0 +1,71 @@
+/* File: project/static/project/item.css
+Author: Yi Ji (Wayne) Wang (waynew@bu.edu), 12/08/2025
+Description: A stylesheet for things related to the Item model.
+*/
+
+div.items-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+div.item-div {
+    margin: 20px;
+    border-radius: 20px;
+}
+
+img.item {
+    object-fit: cover;
+    border: 5px solid;
+    border-radius: 20px;
+}
+
+img.item.small {
+    width: 280px;
+    height: 280px;
+}
+
+img.item.large {
+    width: 350px;
+    height: 350px;
+}
+
+img.item.mt-20 {
+    margin-top: 20px;
+}
+
+img.item.mb-40 {
+    margin-bottom: 40px;
+}
+
+div.edit-item-div {
+    display: flex;
+    justify-content: center;
+}
+
+div.dummy-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: 280px;
+    color: white;
+    background-color: var(--light-gray);
+    border: 5px solid var(--super-light-gray);
+    border-radius: 20px;
+}
+
+div.dummy-item:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+img.dummy-item-icon {
+    width: 60px;
+    height: 60px;
+    margin-top: 30px;
+}
