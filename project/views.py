@@ -393,16 +393,19 @@ class PublishBoxView(MyLoginRequiredMixin, View):
         pk = kwargs['pk'] # Box PK
         box = Box.objects.get(pk=pk)
 
+        # URL to redirect to after completion
+        url = reverse('show_box', kwargs={'pk': pk})
+
         # if the Box contains least 1 Item of each rarity, publish it
         if box.contains_every_rarity():
             box.published = True
             box.save()
 
             # display the Box's creator page with the success state
-            return redirect(f'/project/creator/box/{pk}/?success=1')
+            return redirect(f'{url}?success=1')
         
         # otherwise, display the Box's creator page with the failure state
-        return redirect(f'/project/creator/box/{pk}/?failure=1')
+        return redirect(f'{url}?failure=1')
 
 
 class UnpublishBoxView(MyLoginRequiredMixin, View):
