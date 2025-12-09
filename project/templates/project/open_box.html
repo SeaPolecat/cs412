@@ -15,7 +15,7 @@ Description: Template to show the Item that was obtained from a Box.
         <h1 class="large inline">You pulled a </h1>
     {% endif %}
 
-    <h1 class="large inline" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}} </h1>
+    <h1 class="large inline" style="color: {{item.get_rarity_color}}">{{item.get_rarity_full_name}} </h1>
     <h1 class="large inline">{{item.name}}</h1>
 
     <h1 class="medium">
