@@ -65,8 +65,8 @@ Description: Component template containing an Item.
 
         <!-- show the Item's rarity -->
 
-        {% if rar %}
-            <h1 class="small mt-5 mb-5" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}}</h1>
+        {% if rarity %}
+            <h1 class="small mt-5 mb-5" style="color: {{item.get_rarity_color}}">{{item.get_rarity_full_name}}</h1>
         {% endif %}
 
         <!-- show the Item's image (use a question mark png if it's secret rare) -->

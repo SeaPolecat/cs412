@@ -17,11 +17,17 @@ RARE = 'R'
 SUPER_RARE = 'SR'
 SECRET = 'SE'
 
-# the order that items should appear in, based on rarity
-RARITY_ORDER = {COMMON: 1, UNCOMMON: 2, RARE: 3, SUPER_RARE: 4, SECRET: 5}
+# rarities and their full names
+RARITY_NAMES = {
+    COMMON: 'Common',
+    UNCOMMON: 'Uncommon',
+    RARE: 'Rare',
+    SUPER_RARE: 'Super Rare',
+    SECRET: 'Secret',
+}
 
-# colours that represent each rarity
-RARITY_COLORS = {
+# colours that represent each rarity, in hexadecimal format
+RARITY_COLOURS = {
     COMMON: '#8a8a8a',
     UNCOMMON: '#5ead57',
     RARE: '#598eff',
@@ -38,6 +44,9 @@ RARITY_CDF = {         # PDF
     SUPER_RARE: 0.99,  # 0.09
     SECRET: 1,         # 0.01
 }
+
+# the order that items should appear in, based on rarity
+RARITY_ORDER = {COMMON: 1, UNCOMMON: 2, RARE: 3, SUPER_RARE: 4, SECRET: 5}
 
 
 ## MODELS ############################################################################################
@@ -183,21 +192,8 @@ class Item(models.Model):
     name = models.TextField(blank=False) # this Item's name
     image = models.ImageField(blank=False) # this Item's image
 
-    # the possible choices for the rarity field
-    RARITY_CHOICES = {
-        COMMON: 'Common',
-        UNCOMMON: 'Uncommon',
-        RARE: 'Rare',
-        SUPER_RARE: 'Super Rare',
-        SECRET: 'Secret',
-    }
-
     # this Item's rarity level (rarer == smaller chance of obtaining it from a Box)
-    rarity = models.CharField(
-        max_length=2,
-        choices=RARITY_CHOICES,
-        default=COMMON,
-    )
+    rarity = models.CharField(max_length=2, choices=RARITY_NAMES, default=COMMON)
 
     def __str__(self):
         """Return a string representation of this Item."""
@@ -223,7 +219,12 @@ class Item(models.Model):
         in hexadecimal format.
         """
 
-        return RARITY_COLORS[self.rarity]
+        return RARITY_COLOURS[self.rarity]
+    
+    def get_rarity_full_name(self):
+        """Return the full name of this Item's rarity."""
+
+        return RARITY_NAMES[self.rarity]
 
 
 class OwnedItem(models.Model):

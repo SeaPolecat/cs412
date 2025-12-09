@@ -22,7 +22,7 @@ Description: Template to show all the OwnedItems belonging to a Player.
     <div class="items-grid">
         {% for oi in player.get_all_owned_items %}
         {% with item=oi.item %}
-            {% include 'project/components/C_item.html' with quantity=oi.quantity rar=1 origin=1 %}
+            {% include 'project/components/C_item.html' with quantity=oi.quantity rarity=1 origin=1 %}
         {% endwith %}
         {% endfor %}
     </div>
