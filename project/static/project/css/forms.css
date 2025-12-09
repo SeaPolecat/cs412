@@ -54,6 +54,10 @@ form.form-wrapper {
     border-radius: 30px;
 }
 
+form.form-wrapper.wide {
+    width: 60%;
+}
+
 div.form-div {
     display: flex;
     flex-direction: column;

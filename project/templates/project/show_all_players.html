@@ -8,11 +8,10 @@
         {% for player in players %}
 
             <div class="player-div">
+                <h1 class="medium">{{player.username}}</h1>
                 <a href="{% url 'show_player' player.pk %}">
                     <img class="pfp large square clickable" src="{{player.profile_image.url}}">
                 </a>
-
-                <h1 class="medium">{{player.username}}</h1>
             </div>
 
         {% endfor %}

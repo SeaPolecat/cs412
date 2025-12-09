@@ -1,0 +1,46 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h1 class="large">Sign Up</h1>
+
+    <form class="form-wrapper wide" action="{% url 'create_player' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="form-div">
+            <h1 class="medium no-margin">Login Name</h1>
+            <h1 class="small">{{django_form.username.help_text|safe}}</h1>
+            {{django_form.username}}
+        </div>
+
+        <div class="form-div">
+            <h1 class="medium no-margin">Password</h1>
+            <h1 class="small no-margin">{{django_form.password1.help_text|safe}}</h1>
+            {{django_form.password1}}
+        </div>
+
+        <div class="form-div">
+            <h1 class="medium no-margin">Confirm Password</h1>
+            <h1 class="small">{{django_form.password2.help_text|safe}}</h1>
+            {{django_form.password2}}
+        </div>
+
+        <div class="form-div">
+            <h1 class="medium no-margin">Username</h1>
+            <h1 class="small">The name that other people see!</h1>
+            {{form.username}}
+        </div>
+
+        <div class="form-div">
+            <h1 class="medium">Profile Picture</h1>
+            <label class="file-input-label" for="{{form.profile_image.id_for_label}}">Upload File</label>
+            {{form.profile_image}}
+        </div>
+
+        <div class="button-wrapper centered">
+            <button class="submit salmon" type="submit">Sign Up</button>
+            <a class="button small gray" href="{% url 'login' %}">Back</a>
+        </div>
+    </form>
+
+{% endblock %}

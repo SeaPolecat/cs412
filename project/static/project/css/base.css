@@ -1,3 +1,17 @@
+body {
+    text-align: center;
+    margin: 0;
+    font-family: var(--font);
+    color: var(--dark-gray);
+    background-color: var(--off-white);
+    background: repeating-linear-gradient(
+        -45deg, var(--rose-fog),
+        var(--rose-fog) 15px,
+        var(--off-white) 15px,
+        var(--off-white) 55px
+    );
+}
+
 header {
     display: flex;
     position: fixed;

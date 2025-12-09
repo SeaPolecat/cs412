@@ -1,0 +1,27 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+    <h1 class="large">Edit Profile</h1>
+
+    <form class="form-wrapper" action="{% url 'update_player' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-div">
+            <h1 class="medium">Username</h1>
+            {{form.username}}
+        </div>
+        
+        <div class="form-div">
+            <h1 class="medium">Profile Picture</h1>
+            <label class="file-input-label" for="{{form.profile_image.id_for_label}}">Upload File</label>
+            {{form.profile_image}}
+        </div>
+        
+        <div class="button-wrapper centered">
+            <button class="submit salmon" type="submit">Confirm</button>
+            <a class="button small gray" href="{% url 'show_my_player' %}">Cancel</a>
+        </div>
+    </form>
+
+{% endblock %}

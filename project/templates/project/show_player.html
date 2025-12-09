@@ -19,10 +19,14 @@
                 {% endif %}
 
                 <div class="button-wrapper">
-                    <a class="button small salmon mr-20" href="{% url 'show_collection' player.pk %}">Collection</a>
-                    
-                    {% if request.user.is_authenticated and player != request.user.player %}
-                        <a class="button small salmon" href="{% url 'start_trade' player.pk %}">Trade</a>
+                    <a class="button small salmon mr-15" href="{% url 'show_collection' player.pk %}">Collection</a>
+
+                    {% if request.user.is_authenticated %}
+                        {% if player == request.user.player %}
+                            <a class="button small salmon" href="{% url 'update_player' %}">Edit Profile</a>
+                        {% else %}
+                            <a class="button small salmon" href="{% url 'start_trade' player.pk %}">Trade</a>
+                        {% endif %}
                     {% endif %}
                 </div>
             </td>

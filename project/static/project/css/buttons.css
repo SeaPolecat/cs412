@@ -86,7 +86,6 @@ a.button.mb-50 {
 
 button.submit {
     width: fit-content;
-    margin: 0 10px;
     padding: 8px 15px;
     font: var(--medium) var(--font);
     font-weight: var(--bold);
@@ -132,6 +131,7 @@ button.hidden:hover {
 
 div.button-wrapper {
     display: flex;
+    column-gap: 15px;
 }
 
 div.button-wrapper.centered {

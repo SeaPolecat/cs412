@@ -34,6 +34,10 @@ h1.mt-5 {
     margin-top: 5px;
 }
 
+h1.mt-50 {
+    margin-top: 50px;
+}
+
 h1.mb-5 {
     margin-bottom: 5px;
 }
@@ -44,4 +48,8 @@ h1.mb-30 {
 
 h1.mb-50 {
     margin-bottom: 50px;
+}
+
+h1.mr-15 {
+    margin-right: 15px;
 }

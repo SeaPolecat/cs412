@@ -11,7 +11,6 @@
 @import url('box.css');
 @import url('item.css');
 @import url('display.css');
-@import url('trade.css');
 
 /* define variables */
 :root {
@@ -32,18 +31,4 @@
     --palevioletred: #d87093;
     --palevioletred-translucent: rgba(216, 112, 147, 0.2);
     --salmon: #e06c8f;
-}
-
-body {
-    text-align: center;
-    margin: 0;
-    font-family: var(--font);
-    color: var(--dark-gray);
-    background-color: var(--off-white);
-    background: repeating-linear-gradient(
-        -45deg, var(--rose-fog), 
-        var(--rose-fog) 15px, 
-        var(--off-white) 15px, 
-        var(--off-white) 55px
-    );
 }

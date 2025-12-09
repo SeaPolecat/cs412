@@ -24,7 +24,7 @@
 
     <div class="items-grid">
         {% for item in box.get_all_items %}
-            {% include 'project/components/C_item.html' with rarity=1 %}
+            {% include 'project/components/C_item.html' with rarity=1 shop=1 %}
         {% endfor %}
     </div>
 

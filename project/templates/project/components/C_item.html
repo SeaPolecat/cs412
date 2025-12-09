@@ -38,7 +38,11 @@
 
     <div class="item-div">
 
-        <h1 class="medium mb-5 {% if quantity %} inline {% endif %}">{{item.name}}</h1>
+        {% if shop and item.rarity == 'SE' %}
+            <h1 class="medium mb-5 {% if quantity %} inline {% endif %}">???</h1>
+        {% else %}
+            <h1 class="medium mb-5 {% if quantity %} inline {% endif %}">{{item.name}}</h1>
+        {% endif %}
 
         {% if quantity %}
             <h1 class="medium mb-5 inline"> (x {{quantity}})</h1>
@@ -48,7 +52,11 @@
             <h1 class="small mt-5 mb-5" style="color: {{item.get_rarity_color}}">{{item.get_rarity_display}}</h1>
         {% endif %}
 
-        <img class="item small" src="{{item.image.url}}" style="border-color: {{item.get_rarity_color}}">
+        {% if shop and item.rarity == 'SE' %}
+            <img class="item small" src="{% static 'project/img/question.png' %}" style="border-color: {{item.get_rarity_color}}">
+        {% else %}
+            <img class="item small" src="{{item.image.url}}" style="border-color: {{item.get_rarity_color}}">
+        {% endif %}
 
         {% if origin %}
             <h1 class="small mt-5 mb-5">

@@ -4,6 +4,7 @@ div.players-grid {
     justify-content: center;
     width: 95%;
     margin: 0 auto;
+    row-gap: 20px;
 }
 
 div.player-div {

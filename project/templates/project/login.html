@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <h1>Login</h1>
+    <h1 class="large">Login</h1>
 
     <form class="form-wrapper" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
 
         <div class="form-div">
-            <h1 class="medium">Username</h1>
+            <h1 class="medium">Login Name</h1>
             {{form.username}}
         </div>
 
@@ -17,8 +17,15 @@
             {{form.password}}
         </div>
 
-        <div class="form-div horizontal">
+        <div class="button-wrapper centered">
             <button class="submit salmon" type="submit">Login</button>
+            <a class="button small gray" href="{% url 'show_all_players' %}">Cancel</a>
+        </div>
+
+        <h1 class="medium mt-50">No account yet?</h1>
+
+        <div class="button-wrapper centered">
+            <a class="button small salmon centered" href="{% url 'create_player' %}">Sign Up</a>
         </div>
 
         {% if request.GET.next %}
