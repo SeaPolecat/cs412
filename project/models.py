@@ -18,13 +18,13 @@ SUPER_RARE = 'SR'
 SECRET = 'SE'
 
 # rarities and their full names
-RARITY_CHOICES = {
+RARITY_CHOICES = [
     (COMMON, 'Common'),
     (UNCOMMON, 'Uncommon'),
     (RARE, 'Rare'),
     (SUPER_RARE, 'Super Rare'),
     (SECRET, 'Secret'),
-}
+]
 
 # colours that represent each rarity, in hexadecimal format
 RARITY_COLOURS = {
